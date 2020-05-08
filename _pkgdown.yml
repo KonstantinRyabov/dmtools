@@ -1,0 +1,44 @@
+destination: docs
+
+template:
+  params:
+    bootswatch: sandstone
+
+development:
+  mode: unreleased
+
+navbar:
+  title: ~
+  type: default
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/chachabooms/dmtools
+
+reference:
+ - title: One site
+   desc: >
+      Validate different parameters: laboratory, dates, wbcs count in the one site.
+   contents:
+   - date
+   - lab
+   - wbc
+   - short
+   - check
+   - get_result
+   - choose_test.lab
+   - choose_test.date
+   - choose_test.wbc
+   - choose_test.short
+
+ - title: Different sites
+   desc: >
+      Validate different parameters: laboratory, dates, wbcs count in the different sites.
+   contents:
+    - check_sites
+    - test_sites
+
+ - title: Rename
+   desc: >
+      Rename the dataset if this is necessary.
+   contents:
+    - rename_dataset

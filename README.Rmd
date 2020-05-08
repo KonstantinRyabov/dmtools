@@ -1,0 +1,132 @@
+---
+title: "README"
+author: "Konstantin"
+date: "07 04 2020"
+output: md_document
+---
+# dmtools  <img src='man/figures/logo.png' align="right" height="170" />
+[![Build Status](https://travis-ci.com/chachabooms/dmtools.svg?token=pmH5ZxVz4xaZTjx5TDKs&branch=master)](https://travis-ci.com/chachabooms/dmtools) [![codecov](https://codecov.io/gh/chachabooms/dmtools/branch/master/graph/badge.svg?token=AEKUFWUUXZ)](https://codecov.io/gh/chachabooms/dmtools)
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+## Installation
+```{r install, eval = FALSE}
+devtools::install_github("chachabooms/dmtools")
+library(dmtools)
+```
+
+## Overview
+For checking the dataset from EDC in clinical trials. 
+Notice, your dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the names of variables. Column names should be unique.
+
+* `date()` - create object date, for check dates in the dataset
+* `lab()` - create object lab, for check lab results
+* `wbc()` - create object wbc, for check WBCs count: (all * relative) / 100 = absolute
+* `short()` - create object short to transform the dataset(different events in one column)
+* `check()` - check objects
+* `get_result()` - get the final result of object
+* `choose_test()` - filter the final result of `check()`
+* `check_sites()` - check objects of different sites
+* `test_sites()` - filter the final result of `check_sites()`
+* `rename_dataset()` - rename dataset
+
+## Usage
+
+For example, you want to check laboratory values, you need to create the excel table like in the example.  
+
+* age_min - whole number, >= number
+* age_max - if none, type Inf, <= number  
+* sex - for both sex, use `|`
+* human_name - friendly name for analysis
+* name_lab_vals - analysis from the dataset, without postfix or prefix
+* name_is_norm - estimate from the dataset, without postfix or prefix
+* lab_vals_min - lower limit of normal, >= 
+* lab_vals_max - upper limit of normal, <=
+
+```{r refer, echo = FALSE, result = 'asis', warning = FALSE, message = FALSE}
+library(knitr)
+library(dmtools)
+library(dplyr)
+
+refs <- system.file("labs_refer.xlsx", package = "dmtools")
+refers <- readxl::read_xlsx(refs)
+kable(refers, caption = "lab reference ranges")
+```
+
+
+```{r dataset, echo = FALSE, result = 'asis'}
+
+id <- c("01", "02", "03")
+age <- c("19", "20", "22")
+sex <- c("f", "m", "m")
+gluc_post <- c("5.5", "4.1", "9.7")
+gluc_res_post <- c("norm", NA, "norm")
+ast_post <- c("30", "48", "31")
+ast_res_post <- c("norm", "norm", "norm")
+
+df <- data.frame(
+  id, age, sex,
+  gluc_post, gluc_res_post,
+  ast_post, ast_res_post,
+  stringsAsFactors = F
+)
+
+kable(df, caption = "dataset")
+```
+
+
+```{r lab}
+# "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset
+refs <- system.file("labs_refer.xlsx", package = "dmtools")
+obj_lab <- lab(refs, id, age, sex, "norm", "no")
+obj_lab <- obj_lab %>% check(df)
+
+# ok - analysis, which has a correct estimate of the result
+obj_lab %>% choose_test("ok")
+
+# mis - analysis, which has an incorrect estimate of the result
+obj_lab %>% choose_test("mis")
+
+# skip - analysis, which has an empty value of the estimate
+obj_lab %>% choose_test("skip")
+```
+
+```{r strange_dataset, echo = FALSE, result = 'asis'}
+
+id <- c("01", "02", "03")
+age <- c("19", "20", "22")
+sex <- c("f", "m", "m")
+gluc_post <- c("5,5", "4,1", "9,7")
+gluc_res_post <- c("norm", NA, "norm")
+ast_post <- c(" < 5", "48", "31")
+ast_res_post <- c("norm", "norm", "norm")
+
+strange_df <- data.frame(
+  id, age, sex,
+  gluc_post, gluc_res_post,
+  ast_post, ast_res_post,
+  stringsAsFactors = F
+)
+
+kable(strange_df, caption = "strange_dataset")
+```
+
+```{r stange_lab}
+# dmtools can work with the dataset as strange_df
+obj_lab <- obj_lab %>% check(strange_df)
+
+# dmtools can understand the value with a comma like 6,6 
+obj_lab %>% choose_test("ok")
+
+# Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
+obj_lab %>% choose_test("mis")
+
+obj_lab %>% choose_test("skip")
+```
