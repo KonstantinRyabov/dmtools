@@ -8,8 +8,8 @@ Authors@R:
            email = "chachabooms@gmail.com")
 Description: For checking the dataset from EDC(Electronic Data Capture) in clinical trials.
              'dmtools' can check laboratory, dates, WBCs(White Blood Cells) count and rename the dataset.
-             Laboratory - did the investigator correctly estimate the laboratory analysis?
-             Dates - are all dates correspond to the protocol's timeline?
+             Laboratory - does the investigator correctly estimate the laboratory analyzes?
+             Dates - do all dates correspond to the protocol's timeline?
              WBCs count - do absolute equal (all * relative) / 100?
              If the clinical trial has different lab reference ranges, 'dmtools' also can help.
 Depends: R (>= 3.6)

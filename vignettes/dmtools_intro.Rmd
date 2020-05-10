@@ -23,10 +23,10 @@ library(dmtools)
 For checking the dataset from EDC in clinical trials. 
 Notice, your dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the names of variables. Column names should be unique.
 
-* laboratory - did the investigator correctly estimate the laboratory analysis?
-* dates - are all dates correspond to the protocol's timeline?
-* WBCs count - do absolute equal (all * relative) / 100?
-* sites - if the clinical trial has different lab reference ranges
+* laboratory - Does the investigator correctly estimate the laboratory analyzes?
+* dates - Do all dates correspond to the protocol's timeline?
+* WBCs count - Do absolute equal (all * relative) / 100?
+* sites - If the clinical trial has different lab reference ranges.
 
 ## Usage
 
