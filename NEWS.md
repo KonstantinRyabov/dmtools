@@ -1,4 +1,4 @@
-# dmtools 0.2.4 (2020-05-06)
+# dmtools 0.2.4
 
 * add `short()`
 * add `get_result()`
@@ -6,7 +6,7 @@
 * delete parameter `test` and add paramater `func` for `test_sites()`
 * add example for `rename_dataset()`
 
-# dmtools 0.2.3 (2020-04-26)
+# dmtools 0.2.3
 
 * add `test_sites` for choose test in the different sites
 * add `get_date` for the date object

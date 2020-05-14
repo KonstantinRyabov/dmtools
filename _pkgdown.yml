@@ -1,11 +1,7 @@
 destination: docs
 
-template:
-  params:
-    bootswatch: sandstone
-
 development:
-  mode: unreleased
+  mode: release
 
 navbar:
   title: ~

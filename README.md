@@ -1,6 +1,8 @@
 dmtools <img src='man/figures/logo.png' align="right" height="170" />
 =====================================================================
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/dmtools)](https://CRAN.R-project.org/package=dmtools)
 [![Build
 Status](https://travis-ci.com/chachabooms/dmtools.svg?token=pmH5ZxVz4xaZTjx5TDKs&branch=master)](https://travis-ci.com/chachabooms/dmtools)
 [![codecov](https://codecov.io/gh/chachabooms/dmtools/branch/master/graph/badge.svg?token=AEKUFWUUXZ)](https://codecov.io/gh/chachabooms/dmtools)
@@ -8,7 +10,11 @@ Status](https://travis-ci.com/chachabooms/dmtools.svg?token=pmH5ZxVz4xaZTjx5TDKs
 Installation
 ------------
 
+    install.packages("dmtools")
+
+    # dev-version
     devtools::install_github("chachabooms/dmtools")
+
     library(dmtools)
 
 Overview
