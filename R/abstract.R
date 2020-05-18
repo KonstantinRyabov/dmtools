@@ -14,13 +14,13 @@
 #' bio_date_E3 <- c("1991-03-23", "1991-03-16", "1991-03-16")
 #'
 #' df <- data.frame(id, screen_date_E1, rand_date_E2, ph_date_E3, bio_date_E3,
-#' stringsAsFactors = FALSE)
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' timeline <- system.file("dates.xlsx", package = "dmtools")
 #' obj_date <- date(timeline, id, dplyr::contains)
 #'
 #' obj_date <- check(obj_date, df)
-#'
 check <- function(obj, dataset) {
   UseMethod("check")
 }
@@ -43,17 +43,17 @@ check <- function(obj, dataset) {
 #' preg_res_e3 <- c("neg", "pos", "unnes")
 #'
 #' df <- data.frame(
-#'  id, site, sex,
-#'  preg_yn_e2, preg_res_e2,
-#'  preg_yn_e3, preg_res_e3,
-#'  stringsAsFactors = FALSE )
+#'   id, site, sex,
+#'   preg_yn_e2, preg_res_e2,
+#'   preg_yn_e3, preg_res_e3,
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' preg <- system.file("preg.xlsx", package = "dmtools")
-#' obj_short <- short(preg, id,"res", c("site", "sex"))
+#' obj_short <- short(preg, id, "res", c("site", "sex"))
 #'
 #' obj_short <- check(obj_short, df)
 #' get_result(obj_short)
-#'
 get_result <- function(obj, group_id) {
   UseMethod("get_result")
 }
@@ -75,14 +75,14 @@ get_result <- function(obj, group_id) {
 #' bio_date_E3 <- c("1991-03-23", "1991-03-16", "1991-03-16")
 #'
 #' df <- data.frame(id, screen_date_E1, rand_date_E2, ph_date_E3, bio_date_E3,
-#' stringsAsFactors = FALSE)
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' timeline <- system.file("dates.xlsx", package = "dmtools")
 #' obj_date <- date(timeline, id, dplyr::contains)
 #'
 #' obj_date <- check(obj_date, df)
 #' choose_test(obj_date, "out")
-#'
 choose_test <- function(obj, test, group_id) {
   UseMethod("choose_test")
 }

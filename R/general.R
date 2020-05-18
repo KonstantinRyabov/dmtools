@@ -14,13 +14,13 @@
 #' bio_date_E3 <- c("1991-03-23", "1991-03-16", "1991-03-16")
 #'
 #' df <- data.frame(id, screen_date_E1, rand_date_E2, ph_date_E3, bio_date_E3,
-#' stringsAsFactors = FALSE)
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' timeline <- system.file("dates.xlsx", package = "dmtools")
 #' obj_date <- date(timeline, id, dplyr::contains)
 #'
 #' obj_date <- check(obj_date, df)
-#'
 check.default <- function(obj, dataset) {
 
   # mutate empty strings in NA
@@ -108,19 +108,18 @@ find_colnames.default <- function(obj, dataset, row_file) {
 #' preg_res_e3 <- c("neg", "pos", "unnes")
 #'
 #' df <- data.frame(
-#'  id, site, sex,
-#'  preg_yn_e2, preg_res_e2,
-#'  preg_yn_e3, preg_res_e3,
-#'  stringsAsFactors = FALSE )
+#'   id, site, sex,
+#'   preg_yn_e2, preg_res_e2,
+#'   preg_yn_e3, preg_res_e3,
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' preg <- system.file("preg.xlsx", package = "dmtools")
 #' obj_short <- short(preg, id, "res", c("site", "sex"))
 #'
 #' obj_short <- check(obj_short, df)
 #' get_result(obj_short)
-#'
 get_result.default <- function(obj, group_id = T) {
-
   result <- obj[["result"]]
 
   if (group_id) {
@@ -166,7 +165,6 @@ get_result.default <- function(obj, group_id = T) {
 #'
 #' labs <- list(s01_lab, s02_lab)
 #' labs <- check_sites(labs, df, site)
-#'
 check_sites <- function(objs, dataset, col_site) {
   col_site <- dplyr::enquo(col_site)
 
@@ -224,7 +222,6 @@ check_sites <- function(objs, dataset, col_site) {
 #' labs <- check_sites(labs, df, site)
 #'
 #' test_sites(labs, func = function(lab) choose_test(lab, "mis"))
-#'
 test_sites <- function(objs, func) {
   result <- do.call(rbind, lapply(
     objs,

@@ -31,7 +31,6 @@
 #'
 #' result <- rename_dataset(df, crfs, "old_name", "new_name")
 #' result[["data"]]
-#'
 rename_dataset <- function(dataset, path_crfs, no_readable_name, readable_name, num_sheet = 1, is_post = T) {
   # all names of the dataset
   df_colname <- names(dataset)

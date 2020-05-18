@@ -12,7 +12,6 @@
 #' @examples
 #' obj_date <- date("dates.xlsx", id, dplyr::contains)
 #' obj_date <- date("dates.xlsx", id, dplyr::contains, "uneq")
-#'
 date <- function(file, id, get_visit, get_date = dplyr::contains, str_date = "DAT") {
   id <- dplyr::enquo(id)
 
@@ -50,16 +49,15 @@ date <- function(file, id, get_visit, get_date = dplyr::contains, str_date = "DA
 #' bio_date_E3 <- c("1991-03-23", "1991-03-16", "1991-03-16")
 #'
 #' df <- data.frame(id, screen_date_E1, rand_date_E2, ph_date_E3, bio_date_E3,
-#' stringsAsFactors = FALSE)
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' timeline <- system.file("dates.xlsx", package = "dmtools")
 #' obj_date <- date(timeline, id, dplyr::contains)
 #'
 #' obj_date <- check(obj_date, df)
 #' choose_test(obj_date, "out")
-#'
 choose_test.date <- function(obj, test = "out", group_id = T) {
-
   result <- obj %>% get_result(group_id)
 
   # filter final dataset
