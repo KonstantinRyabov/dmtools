@@ -34,15 +34,15 @@ ast_post <- c("30", "48", "31")
 ast_res_post <- c(NA, "norm", "norm")
 
 df <- data.frame(
- id, site, age, sex,
- gluc_post, gluc_res_post,
- ast_post, ast_res_post,
- stringsAsFactors = FALSE )
+  id, site, age, sex,
+  gluc_post, gluc_res_post,
+  ast_post, ast_res_post,
+  stringsAsFactors = FALSE
+)
 
 refs <- system.file("labs_refer.xlsx", package = "dmtools")
 obj_lab <- lab(refs, id, age, sex, "norm", "no")
 
 obj_lab <- check(obj_lab, df)
 choose_test(obj_lab, "mis")
-
 }

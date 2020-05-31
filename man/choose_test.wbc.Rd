@@ -37,5 +37,4 @@ obj_wbc <- wbc(wbcc, id)
 
 obj_wbc <- check(obj_wbc, df)
 choose_test(obj_wbc, "mis")
-
 }

@@ -44,5 +44,4 @@ labs <- list(s01_lab, s02_lab)
 labs <- check_sites(labs, df, site)
 
 test_sites(labs, func = function(lab) choose_test(lab, "mis"))
-
 }
