@@ -85,7 +85,12 @@ find_colnames.default <- function(obj, dataset, row_file) {
   do.call(
     rbind,
     lapply(parts, function(part) {
-      run_tests(obj, dataset, row_file, part)
+      tryCatch(run_tests(obj, dataset, row_file, part),
+        error = function(e) {
+          warning(part, " can't bind")
+          data.frame()
+        }
+      )
     })
   )
 }
