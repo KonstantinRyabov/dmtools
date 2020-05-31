@@ -11,11 +11,9 @@
 #' @export
 #'
 #' @examples
-#' obj_short <- short("preg.xlsx", id,"res", c("site", "sex"))
-#' obj_short <- short("labs.xlsx", id,"name_labs", c("site"), "human_name")
-#'
+#' obj_short <- short("preg.xlsx", id, "res", c("site", "sex"))
+#' obj_short <- short("labs.xlsx", id, "name_labs", c("site"), "human_name")
 short <- function(file, id, name_to_find, common_cols = c(), extra = NA, is_post = T) {
-
   id <- dplyr::enquo(id)
 
   obj <- list(
@@ -42,7 +40,6 @@ short <- function(file, id, name_to_find, common_cols = c(), extra = NA, is_post
 #' @return A data frame. The part of the final result.
 #'
 run_tests.short <- function(obj, dataset, row_file, part) {
-
   id <- obj[["id"]]
   is_pst <- obj[["is_post"]]
   name_to_find <- obj[["name_to_find"]]
@@ -82,5 +79,3 @@ run_tests.short <- function(obj, dataset, row_file, part) {
 
   result
 }
-
-

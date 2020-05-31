@@ -53,9 +53,7 @@ wbc <- function(file, id, is_post = T, site = NA, name_to_find = "relative") {
 #'
 #' obj_wbc <- check(obj_wbc, df)
 #' choose_test(obj_wbc, "mis")
-#'
 choose_test.wbc <- function(obj, test = "mis", group_id = T) {
-
   result <- obj %>% get_result(group_id)
 
   # filter final dataset

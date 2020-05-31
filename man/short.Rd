@@ -26,7 +26,6 @@ The object short.
 Create object short
 }
 \examples{
-obj_short <- short("preg.xlsx", id,"res", c("site", "sex"))
-obj_short <- short("labs.xlsx", id,"name_labs", c("site"), "human_name")
-
+obj_short <- short("preg.xlsx", id, "res", c("site", "sex"))
+obj_short <- short("labs.xlsx", id, "name_labs", c("site"), "human_name")
 }

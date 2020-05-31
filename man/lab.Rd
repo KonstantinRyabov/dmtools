@@ -48,5 +48,4 @@ Create object lab
 obj_lab <- lab("lab_refer.xlsx", id, age, sex, 1, 2)
 obj_lab <- lab("lab_refer.xlsx", id, age, sex, "NORMAL", "NOCLISIG", cl_sign = "CLISIG")
 obj_lab <- lab("lab_refer.xlsx", id, age, sex, "norm", "no", FALSE)
-
 }

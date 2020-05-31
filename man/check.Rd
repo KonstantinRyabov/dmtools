@@ -25,11 +25,11 @@ ph_date_E3 <- c("1991-03-21", "1991-03-16", "1991-03-16")
 bio_date_E3 <- c("1991-03-23", "1991-03-16", "1991-03-16")
 
 df <- data.frame(id, screen_date_E1, rand_date_E2, ph_date_E3, bio_date_E3,
-stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 timeline <- system.file("dates.xlsx", package = "dmtools")
 obj_date <- date(timeline, id, dplyr::contains)
 
 obj_date <- check(obj_date, df)
-
 }

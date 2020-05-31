@@ -26,5 +26,4 @@ Create object date
 \examples{
 obj_date <- date("dates.xlsx", id, dplyr::contains)
 obj_date <- date("dates.xlsx", id, dplyr::contains, "uneq")
-
 }

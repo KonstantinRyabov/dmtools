@@ -44,5 +44,4 @@ s02_lab <- lab(refs_s02, id, age, sex, "norm", "no", site = "site 02")
 
 labs <- list(s01_lab, s02_lab)
 labs <- check_sites(labs, df, site)
-
 }

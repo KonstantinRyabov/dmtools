@@ -18,7 +18,6 @@
 #' obj_lab <- lab("lab_refer.xlsx", id, age, sex, 1, 2)
 #' obj_lab <- lab("lab_refer.xlsx", id, age, sex, "NORMAL", "NOCLISIG", cl_sign = "CLISIG")
 #' obj_lab <- lab("lab_refer.xlsx", id, age, sex, "norm", "no", FALSE)
-#'
 lab <- function(file,
                 id,
                 age,
@@ -29,7 +28,6 @@ lab <- function(file,
                 cl_sign = NA,
                 site = NA,
                 name_to_find = "name_is_norm") {
-
   id <- dplyr::enquo(id)
   age <- dplyr::enquo(age)
   sex <- dplyr::enquo(sex)
@@ -77,19 +75,18 @@ lab <- function(file,
 #' ast_res_post <- c(NA, "norm", "norm")
 #'
 #' df <- data.frame(
-#'  id, site, age, sex,
-#'  gluc_post, gluc_res_post,
-#'  ast_post, ast_res_post,
-#'  stringsAsFactors = FALSE )
+#'   id, site, age, sex,
+#'   gluc_post, gluc_res_post,
+#'   ast_post, ast_res_post,
+#'   stringsAsFactors = FALSE
+#' )
 #'
 #' refs <- system.file("labs_refer.xlsx", package = "dmtools")
 #' obj_lab <- lab(refs, id, age, sex, "norm", "no")
 #'
 #' obj_lab <- check(obj_lab, df)
 #' choose_test(obj_lab, "mis")
-#'
 choose_test.lab <- function(obj, test = "mis", group_id = T) {
-
   result <- obj %>% get_result(group_id)
 
   # filter final dataset
@@ -152,11 +149,11 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
   age_max <- as.double(row_file$age_max)
   pattern_sex <- paste0("^", row_file$sex, "$")
 
-  if(age_min > age_max){
+  if (age_min > age_max) {
     warning("age_min > age_max in ", human_name)
   }
 
-  if(lab_min > lab_max){
+  if (lab_min > lab_max) {
     warning("lab_min > lab_max in ", human_name)
   }
 
@@ -172,7 +169,7 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
     dplyr::filter(dplyr::between(!!age, age_min, age_max), grepl(pattern_sex, !!sex))
 
   # validate by reference values
- result <- by_age_sex %>%
+  result <- by_age_sex %>%
     dplyr::mutate(name_lab = lab_vals, human_lab = human_name, refs = paste(lab_min, "-", lab_max)) %>%
     dplyr::select(!!id, !!age, !!sex, .data$human_lab, .data$name_lab, .data$refs, !!lab_vals, !!is_norm) %>%
     dplyr::mutate(vals_to_dbl = to_dbl(.data[[lab_vals]])) %>%
@@ -180,7 +177,7 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
     dplyr::mutate(is_right = .data$auto_norm == .data[[is_norm]]) %>%
     dplyr::rename(!!vars_rename)
 
- result
+  result
 }
 
 #' Estimating laboratory values

@@ -53,5 +53,4 @@ crfs <- system.file("forms", package = "dmtools")
 
 result <- rename_dataset(df, crfs, "old_name", "new_name")
 result[["data"]]
-
 }
