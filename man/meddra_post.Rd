@@ -4,7 +4,7 @@
 \alias{meddra_post}
 \title{Create the post query}
 \usage{
-meddra_post(target_url, json, token, encoding = "UTF-8")
+meddra_post(target_url, json, token)
 }
 \arguments{
 \item{target_url}{The url for a post query.}
@@ -12,11 +12,9 @@ meddra_post(target_url, json, token, encoding = "UTF-8")
 \item{json}{A string scalar. The json query.}
 
 \item{token}{The user's token.}
-
-\item{encoding}{The json encoding. The default is utf-8.}
 }
 \value{
-A data frame. The result of query.
+A list. The result of query.
 }
 \description{
 Create the post query
