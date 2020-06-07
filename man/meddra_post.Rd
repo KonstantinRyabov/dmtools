@@ -9,7 +9,7 @@ meddra_post(target_url, json, token)
 \arguments{
 \item{target_url}{The url for a post query.}
 
-\item{json}{A string scalar. The json query.}
+\item{json}{A string scalar or a list. The json query.}
 
 \item{token}{The user's token.}
 }

@@ -32,7 +32,7 @@ meddra_auth <- function(target_url, meddra_id, api_key) {
 #' Create the post query
 #'
 #' @param target_url The url for a post query.
-#' @param json  A string scalar. The json query.
+#' @param json  A string scalar or a list. The json query.
 #' @param token The user's token.
 #'
 #' @return
@@ -57,4 +57,21 @@ meddra_post <- function(target_url, json, token) {
   }
 
   httr::content(post_res)
+}
+
+#' A list to a tibble.
+#'
+#' @param to_tibble A list with nested lists.
+#'
+#' @return
+#' A tibble.
+#' @export
+#'
+#' @examples
+#' temp_list <- list(list(1,3), list(4,5))
+#' list_parse(temp_list)
+list_parse <- function(to_tibble) {
+
+  tibble::tibble(result = to_tibble) %>%
+    tidyr::unnest_wider(col = .data[["result"]])
 }
