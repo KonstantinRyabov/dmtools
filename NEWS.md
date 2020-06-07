@@ -1,3 +1,8 @@
+# dmtools 0.2.5
+
+* add functions for MedDRA API
+* `short()` don't stop if an error happens
+
 # dmtools 0.2.4
 
 * add `short()`

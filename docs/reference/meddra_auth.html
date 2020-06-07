@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test sites — test_sites • dmtools</title>
+<title>Get the token — meddra_auth • dmtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Test sites — test_sites" />
-<meta property="og:description" content="Test sites" />
+<meta property="og:title" content="Get the token — meddra_auth" />
+<meta property="og:description" content="Get the token" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -137,64 +137,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test sites</h1>
-    <small class="dont-index">Source: <a href='https://github.com/chachabooms/dmtools/blob/master/R/general.R'><code>R/general.R</code></a></small>
-    <div class="hidden name"><code>test_sites.Rd</code></div>
+    <h1>Get the token</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chachabooms/dmtools/blob/master/R/meddra.R'><code>R/meddra.R</code></a></small>
+    <div class="hidden name"><code>meddra_auth.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Test sites</p>
+    <p>Get the token</p>
     </div>
 
-    <pre class="usage"><span class='fu'>test_sites</span>(<span class='no'>objs</span>, <span class='no'>func</span>)</pre>
+    <pre class="usage"><span class='fu'>meddra_auth</span>(<span class='no'>target_url</span>, <span class='no'>meddra_id</span>, <span class='no'>api_key</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>objs</th>
-      <td><p>A list of objects.</p></td>
+      <th>target_url</th>
+      <td><p>The url for authenticate.</p></td>
     </tr>
     <tr>
-      <th>func</th>
-      <td><p>A function e.g. <code>choose_test</code>, <code>get_result</code>.</p></td>
+      <th>meddra_id</th>
+      <td><p>The user's meddra id.</p></td>
+    </tr>
+    <tr>
+      <th>api_key</th>
+      <td><p>The users's api key.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame. The dataset.</p>
+    <p>A string scalar. The user's token.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>site</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"site 01"</span>, <span class='st'>"site 02"</span>)
-<span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"01"</span>, <span class='st'>"02"</span>)
-<span class='no'>age</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"19"</span>, <span class='st'>"20"</span>)
-<span class='no'>sex</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"f"</span>, <span class='st'>"m"</span>)
-<span class='no'>gluc_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"5.5"</span>, <span class='st'>"4.1"</span>)
-<span class='no'>gluc_res_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"norm"</span>, <span class='st'>"no"</span>)
-<span class='no'>ast_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"30"</span>, <span class='st'>"48"</span>)
-<span class='no'>ast_res_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"norm"</span>)
-
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='no'>site</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>,
-  <span class='no'>gluc_post</span>, <span class='no'>gluc_res_post</span>,
-  <span class='no'>ast_post</span>, <span class='no'>ast_res_post</span>,
-  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
-
-<span class='no'>refs_s01</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"labs_refer_s01.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"dmtools"</span>)
-<span class='no'>refs_s02</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"labs_refer_s02.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"dmtools"</span>)
-
-<span class='no'>s01_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lab.html'>lab</a></span>(<span class='no'>refs_s01</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='st'>"norm"</span>, <span class='st'>"no"</span>, <span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"site 01"</span>)
-<span class='no'>s02_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lab.html'>lab</a></span>(<span class='no'>refs_s02</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='st'>"norm"</span>, <span class='st'>"no"</span>, <span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"site 02"</span>)
-
-<span class='no'>labs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>s01_lab</span>, <span class='no'>s02_lab</span>)
-<span class='no'>labs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='check_sites.html'>check_sites</a></span>(<span class='no'>labs</span>, <span class='no'>df</span>, <span class='no'>site</span>)
-
-<span class='fu'>test_sites</span>(<span class='no'>labs</span>, <span class='kw'>func</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>lab</span>) <span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>lab</span>, <span class='st'>"mis"</span>))</div><div class='output co'>#&gt;   id age sex human_lab name_lab   refs lab_vals is_norm vals_to_dbl auto_norm
-#&gt; 1 02  20   m       ast ast_post 0 - 35       48    norm          48        no
-#&gt;   num_site
-#&gt; 1  site 02</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>meddra_auth</span>(<span class='no'>url</span>, <span class='no'>id</span>, <span class='no'>key</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -1,4 +1,4 @@
-#' Get meddra token
+#' Get the token
 #'
 #' @param target_url The url for authenticate.
 #' @param meddra_id The user's meddra id.
@@ -68,10 +68,9 @@ meddra_post <- function(target_url, json, token) {
 #' @export
 #'
 #' @examples
-#' temp_list <- list(list(1,3), list(4,5))
+#' temp_list <- list(list(a = 1, b = 3), list(a = 4, b = 5))
 #' list_parse(temp_list)
 list_parse <- function(to_tibble) {
-
   tibble::tibble(result = to_tibble) %>%
     tidyr::unnest_wider(col = .data[["result"]])
 }

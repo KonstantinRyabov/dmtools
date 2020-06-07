@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dmtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4.9000</span>
       </span>
     </div>
 
@@ -107,6 +107,9 @@
     </li>
     <li>
       <a href="../articles/dmtools_intro.html">dmtools_intro</a>
+    </li>
+    <li>
+      <a href="../articles/meddra_examples.html">meddra_examples</a>
     </li>
   </ul>
 </li>
@@ -170,7 +173,8 @@
 <span class='no'>bio_date_E3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"1991-03-23"</span>, <span class='st'>"1991-03-16"</span>, <span class='st'>"1991-03-16"</span>)
 
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>id</span>, <span class='no'>screen_date_E1</span>, <span class='no'>rand_date_E2</span>, <span class='no'>ph_date_E3</span>, <span class='no'>bio_date_E3</span>,
-<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='no'>timeline</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"dates.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"dmtools"</span>)
 <span class='no'>obj_date</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='date.html'>date</a></span>(<span class='no'>timeline</span>, <span class='no'>id</span>, <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>contains</a></span>)

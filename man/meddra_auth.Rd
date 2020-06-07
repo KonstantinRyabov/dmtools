@@ -2,7 +2,7 @@
 % Please edit documentation in R/meddra.R
 \name{meddra_auth}
 \alias{meddra_auth}
-\title{Get meddra token}
+\title{Get the token}
 \usage{
 meddra_auth(target_url, meddra_id, api_key)
 }
@@ -17,7 +17,7 @@ meddra_auth(target_url, meddra_id, api_key)
 A string scalar. The user's token.
 }
 \description{
-Get meddra token
+Get the token
 }
 \examples{
 \dontrun{

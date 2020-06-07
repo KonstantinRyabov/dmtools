@@ -16,6 +16,6 @@ A tibble.
 A list to a tibble.
 }
 \examples{
-temp_list <- list(list(1,3), list(4,5))
+temp_list <- list(list(a = 1, b = 3), list(a = 4, b = 5))
 list_parse(temp_list)
 }

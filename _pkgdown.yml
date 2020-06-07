@@ -38,3 +38,11 @@ reference:
       Rename the dataset if this is necessary.
    contents:
     - rename_dataset
+
+ - title: MedDRA
+   desc: >
+      Use MedDRA API.
+   contents:
+    - meddra_auth
+    - meddra_post
+    - list_parse
