@@ -6,6 +6,7 @@
 #' @param extra A character scalar. For additional information.
 #' @param common_cols A character vector. A column names in the dataset, which common for all events.
 #' @param is_post A logical scalar, default is TRUE. True is postfix, otherwise, prefix.
+#' @param is_add_cols A logical scalar, default is FALSE. If necessary add columns.
 #'
 #' @return The object short.
 #' @export
@@ -13,7 +14,13 @@
 #' @examples
 #' obj_short <- short("preg.xlsx", id, "res", c("site", "sex"))
 #' obj_short <- short("labs.xlsx", id, "name_labs", c("site"), "human_name")
-short <- function(file, id, name_to_find, common_cols = c(), extra = NA, is_post = T) {
+short <- function(file,
+                  id,
+                  name_to_find,
+                  common_cols = c(),
+                  extra = NA,
+                  is_post = T,
+                  is_add_cols = F) {
   id <- dplyr::enquo(id)
 
   obj <- list(
@@ -23,6 +30,7 @@ short <- function(file, id, name_to_find, common_cols = c(), extra = NA, is_post
     is_post = is_post,
     name_to_find = name_to_find,
     extra = extra,
+    is_add_cols = is_add_cols,
     bond = "_"
   )
 
@@ -45,6 +53,7 @@ run_tests.short <- function(obj, dataset, row_file, part) {
   name_to_find <- obj[["name_to_find"]]
   common_cols <- obj[["common_cols"]]
   extra <- obj[["extra"]]
+  is_add_cols <- obj[["is_add_cols"]]
 
   temp_row <- data.frame()
   if (!is.na(extra)) {
@@ -61,6 +70,11 @@ run_tests.short <- function(obj, dataset, row_file, part) {
 
   name_to_find <- row_file[[name_to_find]]
   name_to_find <- ifelse(is_pst, paste0(name_to_find, part), paste0(part, name_to_find))
+
+
+  if (is_add_cols) {
+    dataset <- add_cols(dataset, part, ds_names)
+  }
 
   result <- data.frame()
   if (length(common_cols) == 0) {

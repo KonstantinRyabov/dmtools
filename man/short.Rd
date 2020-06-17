@@ -4,7 +4,15 @@
 \alias{short}
 \title{Create object short}
 \usage{
-short(file, id, name_to_find, common_cols = c(), extra = NA, is_post = T)
+short(
+  file,
+  id,
+  name_to_find,
+  common_cols = c(),
+  extra = NA,
+  is_post = T,
+  is_add_cols = F
+)
 }
 \arguments{
 \item{file}{A character scalar. Path to the excel table.}
@@ -18,6 +26,8 @@ short(file, id, name_to_find, common_cols = c(), extra = NA, is_post = T)
 \item{extra}{A character scalar. For additional information.}
 
 \item{is_post}{A logical scalar, default is TRUE. True is postfix, otherwise, prefix.}
+
+\item{is_add_cols}{A logical scalar, default is FALSE. If necessary add columns.}
 }
 \value{
 The object short.
