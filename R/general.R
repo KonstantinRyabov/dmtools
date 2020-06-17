@@ -264,19 +264,18 @@ to_dbl <- function(vals) {
 #' @return A data frame. The dataset.
 #
 add_cols <- function(dset, ds_part, target_cols) {
+  part_dset <- dset %>% dplyr::select(dplyr::contains(ds_part))
+  part_cols <- names(part_dset)
+  diff <- dplyr::setdiff(target_cols, part_cols)
+  NAs <- rep(NA, nrow(dset))
 
-   part_dset <- dset %>% dplyr::select(dplyr::contains(ds_part))
-   part_cols  <- names(part_dset)
-   diff <- dplyr::setdiff(target_cols, part_cols)
-   NAs <- rep(NA, nrow(dset))
+  diff_part <- dplyr::setdiff(part_cols, target_cols)
 
-   diff_part <- dplyr::setdiff(part_cols, target_cols)
-
-   if (length(diff_part) == 0) {
-     for (col in diff) {
-       dset[col] <- NAs
-     }
-   }
+  if (length(diff_part) == 0) {
+    for (col in diff) {
+      dset[col] <- NAs
+    }
+  }
 
   dset
 }

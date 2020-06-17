@@ -21,7 +21,6 @@ short <- function(file,
                   extra = NA,
                   is_post = T,
                   is_add_cols = F) {
-
   id <- dplyr::enquo(id)
 
   obj <- list(

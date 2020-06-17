@@ -28,7 +28,6 @@ lab <- function(file,
                 cl_sign = NA,
                 site = NA,
                 name_to_find = "name_is_norm") {
-
   id <- dplyr::enquo(id)
   age <- dplyr::enquo(age)
   sex <- dplyr::enquo(sex)
