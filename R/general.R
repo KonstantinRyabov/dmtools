@@ -254,3 +254,29 @@ to_dbl <- function(vals) {
     as.double(rs)
   }
 }
+
+#' Add columns if columns don't exist
+#'
+#' @param dset A data frame. The dataset.
+#' @param ds_part A character scalar. Prefix or postfix.
+#' @param target_cols A character vector with necessary columns.
+#'
+#' @return A data frame. The dataset.
+#
+add_cols <- function(dset, ds_part, target_cols) {
+
+   part_dset <- dset %>% dplyr::select(dplyr::contains(ds_part))
+   part_cols  <- names(part_dset)
+   diff <- dplyr::setdiff(target_cols, part_cols)
+   NAs <- rep(NA, nrow(dset))
+
+   diff_part <- dplyr::setdiff(part_cols, target_cols)
+
+   if (length(diff_part) == 0) {
+     for (col in diff) {
+       dset[col] <- NAs
+     }
+   }
+
+  dset
+}
