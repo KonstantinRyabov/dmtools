@@ -15,7 +15,7 @@ Description: For checking the dataset from EDC(Electronic Data Capture) in clini
 Depends: R (>= 3.6)
 Imports:
   magrittr (>= 1.5),
-  dplyr (>= 0.8.3),
+  dplyr (>= 1.0.0),
   readxl (>= 1.3.1),
   purrr (>= 0.3.3),
   lubridate (>= 1.7.4),
