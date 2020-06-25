@@ -269,12 +269,8 @@ add_cols <- function(dset, ds_part, target_cols) {
   diff <- dplyr::setdiff(target_cols, part_cols)
   NAs <- rep(NA, nrow(dset))
 
-  diff_part <- dplyr::setdiff(part_cols, target_cols)
-
-  if (length(diff_part) == 0) {
-    for (col in diff) {
-      dset[col] <- NAs
-    }
+  for (col in diff) {
+    dset[col] <- NAs
   }
 
   dset
