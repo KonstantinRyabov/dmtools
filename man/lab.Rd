@@ -12,7 +12,7 @@ lab(
   norm,
   no_norm,
   is_post = T,
-  cl_sign = NA,
+  cl_sign = NULL,
   site = NA,
   name_to_find = "name_is_norm"
 )
@@ -32,7 +32,7 @@ lab(
 
 \item{is_post}{A logical scalar, default is TRUE. True is postfix, otherwise, prefix.}
 
-\item{cl_sign}{A clinical significant estimate, for example, "CLISIG", default: NA.}
+\item{cl_sign}{A clinical significant estimate, for example, "CLISIG".}
 
 \item{site}{A site number, default: NA.}
 

@@ -17,8 +17,8 @@
 short <- function(file,
                   id,
                   name_to_find,
-                  common_cols = c(),
-                  extra = NA,
+                  common_cols = NULL,
+                  extra = NULL,
                   is_post = T,
                   is_add_cols = F) {
   id <- dplyr::enquo(id)
@@ -56,7 +56,7 @@ run_tests.short <- function(obj, dataset, row_file, part) {
   is_add_cols <- obj[["is_add_cols"]]
 
   temp_row <- data.frame()
-  if (!is.na(extra)) {
+  if (!is.null(extra)) {
     temp_row <- row_file %>% dplyr::select(-!!extra)
   } else {
     temp_row <- row_file
@@ -77,7 +77,7 @@ run_tests.short <- function(obj, dataset, row_file, part) {
   }
 
   result <- data.frame()
-  if (length(common_cols) == 0) {
+  if (is.null(common_cols)) {
     result <- dataset %>%
       dplyr::select(!!id, !!ds_names) %>%
       dplyr::mutate(name_to_find = name_to_find)
@@ -87,7 +87,7 @@ run_tests.short <- function(obj, dataset, row_file, part) {
       dplyr::mutate(name_to_find = name_to_find)
   }
 
-  if (!is.na(extra)) {
+  if (!is.null(extra)) {
     result <- result %>% dplyr::mutate(!!extra := row_file[[extra]])
   }
 

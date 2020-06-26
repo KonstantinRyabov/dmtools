@@ -24,7 +24,7 @@
 check.default <- function(obj, dataset) {
 
   # mutate empty strings in NA
-  dataset <- dataset %>% dplyr::mutate(dplyr::across(is.character, ~ ifelse(. == "", NA, .)))
+  dataset <- dataset %>% dplyr::mutate(dplyr::across(.fns =  ~ ifelse(. == "", NA, .)))
 
   # load file
   file <- obj[["file"]]
@@ -87,7 +87,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
     lapply(parts, function(part) {
       tryCatch(run_tests(obj, dataset, row_file, part),
         error = function(e) {
-          warning(part, " can't bind")
+          warning(part, " can't bind, because ", e)
           data.frame()
         }
       )
@@ -269,12 +269,8 @@ add_cols <- function(dset, ds_part, target_cols) {
   diff <- dplyr::setdiff(target_cols, part_cols)
   NAs <- rep(NA, nrow(dset))
 
-  diff_part <- dplyr::setdiff(part_cols, target_cols)
-
-  if (length(diff_part) == 0) {
-    for (col in diff) {
-      dset[col] <- NAs
-    }
+  for (col in diff) {
+    dset[col] <- NAs
   }
 
   dset

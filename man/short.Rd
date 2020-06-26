@@ -8,8 +8,8 @@ short(
   file,
   id,
   name_to_find,
-  common_cols = c(),
-  extra = NA,
+  common_cols = NULL,
+  extra = NULL,
   is_post = T,
   is_add_cols = F
 )

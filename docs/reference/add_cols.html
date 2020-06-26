@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create object lab — lab • dmtools</title>
+<title>Add columns if columns don't exist — add_cols • dmtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Create object lab — lab" />
-<meta property="og:description" content="Create object lab" />
+<meta property="og:title" content="Add columns if columns don't exist — add_cols" />
+<meta property="og:description" content="Add columns if columns don't exist" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -137,81 +137,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create object lab</h1>
-    <small class="dont-index">Source: <a href='https://github.com/chachabooms/dmtools/blob/master/R/lab.R'><code>R/lab.R</code></a></small>
-    <div class="hidden name"><code>lab.Rd</code></div>
+    <h1>Add columns if columns don't exist</h1>
+    <small class="dont-index">Source: <a href='https://github.com/chachabooms/dmtools/blob/master/R/general.R'><code>R/general.R</code></a></small>
+    <div class="hidden name"><code>add_cols.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create object lab</p>
+    <p>Add columns if columns don't exist</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lab</span>(
-  <span class='no'>file</span>,
-  <span class='no'>id</span>,
-  <span class='no'>age</span>,
-  <span class='no'>sex</span>,
-  <span class='no'>norm</span>,
-  <span class='no'>no_norm</span>,
-  <span class='kw'>is_post</span> <span class='kw'>=</span> <span class='no'>T</span>,
-  <span class='kw'>cl_sign</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>site</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>name_to_find</span> <span class='kw'>=</span> <span class='st'>"name_is_norm"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>add_cols</span>(<span class='no'>dset</span>, <span class='no'>ds_part</span>, <span class='no'>target_cols</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>A character scalar. Path to the laboratory's reference in the excel table.</p></td>
+      <th>dset</th>
+      <td><p>A data frame. The dataset.</p></td>
     </tr>
     <tr>
-      <th>id</th>
-      <td><p>A column name of the subject id in the dataset, without quotes.</p></td>
+      <th>ds_part</th>
+      <td><p>A character scalar. Prefix or postfix.</p></td>
     </tr>
     <tr>
-      <th>age</th>
-      <td><p>A column name of the subject age in the dataset, without quotes.</p></td>
-    </tr>
-    <tr>
-      <th>sex</th>
-      <td><p>A column name of the subject sex in the dataset, without quotes.</p></td>
-    </tr>
-    <tr>
-      <th>norm</th>
-      <td><p>A normal estimate, for example, "NORMAL".</p></td>
-    </tr>
-    <tr>
-      <th>no_norm</th>
-      <td><p>An abnormal estimate, for example, "ABNORMAL".</p></td>
-    </tr>
-    <tr>
-      <th>is_post</th>
-      <td><p>A logical scalar, default is TRUE. True is postfix, otherwise, prefix.</p></td>
-    </tr>
-    <tr>
-      <th>cl_sign</th>
-      <td><p>A clinical significant estimate, for example, "CLISIG".</p></td>
-    </tr>
-    <tr>
-      <th>site</th>
-      <td><p>A site number, default: NA.</p></td>
-    </tr>
-    <tr>
-      <th>name_to_find</th>
-      <td><p>A character scalar. For search prefixes or postfixes, default is "name_is_norm".</p></td>
+      <th>target_cols</th>
+      <td><p>A character vector with necessary columns.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The object lab.</p>
+    <p>A data frame. The dataset.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'>lab</span>(<span class='st'>"lab_refer.xlsx"</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)
-<span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'>lab</span>(<span class='st'>"lab_refer.xlsx"</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='st'>"NORMAL"</span>, <span class='st'>"NOCLISIG"</span>, <span class='kw'>cl_sign</span> <span class='kw'>=</span> <span class='st'>"CLISIG"</span>)
-<span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'>lab</span>(<span class='st'>"lab_refer.xlsx"</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='st'>"norm"</span>, <span class='st'>"no"</span>, <span class='fl'>FALSE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
