@@ -7,7 +7,7 @@
 #' @param sex A column name of the subject sex in the dataset, without quotes.
 #' @param norm A normal estimate, for example, "NORMAL".
 #' @param no_norm An abnormal estimate, for example, "ABNORMAL".
-#' @param cl_sign A clinical significant estimate, for example, "CLISIG", default: NA.
+#' @param cl_sign A clinical significant estimate, for example, "CLISIG".
 #' @param site A site number, default: NA.
 #' @param name_to_find A character scalar. For search prefixes or postfixes, default is "name_is_norm".
 #'
@@ -25,7 +25,7 @@ lab <- function(file,
                 norm,
                 no_norm,
                 is_post = T,
-                cl_sign = NA,
+                cl_sign = NULL,
                 site = NA,
                 name_to_find = "name_is_norm") {
   id <- dplyr::enquo(id)
@@ -137,7 +137,7 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
   no_norm <- obj[["no_norm"]]
   is_post <- obj[["is_post"]]
   obj_cl <- obj[["cl_sign"]]
-  cl_sign <- ifelse(is.na(obj_cl), no_norm, obj_cl)
+  cl_sign <- ifelse(is.null(obj_cl), no_norm, obj_cl)
 
   # laboratory's parameters
   human_name <- row_file$human_name
