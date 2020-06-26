@@ -146,7 +146,15 @@
     <p>Create object short</p>
     </div>
 
-    <pre class="usage"><span class='fu'>short</span>(<span class='no'>file</span>, <span class='no'>id</span>, <span class='no'>name_to_find</span>, <span class='kw'>common_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(), <span class='kw'>extra</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>is_post</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>short</span>(
+  <span class='no'>file</span>,
+  <span class='no'>id</span>,
+  <span class='no'>name_to_find</span>,
+  <span class='kw'>common_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>extra</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>is_post</span> <span class='kw'>=</span> <span class='no'>T</span>,
+  <span class='kw'>is_add_cols</span> <span class='kw'>=</span> <span class='no'>F</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,6 +182,10 @@
     <tr>
       <th>is_post</th>
       <td><p>A logical scalar, default is TRUE. True is postfix, otherwise, prefix.</p></td>
+    </tr>
+    <tr>
+      <th>is_add_cols</th>
+      <td><p>A logical scalar, default is FALSE. If necessary add columns.</p></td>
     </tr>
     </table>
 
