@@ -24,7 +24,7 @@
 check.default <- function(obj, dataset) {
 
   # mutate empty strings in NA
-  dataset <- dataset %>% dplyr::mutate(dplyr::across(.fns =  ~ ifelse(. == "", NA, .)))
+  dataset <- dataset %>% dplyr::mutate(dplyr::across(.fns = ~ ifelse(. == "", NA, .)))
 
   # load file
   file <- obj[["file"]]
