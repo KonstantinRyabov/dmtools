@@ -5,6 +5,7 @@
 #' @param path_crfs A character scalar. Path to the specification files the in excel table.
 #' @param no_readable_name A character scalar. A column name of no_readable values.
 #' @param readable_name A character scalar. A column name of readable values.
+#' @param extension A character scalar. A extension of files, default is *.xlsx.
 #' @param num_sheet An integer scalar, default is the first sheet. A position of a sheet in the excel document.
 #'
 #' @return The list with two values: data - renamed dataset, spec - common specification.
@@ -31,7 +32,13 @@
 #'
 #' result <- rename_dataset(df, crfs, "old_name", "new_name")
 #' result[["data"]]
-rename_dataset <- function(dataset, path_crfs, no_readable_name, readable_name, num_sheet = 1, is_post = T) {
+rename_dataset <- function(dataset,
+                           path_crfs,
+                           no_readable_name,
+                           readable_name,
+                           num_sheet = 1,
+                           extension = "*.xlsx",
+                           is_post = T) {
   # all names of the dataset
   df_colname <- names(dataset)
 
