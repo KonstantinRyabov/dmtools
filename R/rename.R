@@ -43,7 +43,7 @@ rename_dataset <- function(dataset,
   df_colname <- names(dataset)
 
   # files of specification
-  files <- list.files(path = path_crfs, pattern = "*.xlsx")
+  files <- list.files(path = path_crfs, pattern = extension)
 
   # create the common specification
   all_spec <- do.call(rbind, lapply(files, function(file) {
