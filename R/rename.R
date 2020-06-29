@@ -43,7 +43,7 @@ rename_dataset <- function(dataset, path_crfs, no_readable_name, readable_name, 
     # load a file of specification
     vars <- c(no_readable_var = no_readable_name, readable_var = readable_name)
     file <- file.path(path_crfs, file)
-    spec <- readxl::read_xlsx(file, sheet = num_sheet) %>%
+    spec <- readxl::read_excel(file, sheet = num_sheet) %>%
       dplyr::rename(!!vars)
 
     if (length(spec$no_readable_var) == 0) {
