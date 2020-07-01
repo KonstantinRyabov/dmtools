@@ -246,7 +246,7 @@ test_sites <- function(objs, func) {
 #' @return A double vector.
 #'
 to_dbl <- function(vals) {
-  if (is.double(vals)) {
+  if (is.numeric(vals)) {
     vals
   } else {
     with_point <- gsub(",", ".", vals)
