@@ -87,13 +87,13 @@ rename_dataset <- function(dataset,
 #'
 create_spec <- function(df_spec, all_colname, part_spec, is_pst) {
   logics <- rep(is_pst, nrow(df_spec))
-  # colomn names in readable format with prefix or postfix
+  # column names in readable format with prefix or postfix
   new_names <- ifelse(logics, paste0(df_spec$readable_var, part_spec), paste0(part_spec, df_spec$readable_var))
-  # colomn names with prefix or postfix
+  # column names with prefix or postfix
   old_names <- ifelse(logics, paste0(df_spec$no_readable_var, part_spec), paste0(part_spec, df_spec$no_readable_var))
-  # index of neccessary colomn
+  # index of necessary column
   index <- old_names %in% all_colname
-  # change colomn in a specification
+  # change column in a specification
   df_spec <- df_spec %>% dplyr::mutate(readable_var = new_names, no_readable_var = old_names)
   # filter dataset
   df_spec[index, c("no_readable_var", "readable_var")]

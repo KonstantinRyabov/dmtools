@@ -10,11 +10,9 @@
 #' @export
 #'
 wbc <- function(file, id, is_post = T, site = NA, name_to_find = "relative") {
-  id <- dplyr::enquo(id)
-
   obj <- list(
     file = file,
-    id = id,
+    id = dplyr::enquo(id),
     is_post = is_post,
     site = site,
     name_to_find = name_to_find,
