@@ -10,6 +10,7 @@ rename_dataset(
   no_readable_name,
   readable_name,
   num_sheet = 1,
+  extension = "*.xlsx",
   is_post = T
 )
 }
@@ -23,6 +24,8 @@ rename_dataset(
 \item{readable_name}{A character scalar. A column name of readable values.}
 
 \item{num_sheet}{An integer scalar, default is the first sheet. A position of a sheet in the excel document.}
+
+\item{extension}{A character scalar. A extension of files, default is *.xlsx.}
 
 \item{is_post}{A logical scalar, default is TRUE. True is postfix, otherwise, prefix.}
 }

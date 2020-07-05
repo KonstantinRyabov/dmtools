@@ -13,6 +13,27 @@ df <- data.frame(
   stringsAsFactors = FALSE
 )
 
+not_full <- data.frame(
+  id, site, sex,
+  preg_yn_e2, preg_res_e2,
+  preg_res_e3,
+  stringsAsFactors = FALSE
+)
+
+test_that("check don't stop if error", {
+  obj_short <- short("preg.xlsx", id, "res", c("site", "sex"))
+  expect_warning(check(obj_short, not_full), "can't bind")
+})
+
+
+test_that("check add columns", {
+  obj_short <- short("preg.xlsx", id, "res", c("site", "sex"), is_add_cols = TRUE)
+  obj_short <- check(obj_short, not_full)
+  preg <- get_result(obj_short)
+  expect_equal(ncol(preg), 6)
+})
+
+
 test_that("check the number of columns with common variables", {
   obj_short <- short("preg.xlsx", id, "res", c("site", "sex"))
   obj_short <- check(obj_short, df)

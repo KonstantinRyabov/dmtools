@@ -13,11 +13,9 @@
 #' obj_date <- date("dates.xlsx", id, dplyr::contains)
 #' obj_date <- date("dates.xlsx", id, dplyr::contains, "uneq")
 date <- function(file, id, get_visit, get_date = dplyr::contains, str_date = "DAT") {
-  id <- dplyr::enquo(id)
-
   obj <- list(
     file = file,
-    id = id,
+    id = dplyr::enquo(id),
     get_visit = get_visit,
     get_date = get_date,
     str_date = str_date

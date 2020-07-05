@@ -24,7 +24,7 @@
 check.default <- function(obj, dataset) {
 
   # mutate empty strings in NA
-  dataset <- dataset %>% dplyr::mutate(dplyr::across(.fns =  ~ ifelse(. == "", NA, .)))
+  dataset <- dataset %>% dplyr::mutate(dplyr::across(.fns = ~ ifelse(. == "", NA, .)))
 
   # load file
   file <- obj[["file"]]
@@ -246,7 +246,7 @@ test_sites <- function(objs, func) {
 #' @return A double vector.
 #'
 to_dbl <- function(vals) {
-  if (is.double(vals)) {
+  if (is.numeric(vals)) {
     vals
   } else {
     with_point <- gsub(",", ".", vals)

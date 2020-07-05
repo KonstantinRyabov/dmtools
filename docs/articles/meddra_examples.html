@@ -105,6 +105,7 @@
 
     
     
+<p>Notice, you must register for an API Key to use as a password. <a href="https://midt.meddra.org/account/register" class="uri">https://midt.meddra.org/account/register</a></p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">jsonlite</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dmtools</span>)
 
@@ -112,27 +113,35 @@
 <span class="no">auth</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">"api_auth.csv"</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">";"</span>)
 <span class="no">url_auth</span> <span class="kw">&lt;-</span> <span class="st">"https://midt.meddra.org/connect/token"</span>
 <span class="co"># get token</span>
-<span class="no">token</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/meddra_auth.html">meddra_auth</a></span>(<span class="no">url_auth</span>, <span class="no">auth</span>$<span class="no">id</span>, <span class="no">auth</span>$<span class="no">api_key</span>)
-
-<span class="co"># search api</span>
+<span class="no">token</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/meddra_auth.html">meddra_auth</a></span>(<span class="no">url_auth</span>, <span class="no">auth</span>$<span class="no">id</span>, <span class="no">auth</span>$<span class="no">api_key</span>)</pre></body></html></div>
+<div id="search-api" class="section level2">
+<h2 class="hasAnchor">
+<a href="#search-api" class="anchor"></a>search api</h2>
+<div class="sourceCode" id="cb2"><html><body><pre class="r">
 <span class="no">url_search</span> <span class="kw">&lt;-</span> <span class="st">"https://mapit.meddra.org/api/search"</span>
 <span class="co"># read a file with a json</span>
 <span class="no">json_search</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/read_json.html">read_json</a></span>(<span class="st">"search.txt"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/fromJSON.html">toJSON</a></span>(<span class="kw">auto_unbox</span> <span class="kw">=</span> <span class="no">T</span>)
 <span class="co"># get a response</span>
 <span class="no">list_search</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/meddra_post.html">meddra_post</a></span>(<span class="no">url_search</span>, <span class="no">json_search</span>, <span class="no">token</span>)
 <span class="co"># response to a tibble</span>
-<span class="no">tibble_search</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/list_parse.html">list_parse</a></span>(<span class="no">list_search</span>)
-
-<span class="co"># hierarchy api</span>
+<span class="no">tibble_search</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/list_parse.html">list_parse</a></span>(<span class="no">list_search</span>)</pre></body></html></div>
+</div>
+<div id="hierarchy-api" class="section level2">
+<h2 class="hasAnchor">
+<a href="#hierarchy-api" class="anchor"></a>hierarchy api</h2>
+<div class="sourceCode" id="cb3"><html><body><pre class="r">
 <span class="no">url_hier</span> <span class="kw">&lt;-</span> <span class="st">"https://mapit.meddra.org/api/hier"</span>
 <span class="co"># read a file with a json</span>
 <span class="no">json_hier</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/read_json.html">read_json</a></span>(<span class="st">"hier.txt"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/fromJSON.html">toJSON</a></span>(<span class="kw">auto_unbox</span> <span class="kw">=</span> <span class="no">T</span>)
 <span class="co"># get a response</span>
 <span class="no">list_hier</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/meddra_post.html">meddra_post</a></span>(<span class="no">url_hier</span>, <span class="no">json_hier</span>, <span class="no">token</span>)
 <span class="co"># response to a tibble</span>
-<span class="no">tibble_hier</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/list_parse.html">list_parse</a></span>(<span class="no">list_hier</span>$<span class="no">rows</span>)
-
-<span class="co"># type api</span>
+<span class="no">tibble_hier</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/list_parse.html">list_parse</a></span>(<span class="no">list_hier</span>$<span class="no">rows</span>)</pre></body></html></div>
+</div>
+<div id="type-api" class="section level2">
+<h2 class="hasAnchor">
+<a href="#type-api" class="anchor"></a>type api</h2>
+<div class="sourceCode" id="cb4"><html><body><pre class="r">
 <span class="no">url_type</span> <span class="kw">&lt;-</span> <span class="st">"https://mapit.meddra.org/api/type"</span>
 <span class="co"># read a file with a json</span>
 <span class="no">json_type</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/read_json.html">read_json</a></span>(<span class="st">"type.txt"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://jeroen.cran.dev/jsonlite/reference/fromJSON.html">toJSON</a></span>(<span class="kw">auto_unbox</span> <span class="kw">=</span> <span class="no">T</span>)
@@ -140,11 +149,14 @@
 <span class="no">list_type</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/meddra_post.html">meddra_post</a></span>(<span class="no">url_type</span>, <span class="no">json_type</span>, <span class="no">token</span>)
 <span class="co"># response to a tibble</span>
 <span class="no">tibble_type</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/list_parse.html">list_parse</a></span>(<span class="no">list_type</span>)</pre></body></html></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

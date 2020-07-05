@@ -21,11 +21,9 @@ short <- function(file,
                   extra = NULL,
                   is_post = T,
                   is_add_cols = F) {
-  id <- dplyr::enquo(id)
-
   obj <- list(
     file = file,
-    id = id,
+    id = dplyr::enquo(id),
     common_cols = common_cols,
     is_post = is_post,
     name_to_find = name_to_find,

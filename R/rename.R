@@ -5,6 +5,7 @@
 #' @param path_crfs A character scalar. Path to the specification files the in excel table.
 #' @param no_readable_name A character scalar. A column name of no_readable values.
 #' @param readable_name A character scalar. A column name of readable values.
+#' @param extension A character scalar. A extension of files, default is *.xlsx.
 #' @param num_sheet An integer scalar, default is the first sheet. A position of a sheet in the excel document.
 #'
 #' @return The list with two values: data - renamed dataset, spec - common specification.
@@ -31,19 +32,25 @@
 #'
 #' result <- rename_dataset(df, crfs, "old_name", "new_name")
 #' result[["data"]]
-rename_dataset <- function(dataset, path_crfs, no_readable_name, readable_name, num_sheet = 1, is_post = T) {
+rename_dataset <- function(dataset,
+                           path_crfs,
+                           no_readable_name,
+                           readable_name,
+                           num_sheet = 1,
+                           extension = "*.xlsx",
+                           is_post = T) {
   # all names of the dataset
   df_colname <- names(dataset)
 
   # files of specification
-  files <- list.files(path = path_crfs, pattern = "*.xlsx")
+  files <- list.files(path = path_crfs, pattern = extension)
 
   # create the common specification
   all_spec <- do.call(rbind, lapply(files, function(file) {
     # load a file of specification
     vars <- c(no_readable_var = no_readable_name, readable_var = readable_name)
     file <- file.path(path_crfs, file)
-    spec <- readxl::read_xlsx(file, sheet = num_sheet) %>%
+    spec <- readxl::read_excel(file, sheet = num_sheet) %>%
       dplyr::rename(!!vars)
 
     if (length(spec$no_readable_var) == 0) {
@@ -80,13 +87,13 @@ rename_dataset <- function(dataset, path_crfs, no_readable_name, readable_name, 
 #'
 create_spec <- function(df_spec, all_colname, part_spec, is_pst) {
   logics <- rep(is_pst, nrow(df_spec))
-  # colomn names in readable format with prefix or postfix
+  # column names in readable format with prefix or postfix
   new_names <- ifelse(logics, paste0(df_spec$readable_var, part_spec), paste0(part_spec, df_spec$readable_var))
-  # colomn names with prefix or postfix
+  # column names with prefix or postfix
   old_names <- ifelse(logics, paste0(df_spec$no_readable_var, part_spec), paste0(part_spec, df_spec$no_readable_var))
-  # index of neccessary colomn
+  # index of necessary column
   index <- old_names %in% all_colname
-  # change colomn in a specification
+  # change column in a specification
   df_spec <- df_spec %>% dplyr::mutate(readable_var = new_names, no_readable_var = old_names)
   # filter dataset
   df_spec[index, c("no_readable_var", "readable_var")]

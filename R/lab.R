@@ -28,15 +28,11 @@ lab <- function(file,
                 cl_sign = NULL,
                 site = NA,
                 name_to_find = "name_is_norm") {
-  id <- dplyr::enquo(id)
-  age <- dplyr::enquo(age)
-  sex <- dplyr::enquo(sex)
-
   obj <- list(
     file = file,
-    id = id,
-    age = age,
-    sex = sex,
+    id = dplyr::enquo(id),
+    age = dplyr::enquo(age),
+    sex = dplyr::enquo(sex),
     norm = norm,
     no_norm = no_norm,
     is_post = is_post,
