@@ -2,7 +2,7 @@
 #'
 #' @param target_url The url for authenticate.
 #' @param meddra_id The user's meddra id.
-#' @param api_key The users's api key.
+#' @param api_key The user's api key.
 #'
 #' @return A string scalar. The user's token.
 #' @export
