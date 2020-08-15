@@ -73,7 +73,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
 
   # if not found
   if (!any(result_find)) {
-    warning(row_file$human_name, " not found")
+    warning(row_file$LBTEST, " not found")
   }
 
   names <- dset_colnames[result_find]

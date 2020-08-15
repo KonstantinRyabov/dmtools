@@ -46,14 +46,14 @@ Notice, your dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the
 
 For example, you want to check laboratory values, you need to create the excel table like in the example.  
 
-* age_min - whole number, >= number
-* age_max - if none, type Inf, <= number  
-* sex - for both sex, use `|`
-* human_name - friendly name for analysis
-* name_lab_vals - analysis from the dataset, without postfix or prefix
-* name_is_norm - estimate from the dataset, without postfix or prefix
-* lab_vals_min - lower limit of normal, >= 
-* lab_vals_max - upper limit of normal, <=
+* AGELOW - number, >= number
+* AGEHIGH - if none, type Inf, <= number  
+* SEX - for both sex, use `|`
+* LBTEST - What was the lab test name?
+* LBORRES - What was the result of the result lab test?
+* LBNDIND - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
+* LBORNRHI - What was the high limit of the reference range for this lab test, <=
 
 ```{r refer, echo = FALSE, result = 'asis', warning = FALSE, message = FALSE}
 library(knitr)

@@ -14,9 +14,9 @@ df <- data.frame(
   stringsAsFactors = F
 )
 
-s01_lab <- lab("labs_refer.xlsx", id, age, sex, "norm", "no", cl_sign = "cl", site = "site 01")
-s02_lab <- lab("labs_refer.xlsx", id, age, sex, "norm", "no", cl_sign = "cl", site = "site 02")
-s03_lab <- lab("labs_refer.xlsx", id, age, sex, "norm", "no", cl_sign = "cl", site = "site 03")
+s01_lab <- lab("labs_refer.xlsx", id, age, sex, "norm", "no", clsig = "cl", site = "site 01")
+s02_lab <- lab("labs_refer.xlsx", id, age, sex, "norm", "no", clsig = "cl", site = "site 02")
+s03_lab <- lab("labs_refer.xlsx", id, age, sex, "norm", "no", clsig = "cl", site = "site 03")
 all_lab <- check(s01_lab, df)
 
 labs <- list(s01_lab, s02_lab, s03_lab)
@@ -68,10 +68,10 @@ test_that("check if the final result is empty", {
 
 test_that("check if age_min > age_max", {
   warn_age <- lab("warning_age.xlsx", id, age, sex, "norm", "no")
-  expect_warning(check(warn_age, df), "age_min > age_max in enzyme ast")
+  expect_warning(check(warn_age, df), "age_low > age_high in enzyme ast")
 })
 
 test_that("check if lab_min > lab_max ", {
   warn_lab <- lab("warning_lab.xlsx", id, age, sex, "norm", "no")
-  expect_warning(check(warn_lab, df), "lab_min > lab_max in enzyme ast")
+  expect_warning(check(warn_lab, df), "lbornrlo > lbornrhi in enzyme ast")
 })
