@@ -23,8 +23,8 @@ test_that("check names of dates, which is out the timeline", {
 })
 
 test_that("check the difference of protocol", {
-  expect_equal(out_date$out[1], "->2")
-  expect_equal(out_date$out[2], "1<-")
+  expect_equal(out_date$out[1], 2)
+  expect_equal(out_date$out[2], -1)
 })
 
 test_that("check the number of dates, which is no equal", {
