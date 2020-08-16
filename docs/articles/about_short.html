@@ -123,10 +123,10 @@
 <h3 class="hasAnchor">
 <a href="#pregnancy-test" class="anchor"></a>pregnancy test</h3>
 <table class="table">
-<caption>preg</caption>
+<caption>LB</caption>
 <thead><tr class="header">
-<th align="left">yn</th>
-<th align="left">res</th>
+<th align="left">LBPERF</th>
+<th align="left">LBORRES</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td align="left">preg_yn</td>
@@ -175,26 +175,26 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">preg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"preg.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">preg</span>, <span class="no">id</span>, <span class="st">"res"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"site"</span>, <span class="st">"sex"</span>))
+<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">preg</span>, <span class="no">id</span>, <span class="st">"LBORRES"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"site"</span>, <span class="st">"sex"</span>))
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id    site sex yn   res    IDVAR VISIT</span>
-<span class="co">#&gt; 1 01 site 01   f  y   neg preg_res   _e2</span>
-<span class="co">#&gt; 2 01 site 01   f  y   neg preg_res   _e3</span>
-<span class="co">#&gt; 3 02 site 02   m  y   neg preg_res   _e2</span>
-<span class="co">#&gt; 4 02 site 02   m  y   pos preg_res   _e3</span>
-<span class="co">#&gt; 5 03 site 03   f  y   neg preg_res   _e2</span>
-<span class="co">#&gt; 6 03 site 03   f  n unnes preg_res   _e3</span></pre></body></html></div>
+<span class="co">#&gt;   id    site sex LBPERF LBORRES    IDVAR VISIT</span>
+<span class="co">#&gt; 1 01 site 01   f      y     neg preg_res   _e2</span>
+<span class="co">#&gt; 2 01 site 01   f      y     neg preg_res   _e3</span>
+<span class="co">#&gt; 3 02 site 02   m      y     neg preg_res   _e2</span>
+<span class="co">#&gt; 4 02 site 02   m      y     pos preg_res   _e3</span>
+<span class="co">#&gt; 5 03 site 03   f      y     neg preg_res   _e2</span>
+<span class="co">#&gt; 6 03 site 03   f      n   unnes preg_res   _e3</span></pre></body></html></div>
 </div>
 <div id="drug-type" class="section level3">
 <h3 class="hasAnchor">
 <a href="#drug-type" class="anchor"></a>drug type</h3>
 <table class="table">
-<caption>drug</caption>
+<caption>CM</caption>
 <thead><tr class="header">
-<th align="left">type</th>
-<th align="left">amount</th>
+<th align="left">CMTRT</th>
+<th align="left">CMDOSE</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td align="left">drug_type</td>
@@ -235,11 +235,11 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">drug</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"drug.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">drug</span>, <span class="no">id</span>, <span class="st">"type"</span>)
+<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">drug</span>, <span class="no">id</span>, <span class="st">"CMTRT"</span>)
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id     type amount     IDVAR VISIT</span>
+<span class="co">#&gt;   id    CMTRT CMDOSE     IDVAR VISIT</span>
 <span class="co">#&gt; 1 01 type_one      2 drug_type   _e2</span>
 <span class="co">#&gt; 2 01 type_one      2 drug_type   _e3</span>
 <span class="co">#&gt; 3 02 type_two      1 drug_type   _e2</span>
@@ -251,10 +251,10 @@
 <h3 class="hasAnchor">
 <a href="#vital-functions" class="anchor"></a>vital functions</h3>
 <table class="table">
-<caption>vf</caption>
+<caption>VS</caption>
 <thead><tr class="header">
-<th align="left">heart</th>
-<th align="left">resp</th>
+<th align="left">VSTEST_HR</th>
+<th align="left">VSTEST_RESP</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td align="left">hr</td>
@@ -295,28 +295,28 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">vf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"vf.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">vf</span>, <span class="no">id</span>, <span class="st">"heart"</span>)
+<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">vf</span>, <span class="no">id</span>, <span class="st">"VSTEST_HR"</span>)
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id heart resp IDVAR VISIT</span>
-<span class="co">#&gt; 1 01    60   12    hr   _e2</span>
-<span class="co">#&gt; 2 01    65   13    hr   _e3</span>
-<span class="co">#&gt; 3 02    70   15    hr   _e2</span>
-<span class="co">#&gt; 4 02    71   14    hr   _e3</span>
-<span class="co">#&gt; 5 03    76   16    hr   _e2</span>
-<span class="co">#&gt; 6 03    86   18    hr   _e3</span></pre></body></html></div>
+<span class="co">#&gt;   id VSTEST_HR VSTEST_RESP IDVAR VISIT</span>
+<span class="co">#&gt; 1 01        60          12    hr   _e2</span>
+<span class="co">#&gt; 2 01        65          13    hr   _e3</span>
+<span class="co">#&gt; 3 02        70          15    hr   _e2</span>
+<span class="co">#&gt; 4 02        71          14    hr   _e3</span>
+<span class="co">#&gt; 5 03        76          16    hr   _e2</span>
+<span class="co">#&gt; 6 03        86          18    hr   _e3</span></pre></body></html></div>
 </div>
 <div id="adverse-events" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adverse-events" class="anchor"></a>adverse events</h3>
 <table class="table">
-<caption>ae</caption>
+<caption>AE</caption>
 <thead><tr class="header">
-<th align="left">lab</th>
-<th align="left">is_norm</th>
-<th align="left">cl</th>
-<th align="left">human_name</th>
+<th align="left">LBORRES</th>
+<th align="left">LBNRIND</th>
+<th align="left">LBCLSIG</th>
+<th align="left">LBTEST</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td align="left">ast</td>
@@ -375,17 +375,17 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ae</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"ae.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">ae</span>, <span class="no">id</span>, <span class="st">"is_norm"</span>, <span class="kw">common_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ae_yn_e5"</span>, <span class="st">"ae_desc_e5"</span>), <span class="kw">extra</span> <span class="kw">=</span> <span class="st">"human_name"</span>)
+<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">ae</span>, <span class="no">id</span>, <span class="st">"LBNRIND"</span>, <span class="kw">common_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ae_yn_e5"</span>, <span class="st">"ae_desc_e5"</span>), <span class="kw">extra</span> <span class="kw">=</span> <span class="st">"LBTEST"</span>)
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id ae_yn_e5   ae_desc_e5 lab is_norm   cl    IDVAR VISIT human_name</span>
-<span class="co">#&gt; 1 01       no         &lt;NA&gt;  32    norm &lt;NA&gt; ast_norm   _e2 enzyme_ast</span>
-<span class="co">#&gt; 2 01       no         &lt;NA&gt;  36    norm &lt;NA&gt; ast_norm   _e3 enzyme_ast</span>
-<span class="co">#&gt; 3 02      yes abnormal ast  56      no   no ast_norm   _e2 enzyme_ast</span>
-<span class="co">#&gt; 4 02      yes abnormal ast  80      no  yes ast_norm   _e3 enzyme_ast</span>
-<span class="co">#&gt; 5 03       no         &lt;NA&gt;  60      no  yes ast_norm   _e2 enzyme_ast</span>
-<span class="co">#&gt; 6 03       no         &lt;NA&gt;  32    norm &lt;NA&gt; ast_norm   _e3 enzyme_ast</span></pre></body></html></div>
+<span class="co">#&gt;   id ae_yn_e5   ae_desc_e5 LBORRES LBNRIND LBCLSIG    IDVAR VISIT     LBTEST</span>
+<span class="co">#&gt; 1 01       no         &lt;NA&gt;      32    norm    &lt;NA&gt; ast_norm   _e2 enzyme_ast</span>
+<span class="co">#&gt; 2 01       no         &lt;NA&gt;      36    norm    &lt;NA&gt; ast_norm   _e3 enzyme_ast</span>
+<span class="co">#&gt; 3 02      yes abnormal ast      56      no      no ast_norm   _e2 enzyme_ast</span>
+<span class="co">#&gt; 4 02      yes abnormal ast      80      no     yes ast_norm   _e3 enzyme_ast</span>
+<span class="co">#&gt; 5 03       no         &lt;NA&gt;      60      no     yes ast_norm   _e2 enzyme_ast</span>
+<span class="co">#&gt; 6 03       no         &lt;NA&gt;      32    norm    &lt;NA&gt; ast_norm   _e3 enzyme_ast</span></pre></body></html></div>
 </div>
 </div>
   </div>

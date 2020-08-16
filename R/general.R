@@ -71,6 +71,10 @@ find_colnames.default <- function(obj, dataset, row_file) {
   name_find <- ifelse(is_post, paste0("^", name, bond), paste0(bond, name, "$"))
   result_find <- grepl(name_find, dset_colnames)
 
+  if(is.null(name)) {
+    stop("name_to_find is wrong")
+  }
+
   # if not found
   if (!any(result_find)) {
     warning(name, " not found")
@@ -97,7 +101,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
 
 #' Get final result
 #'
-#' @param obj An object. Can be all classes: short, lab, wbc, date.
+#' @param obj An object. Can be all classes: short, lab, date.
 #' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
 #'
 #' @return A data frame. The final result.
@@ -120,7 +124,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
 #' )
 #'
 #' preg <- system.file("preg.xlsx", package = "dmtools")
-#' obj_short <- short(preg, id, "res", c("site", "sex"))
+#' obj_short <- short(preg, id, "LBORRES", c("site", "sex"))
 #'
 #' obj_short <- check(obj_short, df)
 #' get_result(obj_short)

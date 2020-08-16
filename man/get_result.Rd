@@ -34,7 +34,7 @@ df <- data.frame(
 )
 
 preg <- system.file("preg.xlsx", package = "dmtools")
-obj_short <- short(preg, id, "res", c("site", "sex"))
+obj_short <- short(preg, id, "LBORRES", c("site", "sex"))
 
 obj_short <- check(obj_short, df)
 get_result(obj_short)
