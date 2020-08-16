@@ -188,6 +188,5 @@ run_tests.date <- function(obj, dataset, row_file, date) {
 calc_diff <- function(st_inter, dt_item) {
   start_item <- dt_item - lubridate::as_date(lubridate::int_start(st_inter))
   end_item <- dt_item - lubridate::as_date(lubridate::int_end(st_inter))
-  minimum <- pmin(abs(start_item), abs(end_item))
-  ifelse(minimum == abs(start_item), -minimum, minimum)
+  pmin(abs(start_item), abs(end_item))
 }
