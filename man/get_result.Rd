@@ -7,7 +7,7 @@
 get_result(obj, group_id)
 }
 \arguments{
-\item{obj}{An object. Can be all classes: short, lab, wbc, date.}
+\item{obj}{An object. Can be all classes: short, lab, date.}
 
 \item{group_id}{A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.}
 }
