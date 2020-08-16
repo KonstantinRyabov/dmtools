@@ -146,7 +146,7 @@
     <p>Estimating laboratory values</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_norm</span>(<span class='no'>vals</span>, <span class='no'>left_bound</span>, <span class='no'>right_bound</span>, <span class='no'>ds_norm</span>, <span class='no'>normal</span>, <span class='no'>abnormal</span>, <span class='no'>clsign</span>)</pre>
+    <pre class="usage"><span class='fu'>create_norm</span>(<span class='no'>vals</span>, <span class='no'>low</span>, <span class='no'>high</span>, <span class='no'>ds_norm</span>, <span class='no'>normal</span>, <span class='no'>abnormal</span>, <span class='no'>clsig</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,12 +156,12 @@
       <td><p>A double vector. The laboratory values.</p></td>
     </tr>
     <tr>
-      <th>left_bound</th>
+      <th>low</th>
       <td><p>A double scalar. The minimum.</p></td>
     </tr>
     <tr>
-      <th>right_bound</th>
-      <td><p>A double scalar. The maximum.</p></td>
+      <th>high</th>
+      <td><p>double scalar. The maximum.</p></td>
     </tr>
     <tr>
       <th>ds_norm</th>
@@ -176,7 +176,7 @@
       <td><p>An option for the abnormal estimate, for example, "ABNORMAL".</p></td>
     </tr>
     <tr>
-      <th>clsign</th>
+      <th>clsig</th>
       <td><p>An option for the clinical significant estimate, for example, "CLISIG".</p></td>
     </tr>
     </table>

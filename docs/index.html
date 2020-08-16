@@ -117,7 +117,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>For checking the dataset from EDC in clinical trials. Notice, your dataset should have a postfix( _post ) or a prefix( pre_ ) in the names of variables. Column names should be unique.</p>
+<p>For checking the dataset from EDC in clinical trials. Notice, your dataset should have a postfix( _v1 ) or a prefix( v1_ ) in the names of variables. Column names should be unique.</p>
 <ul>
 <li>
 <code><a href="reference/date.html">date()</a></code> - create object date, for check dates in the dataset</li>
@@ -148,16 +148,16 @@
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>For example, you want to check laboratory values, you need to create the excel table like in the example.</p>
 <ul>
-<li>age_min - whole number, &gt;= number</li>
-<li>age_max - if none, type Inf, &lt;= number<br>
+<li>AGELOW - number, &gt;= number</li>
+<li>AGEHIGH - if none, type Inf, &lt;= number<br>
 </li>
-<li>sex - for both sex, use <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>
+<li>SEX - for both sex, use <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>
 </li>
-<li>human_name - friendly name for analysis</li>
-<li>name_lab_vals - analysis from the dataset, without postfix or prefix</li>
-<li>name_is_norm - estimate from the dataset, without postfix or prefix</li>
-<li>lab_vals_min - lower limit of normal, &gt;=</li>
-<li>lab_vals_max - upper limit of normal, &lt;=</li>
+<li>LBTEST - What was the lab test name?</li>
+<li>LBORRES - What was the result of the result lab test?</li>
+<li>LBNDIND - How <br><span class="math display"><em>d</em><em>i</em><em>d</em>/<em>d</em><em>o</em></span><br> the reported values compare within the <br><span class="math display"><em>r</em><em>e</em><em>f</em><em>e</em><em>r</em><em>e</em><em>n</em><em>c</em><em>e</em>/<em>n</em><em>o</em><em>r</em><em>m</em><em>a</em><em>l</em>/<em>e</em><em>x</em><em>p</em><em>e</em><em>c</em><em>t</em><em>e</em><em>d</em></span><br> range?</li>
+<li>LBORNRLO - What was the lower limit of the reference range for this lab test, &gt;=</li>
+<li>LBORNRHI - What was the high limit of the reference range for this lab test, &lt;=</li>
 </ul>
 <table class="table">
 <caption>
@@ -165,28 +165,28 @@ lab reference ranges
 </caption>
 <thead><tr class="header">
 <th style="text-align: right;">
-age_min
+AGELOW
 </th>
 <th style="text-align: right;">
-age_max
+AGEHIGH
 </th>
 <th style="text-align: left;">
-sex
+SEX
 </th>
 <th style="text-align: left;">
-human_name
+LBTEST
 </th>
 <th style="text-align: left;">
-name_lab_vals
+LBORRES
 </th>
 <th style="text-align: left;">
-name_is_norm
+LBNDIND
 </th>
 <th style="text-align: left;">
-lab_vals_min
+LBORNRLO
 </th>
 <th style="text-align: left;">
-lab_vals_max
+LBORNRHI
 </th>
 </tr></thead>
 <tbody>
@@ -285,16 +285,16 @@ age
 sex
 </th>
 <th style="text-align: left;">
-gluc_post
+gluc_v1
 </th>
 <th style="text-align: left;">
-gluc_res_post
+gluc_res_v1
 </th>
 <th style="text-align: left;">
-ast_post
+ast_v2
 </th>
 <th style="text-align: left;">
-ast_res_post
+ast_res_v2
 </th>
 </tr></thead>
 <tbody>
@@ -376,30 +376,30 @@ norm
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co"># ok - analysis, which has a correct estimate of the result</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"ok"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1 01  19   f      gluc gluc_post 3.9 - 5.9      5.5    norm         5.5</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2 01  19   f       ast  ast_post    0 - 39       30    norm        30.0</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3 03  22   m       ast  ast_post    0 - 42       31    norm        31.0</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   auto_norm</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 1      norm</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 2      norm</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; 3      norm</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5.5    norm</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2 01  19   f    ast     ast   _v2      0.0     39.0      30    norm</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3 03  22   m    ast     ast   _v2      0.0     42.0      31    norm</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 1          5.5         norm</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 2         30.0         norm</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; 3         31.0         norm</span></span>
 <span id="cb2-16"><a href="#cb2-16"></a></span>
 <span id="cb2-17"><a href="#cb2-17"></a><span class="co"># mis - analysis, which has an incorrect estimate of the result</span></span>
 <span id="cb2-18"><a href="#cb2-18"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"mis"</span>)</span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; 1 02  20   m       ast  ast_post    0 - 42       48    norm        48.0</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; 2 03  22   m      gluc gluc_post 3.9 - 5.9      9.7    norm         9.7</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt;   auto_norm</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; 1        no</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; 2        no</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; 1 02  20   m    ast     ast   _v2      0.0     42.0      48    norm</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; 2 03  22   m   gluc    gluc   _v1      3.9      5.9     9.7    norm</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; 1         48.0           no</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; 2          9.7           no</span></span>
 <span id="cb2-25"><a href="#cb2-25"></a></span>
 <span id="cb2-26"><a href="#cb2-26"></a><span class="co"># skip - analysis, which has an empty value of the estimate</span></span>
 <span id="cb2-27"><a href="#cb2-27"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"skip"</span>)</span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; 1 02  20   m      gluc gluc_post 3.9 - 5.9      4.1    &lt;NA&gt;         4.1</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt;   auto_norm</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; 1      &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4.1    &lt;NA&gt;</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; 1          4.1         &lt;NA&gt;</span></span></code></pre></div>
 <table class="table">
 <caption>
 strange_dataset
@@ -415,16 +415,16 @@ age
 sex
 </th>
 <th style="text-align: left;">
-gluc_post
+gluc_v1
 </th>
 <th style="text-align: left;">
-gluc_res_post
+gluc_res_v1
 </th>
 <th style="text-align: left;">
-ast_post
+ast_v2
 </th>
 <th style="text-align: left;">
-ast_res_post
+ast_res_v2
 </th>
 </tr></thead>
 <tbody>
@@ -504,29 +504,29 @@ norm
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co"># dmtools can understand the value with a comma like 6,6 </span></span>
 <span id="cb3-5"><a href="#cb3-5"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"ok"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1 01  19   f      gluc gluc_post 3.9 - 5.9      5,5    norm         5.5</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2 03  22   m       ast  ast_post    0 - 42       31    norm        31.0</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;   auto_norm</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 1      norm</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 2      norm</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5,5    norm</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2 03  22   m    ast     ast   _v2      0.0     42.0      31    norm</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 1          5.5         norm</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 2         31.0         norm</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Notice, if dmtools can't understand the value of lab_vals e.g. &lt; 5, it puts Inf in the vals_to_dbl</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"mis"</span>)</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; 1 01  19   f       ast  ast_post    0 - 39      &lt; 5    norm         Inf</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; 2 02  20   m       ast  ast_post    0 - 42       48    norm        48.0</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; 3 03  22   m      gluc gluc_post 3.9 - 5.9      9,7    norm         9.7</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;   auto_norm</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; 1        no</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; 2        no</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; 3        no</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; 1 01  19   f    ast     ast   _v2      0.0     39.0     &lt; 5    norm</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; 2 02  20   m    ast     ast   _v2      0.0     42.0      48    norm</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; 3 03  22   m   gluc    gluc   _v1      3.9      5.9     9,7    norm</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; 1          Inf           no</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; 2         48.0           no</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; 3          9.7           no</span></span>
 <span id="cb3-23"><a href="#cb3-23"></a></span>
 <span id="cb3-24"><a href="#cb3-24"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"skip"</span>)</span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; 1 02  20   m      gluc gluc_post 3.9 - 5.9      4,1    &lt;NA&gt;         4.1</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt;   auto_norm</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; 1      &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4,1    &lt;NA&gt;</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; 1          4.1         &lt;NA&gt;</span></span></code></pre></div>
 </div>
 </div>
   </div>

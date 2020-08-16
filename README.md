@@ -21,8 +21,8 @@ Overview
 --------
 
 For checking the dataset from EDC in clinical trials. Notice, your
-dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the
-names of variables. Column names should be unique.
+dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the names
+of variables. Column names should be unique.
 
 -   `date()` - create object date, for check dates in the dataset
 -   `lab()` - create object lab, for check lab results
@@ -110,10 +110,10 @@ excel table like in the example.
 <th style="text-align: left;">id</th>
 <th style="text-align: left;">age</th>
 <th style="text-align: left;">sex</th>
-<th style="text-align: left;">gluc_post</th>
-<th style="text-align: left;">gluc_res_post</th>
-<th style="text-align: left;">ast_post</th>
-<th style="text-align: left;">ast_res_post</th>
+<th style="text-align: left;">gluc_v1</th>
+<th style="text-align: left;">gluc_res_v1</th>
+<th style="text-align: left;">ast_v2</th>
+<th style="text-align: left;">ast_res_v2</th>
 </tr>
 </thead>
 <tbody>
@@ -155,9 +155,9 @@ excel table like in the example.
     # ok - analysis, which has a correct estimate of the result
     obj_lab %>% choose_test("ok")
     #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 01  19   f   gluc    gluc _post      3.9      5.9     5.5    norm
-    #> 2 01  19   f    ast     ast _post      0.0     39.0      30    norm
-    #> 3 03  22   m    ast     ast _post      0.0     42.0      31    norm
+    #> 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5.5    norm
+    #> 2 01  19   f    ast     ast   _v2      0.0     39.0      30    norm
+    #> 3 03  22   m    ast     ast   _v2      0.0     42.0      31    norm
     #>   RES_TYPE_NUM IND_EXPECTED
     #> 1          5.5         norm
     #> 2         30.0         norm
@@ -166,8 +166,8 @@ excel table like in the example.
     # mis - analysis, which has an incorrect estimate of the result
     obj_lab %>% choose_test("mis")
     #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 02  20   m    ast     ast _post      0.0     42.0      48    norm
-    #> 2 03  22   m   gluc    gluc _post      3.9      5.9     9.7    norm
+    #> 1 02  20   m    ast     ast   _v2      0.0     42.0      48    norm
+    #> 2 03  22   m   gluc    gluc   _v1      3.9      5.9     9.7    norm
     #>   RES_TYPE_NUM IND_EXPECTED
     #> 1         48.0           no
     #> 2          9.7           no
@@ -175,7 +175,7 @@ excel table like in the example.
     # skip - analysis, which has an empty value of the estimate
     obj_lab %>% choose_test("skip")
     #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 02  20   m   gluc    gluc _post      3.9      5.9     4.1    <NA>
+    #> 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4.1    <NA>
     #>   RES_TYPE_NUM IND_EXPECTED
     #> 1          4.1         <NA>
 
@@ -186,10 +186,10 @@ excel table like in the example.
 <th style="text-align: left;">id</th>
 <th style="text-align: left;">age</th>
 <th style="text-align: left;">sex</th>
-<th style="text-align: left;">gluc_post</th>
-<th style="text-align: left;">gluc_res_post</th>
-<th style="text-align: left;">ast_post</th>
-<th style="text-align: left;">ast_res_post</th>
+<th style="text-align: left;">gluc_v1</th>
+<th style="text-align: left;">gluc_res_v1</th>
+<th style="text-align: left;">ast_v2</th>
+<th style="text-align: left;">ast_res_v2</th>
 </tr>
 </thead>
 <tbody>
@@ -229,8 +229,8 @@ excel table like in the example.
     # dmtools can understand the value with a comma like 6,6 
     obj_lab %>% choose_test("ok")
     #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 01  19   f   gluc    gluc _post      3.9      5.9     5,5    norm
-    #> 2 03  22   m    ast     ast _post      0.0     42.0      31    norm
+    #> 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5,5    norm
+    #> 2 03  22   m    ast     ast   _v2      0.0     42.0      31    norm
     #>   RES_TYPE_NUM IND_EXPECTED
     #> 1          5.5         norm
     #> 2         31.0         norm
@@ -238,9 +238,9 @@ excel table like in the example.
     # Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
     obj_lab %>% choose_test("mis")
     #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 01  19   f    ast     ast _post      0.0     39.0     < 5    norm
-    #> 2 02  20   m    ast     ast _post      0.0     42.0      48    norm
-    #> 3 03  22   m   gluc    gluc _post      3.9      5.9     9,7    norm
+    #> 1 01  19   f    ast     ast   _v2      0.0     39.0     < 5    norm
+    #> 2 02  20   m    ast     ast   _v2      0.0     42.0      48    norm
+    #> 3 03  22   m   gluc    gluc   _v1      3.9      5.9     9,7    norm
     #>   RES_TYPE_NUM IND_EXPECTED
     #> 1          Inf           no
     #> 2         48.0           no
@@ -248,6 +248,6 @@ excel table like in the example.
 
     obj_lab %>% choose_test("skip")
     #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 02  20   m   gluc    gluc _post      3.9      5.9     4,1    <NA>
+    #> 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4,1    <NA>
     #>   RES_TYPE_NUM IND_EXPECTED
     #> 1          4.1         <NA>

@@ -29,7 +29,7 @@ library(dmtools)
 
 ## Overview
 For checking the dataset from EDC in clinical trials. 
-Notice, your dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the names of variables. Column names should be unique.
+Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the names of variables. Column names should be unique.
 
 * `date()` - create object date, for check dates in the dataset
 * `lab()` - create object lab, for check lab results
@@ -71,15 +71,15 @@ kable(refers, caption = "lab reference ranges")
 id <- c("01", "02", "03")
 age <- c("19", "20", "22")
 sex <- c("f", "m", "m")
-gluc_post <- c("5.5", "4.1", "9.7")
-gluc_res_post <- c("norm", NA, "norm")
-ast_post <- c("30", "48", "31")
-ast_res_post <- c("norm", "norm", "norm")
+gluc_v1 <- c("5.5", "4.1", "9.7")
+gluc_res_v1 <- c("norm", NA, "norm")
+ast_v2 <- c("30", "48", "31")
+ast_res_v2 <- c("norm", "norm", "norm")
 
 df <- data.frame(
   id, age, sex,
-  gluc_post, gluc_res_post,
-  ast_post, ast_res_post,
+  gluc_v1, gluc_res_v1,
+  ast_v2, ast_res_v2,
   stringsAsFactors = F
 )
 
@@ -108,15 +108,15 @@ obj_lab %>% choose_test("skip")
 id <- c("01", "02", "03")
 age <- c("19", "20", "22")
 sex <- c("f", "m", "m")
-gluc_post <- c("5,5", "4,1", "9,7")
-gluc_res_post <- c("norm", NA, "norm")
-ast_post <- c(" < 5", "48", "31")
-ast_res_post <- c("norm", "norm", "norm")
+gluc_v1 <- c("5,5", "4,1", "9,7")
+gluc_res_v1 <- c("norm", NA, "norm")
+ast_v2 <- c(" < 5", "48", "31")
+ast_res_v2 <- c("norm", "norm", "norm")
 
 strange_df <- data.frame(
   id, age, sex,
-  gluc_post, gluc_res_post,
-  ast_post, ast_res_post,
+  gluc_v1, gluc_res_v1,
+  ast_v2, ast_res_v2,
   stringsAsFactors = F
 )
 

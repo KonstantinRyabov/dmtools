@@ -21,7 +21,7 @@ library(dmtools)
 
 ## Overview
 For checking the dataset from EDC in clinical trials. 
-Notice, your dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the names of variables. Column names should be unique.
+Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the names of variables. Column names should be unique.
 
 * laboratory - Does the investigator correctly estimate the laboratory analyzes?
 * dates - Do all dates correspond to the protocol's timeline?
@@ -34,14 +34,14 @@ Notice, your dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the
 
 For laboratory check, you need to create the excel table like in the example.  
 
-* age_min - whole number, >= number
-* age_max - if none, type Inf, <= number  
-* sex - for both sex, use `|`
-* human_name - friendly name for analysis
-* name_lab_vals - analysis from the dataset, without postfix or prefix
-* name_is_norm - estimate from the dataset, without postfix or prefix
-* lab_vals_min - lower limit of normal, >= 
-* lab_vals_max - upper limit of normal, <=
+* AGELOW - number, >= number
+* AGEHIGH - if none, type Inf, <= number  
+* SEX - for both sex, use `|`
+* LBTEST - What was the lab test name?
+* LBORRES - What was the result of the result lab test?
+* LBNDIND - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
+* LBORNRHI - What was the high limit of the reference range for this lab test, <=
 
 ```{r refer, echo = FALSE, result = 'asis', warning = FALSE, message = FALSE}
 library(knitr)
@@ -59,15 +59,15 @@ kable(refers, caption = "lab reference ranges")
 id <- c("01", "02", "03")
 age <- c("19", "20", "22")
 sex <- c("f", "m", "m")
-gluc_post <- c("5.5", "4.1", "9.7")
-gluc_res_post <- c("norm", NA, "norm")
-ast_post <- c("30", "48", "31")
-ast_res_post <- c("norm", "norm", "norm")
+gluc_v1 <- c("5.5", "4.1", "9.7")
+gluc_res_v1 <- c("norm", NA, "norm")
+ast_v2 <- c("30", "48", "31")
+ast_res_v2 <- c("norm", "norm", "norm")
 
 df <- data.frame(
   id, age, sex,
-  gluc_post, gluc_res_post,
-  ast_post, ast_res_post,
+  gluc_v1, gluc_res_v1,
+  ast_v2, ast_res_v2,
   stringsAsFactors = F
 )
 
@@ -170,12 +170,12 @@ kable(wbcc, caption = "wbcc")
 
 ```{r dataset_wbcc, echo = FALSE, result = 'asis'}
 id <- c("01", "02", "03")
-wbc_post <- c(5.6, 7.8, 8.1)
-lym_rel_post <- c(21, 25, 30)
-lym_abs_post <- c(1.18, 1.95, 2.13)
+wbc_v1 <- c(5.6, 7.8, 8.1)
+lym_rel_v1 <- c(21, 25, 30)
+lym_abs_v1 <- c(1.18, 1.95, 2.13)
 
 df <- data.frame(
-  id, wbc_post, lym_rel_post, lym_abs_post,
+  id, wbc_v1, lym_rel_v1, lym_abs_v1,
   stringsAsFactors = F
 )
 
@@ -216,15 +216,15 @@ site <- c("site 01", "site 02")
 id <- c("01", "02")
 age <- c("19", "20")
 sex <- c("f", "m")
-gluc_post <- c("5.5", "4.1")
-gluc_res_post <- c("norm", "no")
-ast_post <- c("30", "48")
-ast_res_post <- c(NA, "norm")
+gluc_v1 <- c("5.5", "4.1")
+gluc_res_v1 <- c("norm", "no")
+ast_v2 <- c("30", "48")
+ast_res_v2 <- c(NA, "norm")
 
 df <- data.frame(
   site, id, age, sex,
-  gluc_post, gluc_res_post,
-  ast_post, ast_res_post,
+  gluc_v1, gluc_res_v1,
+  ast_v2, ast_res_v2,
   stringsAsFactors = F
 )
 
