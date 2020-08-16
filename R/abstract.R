@@ -27,7 +27,7 @@ check <- function(obj, dataset) {
 
 #' Get the final result
 #'
-#' @param obj An object. Can be all classes: short, lab, wbc, date.
+#' @param obj An object. Can be all classes: short, lab, date.
 #' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
 #'
 #' @return A data frame. The final result.

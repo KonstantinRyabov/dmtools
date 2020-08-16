@@ -71,7 +71,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
   name_find <- ifelse(is_post, paste0("^", name, bond), paste0(bond, name, "$"))
   result_find <- grepl(name_find, dset_colnames)
 
-  if(is.null(name)) {
+  if (is.null(name)) {
     stop("name_to_find is wrong")
   }
 
