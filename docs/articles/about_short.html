@@ -179,13 +179,13 @@
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id    site sex yn   res name_to_find</span>
-<span class="co">#&gt; 1 01 site 01   f  y   neg  preg_res_e2</span>
-<span class="co">#&gt; 2 01 site 01   f  y   neg  preg_res_e3</span>
-<span class="co">#&gt; 3 02 site 02   m  y   neg  preg_res_e2</span>
-<span class="co">#&gt; 4 02 site 02   m  y   pos  preg_res_e3</span>
-<span class="co">#&gt; 5 03 site 03   f  y   neg  preg_res_e2</span>
-<span class="co">#&gt; 6 03 site 03   f  n unnes  preg_res_e3</span></pre></body></html></div>
+<span class="co">#&gt;   id    site sex yn   res    IDVAR VISIT</span>
+<span class="co">#&gt; 1 01 site 01   f  y   neg preg_res   _e2</span>
+<span class="co">#&gt; 2 01 site 01   f  y   neg preg_res   _e3</span>
+<span class="co">#&gt; 3 02 site 02   m  y   neg preg_res   _e2</span>
+<span class="co">#&gt; 4 02 site 02   m  y   pos preg_res   _e3</span>
+<span class="co">#&gt; 5 03 site 03   f  y   neg preg_res   _e2</span>
+<span class="co">#&gt; 6 03 site 03   f  n unnes preg_res   _e3</span></pre></body></html></div>
 </div>
 <div id="drug-type" class="section level3">
 <h3 class="hasAnchor">
@@ -239,13 +239,13 @@
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id     type amount name_to_find</span>
-<span class="co">#&gt; 1 01 type_one      2 drug_type_e2</span>
-<span class="co">#&gt; 2 01 type_one      2 drug_type_e3</span>
-<span class="co">#&gt; 3 02 type_two      1 drug_type_e2</span>
-<span class="co">#&gt; 4 02 type_two      1 drug_type_e3</span>
-<span class="co">#&gt; 5 03 type_one      2 drug_type_e2</span>
-<span class="co">#&gt; 6 03 type_one      1 drug_type_e3</span></pre></body></html></div>
+<span class="co">#&gt;   id     type amount     IDVAR VISIT</span>
+<span class="co">#&gt; 1 01 type_one      2 drug_type   _e2</span>
+<span class="co">#&gt; 2 01 type_one      2 drug_type   _e3</span>
+<span class="co">#&gt; 3 02 type_two      1 drug_type   _e2</span>
+<span class="co">#&gt; 4 02 type_two      1 drug_type   _e3</span>
+<span class="co">#&gt; 5 03 type_one      2 drug_type   _e2</span>
+<span class="co">#&gt; 6 03 type_one      1 drug_type   _e3</span></pre></body></html></div>
 </div>
 <div id="vital-functions" class="section level3">
 <h3 class="hasAnchor">
@@ -299,13 +299,13 @@
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id heart resp name_to_find</span>
-<span class="co">#&gt; 1 01    60   12        hr_e2</span>
-<span class="co">#&gt; 2 01    65   13        hr_e3</span>
-<span class="co">#&gt; 3 02    70   15        hr_e2</span>
-<span class="co">#&gt; 4 02    71   14        hr_e3</span>
-<span class="co">#&gt; 5 03    76   16        hr_e2</span>
-<span class="co">#&gt; 6 03    86   18        hr_e3</span></pre></body></html></div>
+<span class="co">#&gt;   id heart resp IDVAR VISIT</span>
+<span class="co">#&gt; 1 01    60   12    hr   _e2</span>
+<span class="co">#&gt; 2 01    65   13    hr   _e3</span>
+<span class="co">#&gt; 3 02    70   15    hr   _e2</span>
+<span class="co">#&gt; 4 02    71   14    hr   _e3</span>
+<span class="co">#&gt; 5 03    76   16    hr   _e2</span>
+<span class="co">#&gt; 6 03    86   18    hr   _e3</span></pre></body></html></div>
 </div>
 <div id="adverse-events" class="section level3">
 <h3 class="hasAnchor">
@@ -379,13 +379,13 @@
 
 <span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id ae_yn_e5   ae_desc_e5 lab is_norm   cl name_to_find human_name</span>
-<span class="co">#&gt; 1 01       no         &lt;NA&gt;  32    norm &lt;NA&gt;  ast_norm_e2 enzyme_ast</span>
-<span class="co">#&gt; 2 01       no         &lt;NA&gt;  36    norm &lt;NA&gt;  ast_norm_e3 enzyme_ast</span>
-<span class="co">#&gt; 3 02      yes abnormal ast  56      no   no  ast_norm_e2 enzyme_ast</span>
-<span class="co">#&gt; 4 02      yes abnormal ast  80      no  yes  ast_norm_e3 enzyme_ast</span>
-<span class="co">#&gt; 5 03       no         &lt;NA&gt;  60      no  yes  ast_norm_e2 enzyme_ast</span>
-<span class="co">#&gt; 6 03       no         &lt;NA&gt;  32    norm &lt;NA&gt;  ast_norm_e3 enzyme_ast</span></pre></body></html></div>
+<span class="co">#&gt;   id ae_yn_e5   ae_desc_e5 lab is_norm   cl    IDVAR VISIT human_name</span>
+<span class="co">#&gt; 1 01       no         &lt;NA&gt;  32    norm &lt;NA&gt; ast_norm   _e2 enzyme_ast</span>
+<span class="co">#&gt; 2 01       no         &lt;NA&gt;  36    norm &lt;NA&gt; ast_norm   _e3 enzyme_ast</span>
+<span class="co">#&gt; 3 02      yes abnormal ast  56      no   no ast_norm   _e2 enzyme_ast</span>
+<span class="co">#&gt; 4 02      yes abnormal ast  80      no  yes ast_norm   _e3 enzyme_ast</span>
+<span class="co">#&gt; 5 03       no         &lt;NA&gt;  60      no  yes ast_norm   _e2 enzyme_ast</span>
+<span class="co">#&gt; 6 03       no         &lt;NA&gt;  32    norm &lt;NA&gt; ast_norm   _e3 enzyme_ast</span></pre></body></html></div>
 </div>
 </div>
   </div>

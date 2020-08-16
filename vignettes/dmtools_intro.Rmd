@@ -25,7 +25,6 @@ Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the na
 
 * laboratory - Does the investigator correctly estimate the laboratory analyzes?
 * dates - Do all dates correspond to the protocol's timeline?
-* WBCs count - Do absolute equal (all * relative) / 100?
 * sites - If the clinical trial has different lab reference ranges.
 
 ## Usage
@@ -151,51 +150,6 @@ obj_date %>% get_result()
 `dplyr::contains` - A function, which select necessary visit or event e.g. dplyr::start_with, dplyr::contains. It works like `df %>% select(contains("E1"))`. You also can use `dplyr::start_with`, works like `df %>% select(start_with("V1"))`
 
 `dplyr::matches` - A function, which select dates from necessary visit e.g. dplyr::matches, dplyr::contains. It works like `visit_one %>% select(contains("DAT"))`, default: `dplyr::contains()`
-
-
-### WBCs count
-
-For WBCs count check, you need to create the excel table like in the example.  
-Formula for check is (all * relative) / 100 = absolute.
-
-* human_name - friendly name for WBCs count
-* absolute - absolute WBCs from dataset, without postfix or prefix
-* relative - relative WBCs from dataset, without postfix or prefix
-
-```{r wbcc, echo = FALSE, result = 'asis', warning = F, message = FALSE}
-wbcc_file <- system.file("wbcc.xlsx", package = "dmtools")
-wbcc <- readxl::read_xlsx(wbcc_file)
-kable(wbcc, caption = "wbcc")
-```
-
-```{r dataset_wbcc, echo = FALSE, result = 'asis'}
-id <- c("01", "02", "03")
-wbc_v1 <- c(5.6, 7.8, 8.1)
-lym_rel_v1 <- c(21, 25, 30)
-lym_abs_v1 <- c(1.18, 1.95, 2.13)
-
-df <- data.frame(
-  id, wbc_v1, lym_rel_v1, lym_abs_v1,
-  stringsAsFactors = F
-)
-
-kable(df, caption = "dataset")
-```
-
-``` {r wbc}
-wbcc_file <- system.file("wbcc.xlsx", package = "dmtools")
-wbcc <- wbc(wbcc_file, id)
-wbcc <- wbcc %>% check(df)
-
-# mis - wbc, which has an incorrect calculation
-wbcc %>% choose_test("mis")
-
-# ok - wbc, which has a correct calculation
-wbcc %>% choose_test("ok")
-
-# all WBCs count
-wbcc %>% get_result()
-```
 
 ### sites
 

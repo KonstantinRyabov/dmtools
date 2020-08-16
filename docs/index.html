@@ -19,10 +19,9 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Tools for Validation the Dataset">
 <meta property="og:description" content="For checking the dataset from EDC(Electronic Data Capture) in clinical trials.
-             dmtools can check laboratory, dates, WBCs(White Blood Cells) count and rename the dataset.
+             dmtools can check laboratory, dates and rename the dataset.
              Laboratory - does the investigator correctly estimate the laboratory analyzes?
              Dates - do all dates correspond to the protocols timeline?
-             WBCs count - do absolute equal (all * relative) / 100?
              If the clinical trial has different lab reference ranges, dmtools' also can help.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -123,8 +122,6 @@
 <code><a href="reference/date.html">date()</a></code> - create object date, for check dates in the dataset</li>
 <li>
 <code><a href="reference/lab.html">lab()</a></code> - create object lab, for check lab results</li>
-<li>
-<code><a href="reference/wbc.html">wbc()</a></code> - create object wbc, for check WBCs count: (all * relative) / 100 = absolute</li>
 <li>
 <code><a href="reference/short.html">short()</a></code> - create object short to transform the dataset(different events in one column)</li>
 <li>

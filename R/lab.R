@@ -146,11 +146,11 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
   pattern_sex <- paste0("^", row_file$SEX, "$")
 
   if (age_low > age_high) {
-    warning("age_low > age_high in ", lbtest)
+    warning("AGELOW > AGEHIGH in ", lbtest)
   }
 
   if (lbornrlo > lbornrhi) {
-    warning("lbornrlo > lbornrhi in ", lbtest)
+    warning("LBORNRLO > LBORNRHI in ", lbtest)
   }
 
   # laboratory's parameter with prefix or postfix

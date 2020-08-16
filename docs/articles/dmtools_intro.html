@@ -117,7 +117,6 @@
 <ul>
 <li>laboratory - Does the investigator correctly estimate the laboratory analyzes?</li>
 <li>dates - Do all dates correspond to the protocol’s timeline?</li>
-<li>WBCs count - Do absolute equal (all * relative) / 100?</li>
 <li>sites - If the clinical trial has different lab reference ranges.</li>
 </ul>
 </div>
@@ -446,82 +445,6 @@
 <p><code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::contains</a></code> - A function, which select necessary visit or event e.g. dplyr::start_with, dplyr::contains. It works like <code>df %&gt;% select(contains("E1"))</code>. You also can use <code>dplyr::start_with</code>, works like <code>df %&gt;% select(start_with("V1"))</code></p>
 <p><code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::matches</a></code> - A function, which select dates from necessary visit e.g. dplyr::matches, dplyr::contains. It works like <code>visit_one %&gt;% select(contains("DAT"))</code>, default: <code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::contains()</a></code></p>
 </div>
-<div id="wbcs-count" class="section level3">
-<h3 class="hasAnchor">
-<a href="#wbcs-count" class="anchor"></a>WBCs count</h3>
-<p>For WBCs count check, you need to create the excel table like in the example.<br>
-Formula for check is (all * relative) / 100 = absolute.</p>
-<ul>
-<li>human_name - friendly name for WBCs count</li>
-<li>absolute - absolute WBCs from dataset, without postfix or prefix</li>
-<li>relative - relative WBCs from dataset, without postfix or prefix</li>
-</ul>
-<table class="table">
-<caption>wbcc</caption>
-<thead><tr class="header">
-<th align="left">human_name</th>
-<th align="left">absolute</th>
-<th align="left">relative</th>
-<th align="left">all</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">lymphocytes</td>
-<td align="left">lym_abs</td>
-<td align="left">lym_rel</td>
-<td align="left">wbc</td>
-</tr></tbody>
-</table>
-<table class="table">
-<caption>dataset</caption>
-<thead><tr class="header">
-<th align="left">id</th>
-<th align="right">wbc_v1</th>
-<th align="right">lym_rel_v1</th>
-<th align="right">lym_abs_v1</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">01</td>
-<td align="right">5.6</td>
-<td align="right">21</td>
-<td align="right">1.18</td>
-</tr>
-<tr class="even">
-<td align="left">02</td>
-<td align="right">7.8</td>
-<td align="right">25</td>
-<td align="right">1.95</td>
-</tr>
-<tr class="odd">
-<td align="left">03</td>
-<td align="right">8.1</td>
-<td align="right">30</td>
-<td align="right">2.13</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">wbcc_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"wbcc.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">wbcc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/wbc.html">wbc</a></span>(<span class="no">wbcc_file</span>, <span class="no">id</span>)
-<span class="no">wbcc</span> <span class="kw">&lt;-</span> <span class="no">wbcc</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
-
-<span class="co"># mis - wbc, which has an incorrect calculation</span>
-<span class="no">wbcc</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"mis"</span>)
-<span class="co">#&gt;   id  human_name   lab_name rel all  abs auto_abs</span>
-<span class="co">#&gt; 1 03 lymphocytes lym_abs_v1  30 8.1 2.13     2.43</span>
-
-<span class="co"># ok - wbc, which has a correct calculation</span>
-<span class="no">wbcc</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"ok"</span>)
-<span class="co">#&gt;   id  human_name   lab_name rel all  abs auto_abs</span>
-<span class="co">#&gt; 1 01 lymphocytes lym_abs_v1  21 5.6 1.18     1.18</span>
-<span class="co">#&gt; 2 02 lymphocytes lym_abs_v1  25 7.8 1.95     1.95</span>
-
-<span class="co"># all WBCs count</span>
-<span class="no">wbcc</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id  human_name   lab_name rel all  abs auto_abs is_right</span>
-<span class="co">#&gt; 1 01 lymphocytes lym_abs_v1  21 5.6 1.18     1.18     TRUE</span>
-<span class="co">#&gt; 2 02 lymphocytes lym_abs_v1  25 7.8 1.95     1.95     TRUE</span>
-<span class="co">#&gt; 3 03 lymphocytes lym_abs_v1  30 8.1 2.13     2.43    FALSE</span></pre></body></html></div>
-</div>
 <div id="sites" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sites" class="anchor"></a>sites</h3>
@@ -651,7 +574,7 @@ Formula for check is (all * relative) / 100 = absolute.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">refs_s01</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"labs_refer_s01.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">refs_s01</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"labs_refer_s01.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
 <span class="no">refs_s02</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"labs_refer_s02.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
 
 <span class="no">s01_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s01</span>, <span class="no">id</span>, <span class="no">age</span>, <span class="no">sex</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 01"</span>)
@@ -713,7 +636,7 @@ Formula for check is (all * relative) / 100 = absolute.</p>
 <h3 class="hasAnchor">
 <a href="#rename" class="anchor"></a>rename</h3>
 <p>Function to rename the dataset, using crfs.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/rename_dataset.html">rename_dataset</a></span>(<span class="st">"./crfs"</span>, <span class="st">"old_name"</span>, <span class="st">"new_name"</span>, <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/rename_dataset.html">rename_dataset</a></span>(<span class="st">"./crfs"</span>, <span class="st">"old_name"</span>, <span class="st">"new_name"</span>, <span class="fl">2</span>)</pre></body></html></div>
 <ul>
 <li>“./crfs” - path to crfs</li>
 <li>“old_name” - variable for names in the dataset, without postfix or prefix</li>

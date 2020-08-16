@@ -33,7 +33,6 @@ Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the na
 
 * `date()` - create object date, for check dates in the dataset
 * `lab()` - create object lab, for check lab results
-* `wbc()` - create object wbc, for check WBCs count: (all * relative) / 100 = absolute
 * `short()` - create object short to transform the dataset(different events in one column)
 * `check()` - check objects
 * `get_result()` - get the final result of object

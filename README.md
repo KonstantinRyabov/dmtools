@@ -26,8 +26,6 @@ of variables. Column names should be unique.
 
 -   `date()` - create object date, for check dates in the dataset
 -   `lab()` - create object lab, for check lab results
--   `wbc()` - create object wbc, for check WBCs count: (all \* relative)
-    / 100 = absolute
 -   `short()` - create object short to transform the dataset(different
     events in one column)
 -   `check()` - check objects

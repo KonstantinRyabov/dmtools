@@ -58,7 +58,7 @@ test_that("check unknown parameter", {
 
 test_that("check if analyzes not found", {
   warn_lab <- lab("warning_refer.xlsx", id, age, sex, "norm", "no")
-  expect_warning(check(warn_lab, df), "enzyme alt not found")
+  expect_warning(check(warn_lab, df), "alt_res not found")
 })
 
 test_that("check if the final result is empty", {
@@ -68,10 +68,10 @@ test_that("check if the final result is empty", {
 
 test_that("check if age_min > age_max", {
   warn_age <- lab("warning_age.xlsx", id, age, sex, "norm", "no")
-  expect_warning(check(warn_age, df), "age_low > age_high in enzyme ast")
+  expect_warning(check(warn_age, df), "AGELOW > AGEHIGH in enzyme ast")
 })
 
 test_that("check if lab_min > lab_max ", {
   warn_lab <- lab("warning_lab.xlsx", id, age, sex, "norm", "no")
-  expect_warning(check(warn_lab, df), "lbornrlo > lbornrhi in enzyme ast")
+  expect_warning(check(warn_lab, df), "LBORNRLO > LBORNRHI in enzyme ast")
 })
