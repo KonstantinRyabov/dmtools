@@ -4,14 +4,14 @@
 \alias{create_norm}
 \title{Estimating laboratory values}
 \usage{
-create_norm(vals, left_bound, right_bound, ds_norm, normal, abnormal, clsign)
+create_norm(vals, low, high, ds_norm, normal, abnormal, clsig)
 }
 \arguments{
 \item{vals}{A double vector. The laboratory values.}
 
-\item{left_bound}{A double scalar. The minimum.}
+\item{low}{A double scalar. The minimum.}
 
-\item{right_bound}{A double scalar. The maximum.}
+\item{high}{double scalar. The maximum.}
 
 \item{ds_norm}{An estimate of the laboratory values from the dataset.}
 
@@ -19,7 +19,7 @@ create_norm(vals, left_bound, right_bound, ds_norm, normal, abnormal, clsign)
 
 \item{abnormal}{An option for the abnormal estimate, for example, "ABNORMAL".}
 
-\item{clsign}{An option for the clinical significant estimate, for example, "CLISIG".}
+\item{clsig}{An option for the clinical significant estimate, for example, "CLISIG".}
 }
 \value{
 A vector with the auto estimate.

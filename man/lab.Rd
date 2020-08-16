@@ -9,12 +9,12 @@ lab(
   id,
   age,
   sex,
-  norm,
-  no_norm,
+  normal,
+  abnormal,
   is_post = T,
-  cl_sign = NULL,
+  clsig = NULL,
   site = NA,
-  name_to_find = "name_is_norm"
+  name_to_find = "LBNDIND"
 )
 }
 \arguments{
@@ -26,17 +26,17 @@ lab(
 
 \item{sex}{A column name of the subject sex in the dataset, without quotes.}
 
-\item{norm}{A normal estimate, for example, "NORMAL".}
+\item{normal}{A normal estimate, for example, "NORMAL".}
 
-\item{no_norm}{An abnormal estimate, for example, "ABNORMAL".}
+\item{abnormal}{An abnormal estimate, for example, "ABNORMAL".}
 
 \item{is_post}{A logical scalar, default is TRUE. True is postfix, otherwise, prefix.}
 
-\item{cl_sign}{A clinical significant estimate, for example, "CLISIG".}
+\item{clsig}{A clinical significant estimate, for example, "CLISIG".}
 
 \item{site}{A site number, default: NA.}
 
-\item{name_to_find}{A character scalar. For search prefixes or postfixes, default is "name_is_norm".}
+\item{name_to_find}{A character scalar. For search prefixes or postfixes, default is "LBNDIND".}
 }
 \value{
 The object lab.
@@ -46,6 +46,6 @@ Create object lab
 }
 \examples{
 obj_lab <- lab("lab_refer.xlsx", id, age, sex, 1, 2)
-obj_lab <- lab("lab_refer.xlsx", id, age, sex, "NORMAL", "NOCLISIG", cl_sign = "CLISIG")
+obj_lab <- lab("lab_refer.xlsx", id, age, sex, "NORMAL", "NOCLISIG", clsig = "CLISIG")
 obj_lab <- lab("lab_refer.xlsx", id, age, sex, "norm", "no", FALSE)
 }

@@ -21,13 +21,11 @@ Overview
 --------
 
 For checking the dataset from EDC in clinical trials. Notice, your
-dataset should have a postfix( \_post ) or a prefix( pre\_ ) in the
-names of variables. Column names should be unique.
+dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the names
+of variables. Column names should be unique.
 
 -   `date()` - create object date, for check dates in the dataset
 -   `lab()` - create object lab, for check lab results
--   `wbc()` - create object wbc, for check WBCs count: (all \* relative)
-    / 100 = absolute
 -   `short()` - create object short to transform the dataset(different
     events in one column)
 -   `check()` - check objects
@@ -43,29 +41,30 @@ Usage
 For example, you want to check laboratory values, you need to create the
 excel table like in the example.
 
--   age\_min - whole number, &gt;= number
--   age\_max - if none, type Inf, &lt;= number  
--   sex - for both sex, use `|`
--   human\_name - friendly name for analysis
--   name\_lab\_vals - analysis from the dataset, without postfix or
-    prefix
--   name\_is\_norm - estimate from the dataset, without postfix or
-    prefix
--   lab\_vals\_min - lower limit of normal, &gt;=
--   lab\_vals\_max - upper limit of normal, &lt;=
+-   AGELOW - number, &gt;= number
+-   AGEHIGH - if none, type Inf, &lt;= number  
+-   SEX - for both sex, use `|`
+-   LBTEST - What was the lab test name?
+-   LBORRES - What was the result of the result lab test?
+-   LBNDIND - How \[did/do\] the reported values compare within the
+    \[reference/normal/expected\] range?
+-   LBORNRLO - What was the lower limit of the reference range for this
+    lab test, &gt;=
+-   LBORNRHI - What was the high limit of the reference range for this
+    lab test, &lt;=
 
 <table>
 <caption>lab reference ranges</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">age_min</th>
-<th style="text-align: right;">age_max</th>
-<th style="text-align: left;">sex</th>
-<th style="text-align: left;">human_name</th>
-<th style="text-align: left;">name_lab_vals</th>
-<th style="text-align: left;">name_is_norm</th>
-<th style="text-align: left;">lab_vals_min</th>
-<th style="text-align: left;">lab_vals_max</th>
+<th style="text-align: right;">AGELOW</th>
+<th style="text-align: right;">AGEHIGH</th>
+<th style="text-align: left;">SEX</th>
+<th style="text-align: left;">LBTEST</th>
+<th style="text-align: left;">LBORRES</th>
+<th style="text-align: left;">LBNDIND</th>
+<th style="text-align: left;">LBORNRLO</th>
+<th style="text-align: left;">LBORNRHI</th>
 </tr>
 </thead>
 <tbody>
@@ -109,10 +108,10 @@ excel table like in the example.
 <th style="text-align: left;">id</th>
 <th style="text-align: left;">age</th>
 <th style="text-align: left;">sex</th>
-<th style="text-align: left;">gluc_post</th>
-<th style="text-align: left;">gluc_res_post</th>
-<th style="text-align: left;">ast_post</th>
-<th style="text-align: left;">ast_res_post</th>
+<th style="text-align: left;">gluc_v1</th>
+<th style="text-align: left;">gluc_res_v1</th>
+<th style="text-align: left;">ast_v2</th>
+<th style="text-align: left;">ast_res_v2</th>
 </tr>
 </thead>
 <tbody>
@@ -153,30 +152,30 @@ excel table like in the example.
 
     # ok - analysis, which has a correct estimate of the result
     obj_lab %>% choose_test("ok")
-    #>   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-    #> 1 01  19   f      gluc gluc_post 3.9 - 5.9      5.5    norm         5.5
-    #> 2 01  19   f       ast  ast_post    0 - 39       30    norm        30.0
-    #> 3 03  22   m       ast  ast_post    0 - 42       31    norm        31.0
-    #>   auto_norm
-    #> 1      norm
-    #> 2      norm
-    #> 3      norm
+    #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5.5    norm
+    #> 2 01  19   f    ast     ast   _v2      0.0     39.0      30    norm
+    #> 3 03  22   m    ast     ast   _v2      0.0     42.0      31    norm
+    #>   RES_TYPE_NUM IND_EXPECTED
+    #> 1          5.5         norm
+    #> 2         30.0         norm
+    #> 3         31.0         norm
 
     # mis - analysis, which has an incorrect estimate of the result
     obj_lab %>% choose_test("mis")
-    #>   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-    #> 1 02  20   m       ast  ast_post    0 - 42       48    norm        48.0
-    #> 2 03  22   m      gluc gluc_post 3.9 - 5.9      9.7    norm         9.7
-    #>   auto_norm
-    #> 1        no
-    #> 2        no
+    #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 02  20   m    ast     ast   _v2      0.0     42.0      48    norm
+    #> 2 03  22   m   gluc    gluc   _v1      3.9      5.9     9.7    norm
+    #>   RES_TYPE_NUM IND_EXPECTED
+    #> 1         48.0           no
+    #> 2          9.7           no
 
     # skip - analysis, which has an empty value of the estimate
     obj_lab %>% choose_test("skip")
-    #>   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-    #> 1 02  20   m      gluc gluc_post 3.9 - 5.9      4.1    <NA>         4.1
-    #>   auto_norm
-    #> 1      <NA>
+    #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4.1    <NA>
+    #>   RES_TYPE_NUM IND_EXPECTED
+    #> 1          4.1         <NA>
 
 <table>
 <caption>strange_dataset</caption>
@@ -185,10 +184,10 @@ excel table like in the example.
 <th style="text-align: left;">id</th>
 <th style="text-align: left;">age</th>
 <th style="text-align: left;">sex</th>
-<th style="text-align: left;">gluc_post</th>
-<th style="text-align: left;">gluc_res_post</th>
-<th style="text-align: left;">ast_post</th>
-<th style="text-align: left;">ast_res_post</th>
+<th style="text-align: left;">gluc_v1</th>
+<th style="text-align: left;">gluc_res_v1</th>
+<th style="text-align: left;">ast_v2</th>
+<th style="text-align: left;">ast_res_v2</th>
 </tr>
 </thead>
 <tbody>
@@ -227,26 +226,26 @@ excel table like in the example.
 
     # dmtools can understand the value with a comma like 6,6 
     obj_lab %>% choose_test("ok")
-    #>   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-    #> 1 01  19   f      gluc gluc_post 3.9 - 5.9      5,5    norm         5.5
-    #> 2 03  22   m       ast  ast_post    0 - 42       31    norm        31.0
-    #>   auto_norm
-    #> 1      norm
-    #> 2      norm
+    #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5,5    norm
+    #> 2 03  22   m    ast     ast   _v2      0.0     42.0      31    norm
+    #>   RES_TYPE_NUM IND_EXPECTED
+    #> 1          5.5         norm
+    #> 2         31.0         norm
 
     # Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
     obj_lab %>% choose_test("mis")
-    #>   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-    #> 1 01  19   f       ast  ast_post    0 - 39      < 5    norm         Inf
-    #> 2 02  20   m       ast  ast_post    0 - 42       48    norm        48.0
-    #> 3 03  22   m      gluc gluc_post 3.9 - 5.9      9,7    norm         9.7
-    #>   auto_norm
-    #> 1        no
-    #> 2        no
-    #> 3        no
+    #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 01  19   f    ast     ast   _v2      0.0     39.0     < 5    norm
+    #> 2 02  20   m    ast     ast   _v2      0.0     42.0      48    norm
+    #> 3 03  22   m   gluc    gluc   _v1      3.9      5.9     9,7    norm
+    #>   RES_TYPE_NUM IND_EXPECTED
+    #> 1          Inf           no
+    #> 2         48.0           no
+    #> 3          9.7           no
 
     obj_lab %>% choose_test("skip")
-    #>   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-    #> 1 02  20   m      gluc gluc_post 3.9 - 5.9      4,1    <NA>         4.1
-    #>   auto_norm
-    #> 1      <NA>
+    #>   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4,1    <NA>
+    #>   RES_TYPE_NUM IND_EXPECTED
+    #> 1          4.1         <NA>

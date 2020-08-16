@@ -195,14 +195,14 @@
 <span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lab.html'>lab</a></span>(<span class='no'>refs</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='st'>"norm"</span>, <span class='st'>"no"</span>)
 
 <span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='check.html'>check</a></span>(<span class='no'>obj_lab</span>, <span class='no'>df</span>)
-<span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>obj_lab</span>, <span class='st'>"mis"</span>)</div><div class='output co'>#&gt;   id age sex human_lab  name_lab      refs lab_vals is_norm vals_to_dbl
-#&gt; 1 02  20   m      gluc gluc_post 3.9 - 5.9      4.1      no         4.1
-#&gt; 2 02  20   m       ast  ast_post    0 - 42       48    norm        48.0
-#&gt; 3 03  22   f      gluc gluc_post 3.9 - 5.9      9.7      cl         9.7
-#&gt;   auto_norm
-#&gt; 1      norm
-#&gt; 2        no
-#&gt; 3        no</div></pre>
+<span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>obj_lab</span>, <span class='st'>"mis"</span>)</div><div class='output co'>#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+#&gt; 1 02  20   m   gluc    gluc _post      3.9      5.9     4.1      no
+#&gt; 2 02  20   m    ast     ast _post      0.0     42.0      48    norm
+#&gt; 3 03  22   f   gluc    gluc _post      3.9      5.9     9.7      cl
+#&gt;   RES_TYPE_NUM IND_EXPECTED
+#&gt; 1          4.1         norm
+#&gt; 2         48.0           no
+#&gt; 3          9.7           no</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -7,7 +7,7 @@
 \method{get_result}{default}(obj, group_id = T)
 }
 \arguments{
-\item{obj}{An object. Can be all classes: short, lab, wbc, date.}
+\item{obj}{An object. Can be all classes: short, lab, date.}
 
 \item{group_id}{A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.}
 }
@@ -34,7 +34,7 @@ df <- data.frame(
 )
 
 preg <- system.file("preg.xlsx", package = "dmtools")
-obj_short <- short(preg, id, "res", c("site", "sex"))
+obj_short <- short(preg, id, "LBORRES", c("site", "sex"))
 
 obj_short <- check(obj_short, df)
 get_result(obj_short)

@@ -191,10 +191,10 @@
 <span class='no'>labs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>s01_lab</span>, <span class='no'>s02_lab</span>)
 <span class='no'>labs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='check_sites.html'>check_sites</a></span>(<span class='no'>labs</span>, <span class='no'>df</span>, <span class='no'>site</span>)
 
-<span class='fu'>test_sites</span>(<span class='no'>labs</span>, <span class='kw'>func</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>lab</span>) <span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>lab</span>, <span class='st'>"mis"</span>))</div><div class='output co'>#&gt;   id age sex human_lab name_lab   refs lab_vals is_norm vals_to_dbl auto_norm
-#&gt; 1 02  20   m       ast ast_post 0 - 35       48    norm          48        no
-#&gt;   num_site
-#&gt; 1  site 02</div></pre>
+<span class='fu'>test_sites</span>(<span class='no'>labs</span>, <span class='kw'>func</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>lab</span>) <span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>lab</span>, <span class='st'>"mis"</span>))</div><div class='output co'>#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+#&gt; 1 02  20   m    ast     ast _post        0       35      48    norm
+#&gt;   RES_TYPE_NUM IND_EXPECTED num_site
+#&gt; 1           48           no  site 02</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

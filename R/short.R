@@ -67,8 +67,6 @@ run_tests.short <- function(obj, dataset, row_file, part) {
   names(ds_names) <- col_names
 
   name_to_find <- row_file[[name_to_find]]
-  name_to_find <- ifelse(is_pst, paste0(name_to_find, part), paste0(part, name_to_find))
-
 
   if (is_add_cols) {
     dataset <- add_cols(dataset, part, ds_names)
@@ -78,11 +76,11 @@ run_tests.short <- function(obj, dataset, row_file, part) {
   if (is.null(common_cols)) {
     result <- dataset %>%
       dplyr::select(!!id, !!ds_names) %>%
-      dplyr::mutate(name_to_find = name_to_find)
+      dplyr::mutate(IDVAR = name_to_find, VISIT = part)
   } else {
     result <- dataset %>%
       dplyr::select(!!id, !!common_cols, !!ds_names) %>%
-      dplyr::mutate(name_to_find = name_to_find)
+      dplyr::mutate(IDVAR = name_to_find, VISIT = part)
   }
 
   if (!is.null(extra)) {
