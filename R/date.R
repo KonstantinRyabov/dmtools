@@ -138,7 +138,7 @@ run_tests.date <- function(obj, dataset, row_file, date) {
   minus <- as.integer(row_file$MINUS)
   plus <- as.integer(row_file$PLUS)
   shift <- as.integer(row_file$VISITDY)
-  name_visit <- row_file$VISITNUM
+  name_visit <- row_file$VISIT
   st_date <- row_file$STARTDAT
   st_name <- row_file$STARTVISIT
 
