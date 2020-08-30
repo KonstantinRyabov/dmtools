@@ -2,7 +2,7 @@
 
 * add functions for MedDRA API
 * `short()` don't stop if an error happens
-* CDASH for laboratory
+* CDASH
 * delete `wbc()`
 
 # dmtools 0.2.4

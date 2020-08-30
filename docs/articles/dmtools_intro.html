@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dmtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
       </span>
     </div>
 
@@ -279,27 +279,27 @@
 <a href="#dates" class="anchor"></a>dates</h3>
 <p>For dates check, you need to create the excel table like in the example.</p>
 <ul>
-<li>minus, plus, shift - parameter of timeline</li>
-<li>num_visit - parameter for function e.g. <code>contains(num_visit)</code>
+<li>MINUS, PLUS, VISITDY - parameter of a timeline</li>
+<li>VISITNUM - clinical encounter number, parameter for function e.g. <code>contains(num_visit)</code>
 </li>
-<li>name_visit - friendly name of visit</li>
-<li>standard_date - standard date from a dataset, with postfix or prefix</li>
-<li>standard_name - friendly name of standard date</li>
-<li>check_equal - check date equality within a visit</li>
-<li>equal_date - date for check equality from a dataset, with postfix or prefix</li>
+<li>VISIT - protocol-defined description of a clinical encounter</li>
+<li>STARTDAT - start date from a dataset, with postfix or prefix</li>
+<li>STARTVISIT - friendly name of start date</li>
+<li>IS_EQUAL - check date equality within a visit</li>
+<li>EQUALDAT - date for check equality from a dataset, with postfix or prefix</li>
 </ul>
 <table class="table">
 <caption>timeline</caption>
 <thead><tr class="header">
-<th align="left">num_visit</th>
-<th align="left">name_visit</th>
-<th align="right">minus</th>
-<th align="right">plus</th>
-<th align="right">shift</th>
-<th align="left">standard_date</th>
-<th align="left">standard_name</th>
-<th align="left">check_equal</th>
-<th align="left">equal_date</th>
+<th align="left">VISITNUM</th>
+<th align="left">VISIT</th>
+<th align="right">MINUS</th>
+<th align="right">PLUS</th>
+<th align="right">VISITDY</th>
+<th align="left">STARTDAT</th>
+<th align="left">STARTVISIT</th>
+<th align="left">IS_EQUAL</th>
+<th align="left">EQUALDAT</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -377,71 +377,71 @@
 
 <span class="co"># out - dates, which are out of the protocol's timeline</span>
 <span class="no">obj_date</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"out"</span>)
-<span class="co">#&gt;   id         standard_name standard_date name_event   name_item  date_item</span>
-<span class="co">#&gt; 1 01 date of randomization    1991-03-15    visit 2 bio_date_E3 1991-03-23</span>
-<span class="co">#&gt;                standard_interval out</span>
-<span class="co">#&gt; 1 1991-03-19 UTC--1991-03-21 UTC -&gt;2</span>
+<span class="co">#&gt;   id            STARTVISIT   STARTDAT   VISIT        TERM     VISDAT</span>
+<span class="co">#&gt; 1 01 date of randomization 1991-03-15 visit 2 bio_date_E3 1991-03-23</span>
+<span class="co">#&gt;                          PLANDAT DAYS_OUT</span>
+<span class="co">#&gt; 1 1991-03-19 UTC--1991-03-21 UTC        2</span>
 
 <span class="co"># uneq - dates, which are unequal</span>
 <span class="no">obj_date</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"uneq"</span>)
-<span class="co">#&gt;   id name_event   name_item  date_item stand_equal is_in_timeline</span>
-<span class="co">#&gt; 1 01    visit 2 bio_date_E3 1991-03-23  1991-03-21          FALSE</span>
+<span class="co">#&gt;   id   VISIT        TERM     VISDAT   EQUALDAT IS_TIMELINE</span>
+<span class="co">#&gt; 1 01 visit 2 bio_date_E3 1991-03-23 1991-03-21       FALSE</span>
 
 <span class="co"># ok - correct dates</span>
 <span class="no">obj_date</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"ok"</span>)
-<span class="co">#&gt;    id         standard_name standard_date name_event      name_item  date_item</span>
-<span class="co">#&gt; 1  01     date of screening    1991-03-13  screening screen_date_E1 1991-03-13</span>
-<span class="co">#&gt; 2  01 date of randomization    1991-03-15       rand   rand_date_E2 1991-03-15</span>
-<span class="co">#&gt; 3  01 date of randomization    1991-03-15    visit 2     ph_date_E3 1991-03-21</span>
-<span class="co">#&gt; 4  02     date of screening    1991-03-07  screening screen_date_E1 1991-03-07</span>
-<span class="co">#&gt; 5  02 date of randomization    1991-03-11       rand   rand_date_E2 1991-03-11</span>
-<span class="co">#&gt; 6  02 date of randomization    1991-03-11    visit 2     ph_date_E3 1991-03-16</span>
-<span class="co">#&gt; 7  02 date of randomization    1991-03-11    visit 2    bio_date_E3 1991-03-16</span>
-<span class="co">#&gt; 8  03     date of screening    1991-03-08  screening screen_date_E1 1991-03-08</span>
-<span class="co">#&gt; 9  03 date of randomization    1991-03-10       rand   rand_date_E2 1991-03-10</span>
-<span class="co">#&gt; 10 03 date of randomization    1991-03-10    visit 2     ph_date_E3 1991-03-16</span>
-<span class="co">#&gt; 11 03 date of randomization    1991-03-10    visit 2    bio_date_E3 1991-03-16</span>
-<span class="co">#&gt;                 standard_interval stand_equal</span>
-<span class="co">#&gt; 1  1991-03-13 UTC--1991-03-16 UTC  1991-03-13</span>
-<span class="co">#&gt; 2  1991-03-15 UTC--1991-03-15 UTC  1991-03-15</span>
-<span class="co">#&gt; 3  1991-03-19 UTC--1991-03-21 UTC  1991-03-21</span>
-<span class="co">#&gt; 4  1991-03-07 UTC--1991-03-10 UTC  1991-03-07</span>
-<span class="co">#&gt; 5  1991-03-11 UTC--1991-03-11 UTC  1991-03-11</span>
-<span class="co">#&gt; 6  1991-03-15 UTC--1991-03-17 UTC  1991-03-16</span>
-<span class="co">#&gt; 7  1991-03-15 UTC--1991-03-17 UTC  1991-03-16</span>
-<span class="co">#&gt; 8  1991-03-08 UTC--1991-03-11 UTC  1991-03-08</span>
-<span class="co">#&gt; 9  1991-03-10 UTC--1991-03-10 UTC  1991-03-10</span>
-<span class="co">#&gt; 10 1991-03-14 UTC--1991-03-16 UTC  1991-03-16</span>
-<span class="co">#&gt; 11 1991-03-14 UTC--1991-03-16 UTC  1991-03-16</span>
+<span class="co">#&gt;    id            STARTVISIT   STARTDAT     VISIT           TERM     VISDAT</span>
+<span class="co">#&gt; 1  01     date of screening 1991-03-13 screening screen_date_E1 1991-03-13</span>
+<span class="co">#&gt; 2  01 date of randomization 1991-03-15      rand   rand_date_E2 1991-03-15</span>
+<span class="co">#&gt; 3  01 date of randomization 1991-03-15   visit 2     ph_date_E3 1991-03-21</span>
+<span class="co">#&gt; 4  02     date of screening 1991-03-07 screening screen_date_E1 1991-03-07</span>
+<span class="co">#&gt; 5  02 date of randomization 1991-03-11      rand   rand_date_E2 1991-03-11</span>
+<span class="co">#&gt; 6  02 date of randomization 1991-03-11   visit 2     ph_date_E3 1991-03-16</span>
+<span class="co">#&gt; 7  02 date of randomization 1991-03-11   visit 2    bio_date_E3 1991-03-16</span>
+<span class="co">#&gt; 8  03     date of screening 1991-03-08 screening screen_date_E1 1991-03-08</span>
+<span class="co">#&gt; 9  03 date of randomization 1991-03-10      rand   rand_date_E2 1991-03-10</span>
+<span class="co">#&gt; 10 03 date of randomization 1991-03-10   visit 2     ph_date_E3 1991-03-16</span>
+<span class="co">#&gt; 11 03 date of randomization 1991-03-10   visit 2    bio_date_E3 1991-03-16</span>
+<span class="co">#&gt;                           PLANDAT   EQUALDAT</span>
+<span class="co">#&gt; 1  1991-03-13 UTC--1991-03-16 UTC 1991-03-13</span>
+<span class="co">#&gt; 2  1991-03-15 UTC--1991-03-15 UTC 1991-03-15</span>
+<span class="co">#&gt; 3  1991-03-19 UTC--1991-03-21 UTC 1991-03-21</span>
+<span class="co">#&gt; 4  1991-03-07 UTC--1991-03-10 UTC 1991-03-07</span>
+<span class="co">#&gt; 5  1991-03-11 UTC--1991-03-11 UTC 1991-03-11</span>
+<span class="co">#&gt; 6  1991-03-15 UTC--1991-03-17 UTC 1991-03-16</span>
+<span class="co">#&gt; 7  1991-03-15 UTC--1991-03-17 UTC 1991-03-16</span>
+<span class="co">#&gt; 8  1991-03-08 UTC--1991-03-11 UTC 1991-03-08</span>
+<span class="co">#&gt; 9  1991-03-10 UTC--1991-03-10 UTC 1991-03-10</span>
+<span class="co">#&gt; 10 1991-03-14 UTC--1991-03-16 UTC 1991-03-16</span>
+<span class="co">#&gt; 11 1991-03-14 UTC--1991-03-16 UTC 1991-03-16</span>
 
 <span class="co"># all dates</span>
 <span class="no">obj_date</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;    id         standard_name standard_date name_event      name_item  date_item</span>
-<span class="co">#&gt; 1  01     date of screening    1991-03-13  screening screen_date_E1 1991-03-13</span>
-<span class="co">#&gt; 2  01 date of randomization    1991-03-15       rand   rand_date_E2 1991-03-15</span>
-<span class="co">#&gt; 3  01 date of randomization    1991-03-15    visit 2     ph_date_E3 1991-03-21</span>
-<span class="co">#&gt; 4  01 date of randomization    1991-03-15    visit 2    bio_date_E3 1991-03-23</span>
-<span class="co">#&gt; 5  02     date of screening    1991-03-07  screening screen_date_E1 1991-03-07</span>
-<span class="co">#&gt; 6  02 date of randomization    1991-03-11       rand   rand_date_E2 1991-03-11</span>
-<span class="co">#&gt; 7  02 date of randomization    1991-03-11    visit 2     ph_date_E3 1991-03-16</span>
-<span class="co">#&gt; 8  02 date of randomization    1991-03-11    visit 2    bio_date_E3 1991-03-16</span>
-<span class="co">#&gt; 9  03     date of screening    1991-03-08  screening screen_date_E1 1991-03-08</span>
-<span class="co">#&gt; 10 03 date of randomization    1991-03-10       rand   rand_date_E2 1991-03-10</span>
-<span class="co">#&gt; 11 03 date of randomization    1991-03-10    visit 2     ph_date_E3 1991-03-16</span>
-<span class="co">#&gt; 12 03 date of randomization    1991-03-10    visit 2    bio_date_E3 1991-03-16</span>
-<span class="co">#&gt;                 standard_interval stand_equal is_in_timeline is_equal out</span>
-<span class="co">#&gt; 1  1991-03-13 UTC--1991-03-16 UTC  1991-03-13           TRUE     TRUE   0</span>
-<span class="co">#&gt; 2  1991-03-15 UTC--1991-03-15 UTC  1991-03-15           TRUE     TRUE   0</span>
-<span class="co">#&gt; 3  1991-03-19 UTC--1991-03-21 UTC  1991-03-21           TRUE     TRUE   0</span>
-<span class="co">#&gt; 4  1991-03-19 UTC--1991-03-21 UTC  1991-03-21          FALSE    FALSE -&gt;2</span>
-<span class="co">#&gt; 5  1991-03-07 UTC--1991-03-10 UTC  1991-03-07           TRUE     TRUE   0</span>
-<span class="co">#&gt; 6  1991-03-11 UTC--1991-03-11 UTC  1991-03-11           TRUE     TRUE   0</span>
-<span class="co">#&gt; 7  1991-03-15 UTC--1991-03-17 UTC  1991-03-16           TRUE     TRUE   0</span>
-<span class="co">#&gt; 8  1991-03-15 UTC--1991-03-17 UTC  1991-03-16           TRUE     TRUE   0</span>
-<span class="co">#&gt; 9  1991-03-08 UTC--1991-03-11 UTC  1991-03-08           TRUE     TRUE   0</span>
-<span class="co">#&gt; 10 1991-03-10 UTC--1991-03-10 UTC  1991-03-10           TRUE     TRUE   0</span>
-<span class="co">#&gt; 11 1991-03-14 UTC--1991-03-16 UTC  1991-03-16           TRUE     TRUE   0</span>
-<span class="co">#&gt; 12 1991-03-14 UTC--1991-03-16 UTC  1991-03-16           TRUE     TRUE   0</span></pre></body></html></div>
+<span class="co">#&gt;    id            STARTVISIT   STARTDAT     VISIT           TERM     VISDAT</span>
+<span class="co">#&gt; 1  01     date of screening 1991-03-13 screening screen_date_E1 1991-03-13</span>
+<span class="co">#&gt; 2  01 date of randomization 1991-03-15      rand   rand_date_E2 1991-03-15</span>
+<span class="co">#&gt; 3  01 date of randomization 1991-03-15   visit 2     ph_date_E3 1991-03-21</span>
+<span class="co">#&gt; 4  01 date of randomization 1991-03-15   visit 2    bio_date_E3 1991-03-23</span>
+<span class="co">#&gt; 5  02     date of screening 1991-03-07 screening screen_date_E1 1991-03-07</span>
+<span class="co">#&gt; 6  02 date of randomization 1991-03-11      rand   rand_date_E2 1991-03-11</span>
+<span class="co">#&gt; 7  02 date of randomization 1991-03-11   visit 2     ph_date_E3 1991-03-16</span>
+<span class="co">#&gt; 8  02 date of randomization 1991-03-11   visit 2    bio_date_E3 1991-03-16</span>
+<span class="co">#&gt; 9  03     date of screening 1991-03-08 screening screen_date_E1 1991-03-08</span>
+<span class="co">#&gt; 10 03 date of randomization 1991-03-10      rand   rand_date_E2 1991-03-10</span>
+<span class="co">#&gt; 11 03 date of randomization 1991-03-10   visit 2     ph_date_E3 1991-03-16</span>
+<span class="co">#&gt; 12 03 date of randomization 1991-03-10   visit 2    bio_date_E3 1991-03-16</span>
+<span class="co">#&gt;                           PLANDAT   EQUALDAT IS_TIMELINE IS_EQUAL DAYS_OUT</span>
+<span class="co">#&gt; 1  1991-03-13 UTC--1991-03-16 UTC 1991-03-13        TRUE     TRUE        0</span>
+<span class="co">#&gt; 2  1991-03-15 UTC--1991-03-15 UTC 1991-03-15        TRUE     TRUE        0</span>
+<span class="co">#&gt; 3  1991-03-19 UTC--1991-03-21 UTC 1991-03-21        TRUE     TRUE        0</span>
+<span class="co">#&gt; 4  1991-03-19 UTC--1991-03-21 UTC 1991-03-21       FALSE    FALSE        2</span>
+<span class="co">#&gt; 5  1991-03-07 UTC--1991-03-10 UTC 1991-03-07        TRUE     TRUE        0</span>
+<span class="co">#&gt; 6  1991-03-11 UTC--1991-03-11 UTC 1991-03-11        TRUE     TRUE        0</span>
+<span class="co">#&gt; 7  1991-03-15 UTC--1991-03-17 UTC 1991-03-16        TRUE     TRUE        0</span>
+<span class="co">#&gt; 8  1991-03-15 UTC--1991-03-17 UTC 1991-03-16        TRUE     TRUE        0</span>
+<span class="co">#&gt; 9  1991-03-08 UTC--1991-03-11 UTC 1991-03-08        TRUE     TRUE        0</span>
+<span class="co">#&gt; 10 1991-03-10 UTC--1991-03-10 UTC 1991-03-10        TRUE     TRUE        0</span>
+<span class="co">#&gt; 11 1991-03-14 UTC--1991-03-16 UTC 1991-03-16        TRUE     TRUE        0</span>
+<span class="co">#&gt; 12 1991-03-14 UTC--1991-03-16 UTC 1991-03-16        TRUE     TRUE        0</span></pre></body></html></div>
 <p><code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::contains</a></code> - A function, which select necessary visit or event e.g. dplyr::start_with, dplyr::contains. It works like <code>df %&gt;% select(contains("E1"))</code>. You also can use <code>dplyr::start_with</code>, works like <code>df %&gt;% select(start_with("V1"))</code></p>
 <p><code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::matches</a></code> - A function, which select dates from necessary visit e.g. dplyr::matches, dplyr::contains. It works like <code>visit_one %&gt;% select(contains("DAT"))</code>, default: <code><a href="https://dplyr.tidyverse.org/reference/reexports.html">dplyr::contains()</a></code></p>
 </div>

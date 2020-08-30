@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dmtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
       </span>
     </div>
 
@@ -189,10 +189,10 @@
 <span class='no'>obj_date</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='date.html'>date</a></span>(<span class='no'>timeline</span>, <span class='no'>id</span>, <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>contains</a></span>)
 
 <span class='no'>obj_date</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='check.html'>check</a></span>(<span class='no'>obj_date</span>, <span class='no'>df</span>)
-<span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>obj_date</span>, <span class='st'>"out"</span>)</div><div class='output co'>#&gt;   id         standard_name standard_date name_event   name_item  date_item
-#&gt; 1 01 date of randomization    1991-03-15    visit 2 bio_date_E3 1991-03-23
-#&gt;                standard_interval out
-#&gt; 1 1991-03-19 UTC--1991-03-21 UTC -&gt;2</div></pre>
+<span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>obj_date</span>, <span class='st'>"out"</span>)</div><div class='output co'>#&gt;   id            STARTVISIT   STARTDAT   VISIT        TERM     VISDAT
+#&gt; 1 01 date of randomization 1991-03-15 visit 2 bio_date_E3 1991-03-23
+#&gt;                          PLANDAT DAYS_OUT
+#&gt; 1 1991-03-19 UTC--1991-03-21 UTC        2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

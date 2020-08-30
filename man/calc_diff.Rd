@@ -7,9 +7,9 @@
 calc_diff(st_inter, dt_item)
 }
 \arguments{
-\item{st_inter}{An interval. An Object of interval.}
+\item{st_inter}{An interval. An object of interval.}
 
-\item{dt_item}{A date item. An Object of date.}
+\item{dt_item}{A date item. An object of date.}
 }
 \value{
 An integer scalar. Differences between the two dates.
