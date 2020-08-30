@@ -97,13 +97,13 @@ obj_lab %>% get_result()
 
 For dates check, you need to create the excel table like in the example.
 
-* minus, plus, shift - parameter of timeline
-* num_visit - parameter for function e.g. `contains(num_visit)`
-* name_visit - friendly name of visit
-* standard_date - standard date from a dataset, with postfix or prefix
-* standard_name - friendly name of standard date
-* check_equal - check date equality within a visit
-* equal_date - date for check equality from a dataset, with postfix or prefix
+* MINUS, PLUS, VISITDY - parameter of a timeline
+* VISITNUM - clinical encounter number, parameter for function e.g. `contains(num_visit)`
+* VISIT - protocol-defined description of a clinical encounter
+* STARTDAT - start date from a dataset, with postfix or prefix
+* STARTVISIT - friendly name of start date
+* IS_EQUAL - check date equality within a visit
+* EQUALDAT - date for check equality from a dataset, with postfix or prefix
 
 ```{r timelines, echo = FALSE, result = 'asis', warning = F, message = FALSE}
 
