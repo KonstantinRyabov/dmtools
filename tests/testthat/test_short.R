@@ -54,3 +54,9 @@ test_that("check the number of columns with extra variables", {
   preg_extra <- get_result(short_extra)
   expect_equal(ncol(preg_extra), 6)
 })
+
+
+test_that("check if the name_to_find is wrong", {
+  error_name_to_find <- short("preg_extra.xlsx", id, "ress", extra = "human_name")
+  expect_error(check(error_name_to_find, df), "name_to_find is wrong")
+})

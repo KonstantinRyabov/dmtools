@@ -11,3 +11,10 @@
 
 checking for future file timestamps ... NOTE
 unable to verify current time
+
+## devtools::check_rhub()
+
+works with this args
+
+platform="windows-x86_64-devel",
+env_vars=c(R_COMPILE_AND_INSTALL_PACKAGES = "always")
