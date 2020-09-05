@@ -26,6 +26,18 @@ check.default <- function(obj, dataset) {
   # mutate empty strings in NA
   dataset <- dataset %>% dplyr::mutate(dplyr::across(.fns = ~ ifelse(. == "", NA, .)))
 
+  if (class(obj) == "lab") {
+    subjs <- dataset %>%
+      dplyr::filter(is.na(!!obj[["age"]]) | is.na(!!obj[["sex"]])) %>%
+      dplyr::select(!!obj[["id"]]) %>%
+      unlist() %>%
+      unique()
+
+    if (length(subjs) != 0) {
+      warning("problem with age or sex: ", paste(subjs, collapse = ","))
+    }
+  }
+
   # load file
   file <- obj[["file"]]
   labs <- readxl::read_xlsx(file)
@@ -239,7 +251,6 @@ test_sites <- function(objs, func) {
     }
   ))
 
-  row.names(result) <- seq_len(nrow(result))
   result
 }
 
