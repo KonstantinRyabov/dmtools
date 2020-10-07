@@ -1,6 +1,6 @@
 Package: dmtools
 Title: Tools for Validation the Dataset
-Version: 0.2.5
+Version: 0.2.5.9000
 Authors@R: 
     person(given = "Konstantin",
            family = "Ryabov",
