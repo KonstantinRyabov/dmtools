@@ -45,7 +45,7 @@ The object lab.
 Create object lab
 }
 \examples{
-obj_lab <- lab("lab_refer.xlsx", id, age, sex, 1, 2)
-obj_lab <- lab("lab_refer.xlsx", id, age, sex, "NORMAL", "NOCLISIG", clsig = "CLISIG")
-obj_lab <- lab("lab_refer.xlsx", id, age, sex, "norm", "no", FALSE)
+obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, 1, 2)
+obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "NORMAL", "NOCLISIG", clsig = "CLISIG")
+obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "norm", "no", FALSE)
 }

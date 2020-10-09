@@ -162,30 +162,30 @@ get_result.default <- function(obj, group_id = T) {
 #' @export
 #'
 #' @examples
-#' site <- c("site 01", "site 02")
-#' id <- c("01", "02")
-#' age <- c("19", "20")
-#' sex <- c("f", "m")
-#' gluc_post <- c("5.5", "4.1")
-#' gluc_res_post <- c("norm", "no")
-#' ast_post <- c("30", "48")
-#' ast_res_post <- c(NA, "norm")
+#' SITE <- c("site 01", "site 02")
+#' ID <- c("01", "02")
+#' AGE <- c("19", "20")
+#' SEX <- c("f", "m")
+#' GLUC_V1 <- c("5.5", "4.1")
+#' GLUC_IND_V1 <- c("norm", "no")
+#' AST_V2 <- c("30", "48")
+#' AST_IND_V2 <- c(NA, "norm")
 #'
 #' df <- data.frame(
-#'   site, id, age, sex,
-#'   gluc_post, gluc_res_post,
-#'   ast_post, ast_res_post,
+#'   SITE, ID, AGE, SEX,
+#'   GLUC_V1, GLUC_IND_V1,
+#'   AST_V2, AST_IND_V2,
 #'   stringsAsFactors = FALSE
 #' )
 #'
 #' refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
 #' refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
 #'
-#' s01_lab <- lab(refs_s01, id, age, sex, "norm", "no", site = "site 01")
-#' s02_lab <- lab(refs_s02, id, age, sex, "norm", "no", site = "site 02")
+#' s01_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01")
+#' s02_lab <- lab(refs_s02, ID, AGE, SEX, "norm", "no", site = "site 02")
 #'
 #' labs <- list(s01_lab, s02_lab)
-#' labs <- check_sites(labs, df, site)
+#' labs <- check_sites(labs, df, SITE)
 check_sites <- function(objs, dataset, col_site) {
   col_site <- dplyr::enquo(col_site)
 
@@ -201,7 +201,7 @@ check_sites <- function(objs, dataset, col_site) {
     obj <- obj %>%
       check(data_site)
 
-    obj[["result"]] <- obj[["result"]] %>% dplyr::mutate(num_site = obj_site)
+    obj[["result"]] <- obj[["result"]] %>% dplyr::mutate(NUM_SITE = obj_site)
 
     obj
   })
@@ -217,30 +217,30 @@ check_sites <- function(objs, dataset, col_site) {
 #' @export
 #'
 #' @examples
-#' site <- c("site 01", "site 02")
-#' id <- c("01", "02")
-#' age <- c("19", "20")
-#' sex <- c("f", "m")
-#' gluc_post <- c("5.5", "4.1")
-#' gluc_res_post <- c("norm", "no")
-#' ast_post <- c("30", "48")
-#' ast_res_post <- c(NA, "norm")
+#' SITE <- c("site 01", "site 02")
+#' ID <- c("01", "02")
+#' AGE <- c("19", "20")
+#' SEX <- c("f", "m")
+#' GLUC_V1 <- c("5.5", "4.1")
+#' GLUC_IND_V1 <- c("norm", "no")
+#' AST_V2 <- c("30", "48")
+#' AST_IND_V2 <- c(NA, "norm")
 #'
 #' df <- data.frame(
-#'   site, id, age, sex,
-#'   gluc_post, gluc_res_post,
-#'   ast_post, ast_res_post,
+#'   SITE, ID, AGE, SEX,
+#'   GLUC_V1, GLUC_IND_V1,
+#'   AST_V2, AST_IND_V2,
 #'   stringsAsFactors = FALSE
 #' )
 #'
 #' refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
 #' refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
 #'
-#' s01_lab <- lab(refs_s01, id, age, sex, "norm", "no", site = "site 01")
-#' s02_lab <- lab(refs_s02, id, age, sex, "norm", "no", site = "site 02")
+#' s01_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01")
+#' s02_lab <- lab(refs_s02, ID, AGE, SEX, "norm", "no", site = "site 02")
 #'
 #' labs <- list(s01_lab, s02_lab)
-#' labs <- check_sites(labs, df, site)
+#' labs <- check_sites(labs, df, SITE)
 #'
 #' test_sites(labs, func = function(lab) choose_test(lab, "mis"))
 test_sites <- function(objs, func) {

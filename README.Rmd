@@ -29,7 +29,7 @@ library(dmtools)
 
 ## Overview
 For checking the dataset from EDC in clinical trials. 
-Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the names of variables. Column names should be unique.
+Notice, your dataset should have a postfix( \_V1 ) or a prefix( V1\_ ) in the names of variables. Column names should be unique.
 
 * `date()` - create object date, for check dates in the dataset
 * `lab()` - create object lab, for check lab results
@@ -39,7 +39,7 @@ Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the na
 * `choose_test()` - filter the final result of `check()`
 * `check_sites()` - check objects of different sites
 * `test_sites()` - filter the final result of `check_sites()`
-* `rename_dataset()` - rename dataset
+* `rename_dataset()` - rename the dataset
 
 ## Usage
 
@@ -48,11 +48,13 @@ For example, you want to check laboratory values, you need to create the excel t
 * AGELOW - number, >= number
 * AGEHIGH - if none, type Inf, <= number  
 * SEX - for both sex, use `|`
-* LBTEST - What was the lab test name?
-* LBORRES - What was the result of the result lab test?
-* LBNDIND - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBTEST - What was the lab test name? (can be any convenient name for you)
+* LBORRES* - What was the result of the lab test?
+* LBNDIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
 * LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
 * LBORNRHI - What was the high limit of the reference range for this lab test, <=
+
+*column names without prefix or postfix
 
 ```{r refer, echo = FALSE, result = 'asis', warning = FALSE, message = FALSE}
 library(knitr)
@@ -67,18 +69,18 @@ kable(refers, caption = "lab reference ranges")
 
 ```{r dataset, echo = FALSE, result = 'asis'}
 
-id <- c("01", "02", "03")
-age <- c("19", "20", "22")
-sex <- c("f", "m", "m")
-gluc_v1 <- c("5.5", "4.1", "9.7")
-gluc_res_v1 <- c("norm", NA, "norm")
-ast_v2 <- c("30", "48", "31")
-ast_res_v2 <- c("norm", "norm", "norm")
+ID <- c("01", "02", "03")
+AGE <- c("19", "20", "22")
+SEX <- c("f", "m", "m")
+GLUC_V1 <- c("5.5", "4.1", "9.7")
+GLUC_IND_V1 <- c("norm", NA, "norm")
+AST_V2 <- c("30", "48", "31")
+AST_IND_V2 <- c("norm", "norm", "norm")
 
 df <- data.frame(
-  id, age, sex,
-  gluc_v1, gluc_res_v1,
-  ast_v2, ast_res_v2,
+  ID, AGE, SEX,
+  GLUC_V1, GLUC_IND_V1,
+  AST_V2, AST_IND_V2,
   stringsAsFactors = F
 )
 
@@ -89,7 +91,7 @@ kable(df, caption = "dataset")
 ```{r lab}
 # "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset
 refs <- system.file("labs_refer.xlsx", package = "dmtools")
-obj_lab <- lab(refs, id, age, sex, "norm", "no")
+obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no")
 obj_lab <- obj_lab %>% check(df)
 
 # ok - analysis, which has a correct estimate of the result
@@ -104,18 +106,18 @@ obj_lab %>% choose_test("skip")
 
 ```{r strange_dataset, echo = FALSE, result = 'asis'}
 
-id <- c("01", "02", "03")
-age <- c("19", "20", "22")
-sex <- c("f", "m", "m")
-gluc_v1 <- c("5,5", "4,1", "9,7")
-gluc_res_v1 <- c("norm", NA, "norm")
-ast_v2 <- c(" < 5", "48", "31")
-ast_res_v2 <- c("norm", "norm", "norm")
+ID <- c("01", "02", "03")
+AGE <- c("19", "20", "22")
+SEX <- c("f", "m", "m")
+GLUC_V1 <- c("5,5", "4,1", "9,7")
+GLUC_IND_V1 <- c("norm", NA, "norm")
+AST_V2 <- c(" < 5", "48", "31")
+AST_IND_V2 <- c("norm", "norm", "norm")
 
 strange_df <- data.frame(
-  id, age, sex,
-  gluc_v1, gluc_res_v1,
-  ast_v2, ast_res_v2,
+  ID, AGE, SEX,
+  GLUC_V1, GLUC_IND_V1,
+  AST_V2, AST_IND_V2,
   stringsAsFactors = F
 )
 

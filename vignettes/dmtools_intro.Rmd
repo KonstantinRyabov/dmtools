@@ -21,7 +21,7 @@ library(dmtools)
 
 ## Overview
 For checking the dataset from EDC in clinical trials. 
-Notice, your dataset should have a postfix( \_v1 ) or a prefix( v1\_ ) in the names of variables. Column names should be unique.
+Notice, your dataset should have a postfix( \_V1 ) or a prefix( V1\_ ) in the names of variables. Column names should be unique.
 
 * laboratory - Does the investigator correctly estimate the laboratory analyzes?
 * dates - Do all dates correspond to the protocol's timeline?
@@ -36,11 +36,14 @@ For laboratory check, you need to create the excel table like in the example.
 * AGELOW - number, >= number
 * AGEHIGH - if none, type Inf, <= number  
 * SEX - for both sex, use `|`
-* LBTEST - What was the lab test name?
-* LBORRES - What was the result of the result lab test?
-* LBNDIND - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBTEST - What was the lab test name? (can be any convenient name for you)
+* LBORRES* - What was the result of the lab test?
+* LBNDIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
 * LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
 * LBORNRHI - What was the high limit of the reference range for this lab test, <=
+
+*column names without prefix or postfix
+
 
 ```{r refer, echo = FALSE, result = 'asis', warning = FALSE, message = FALSE}
 library(knitr)
@@ -55,18 +58,18 @@ kable(refers, caption = "lab reference ranges")
 
 ```{r dataset, echo = FALSE, result = 'asis'}
 
-id <- c("01", "02", "03")
-age <- c("19", "20", "22")
-sex <- c("f", "m", "m")
-gluc_v1 <- c("5.5", "4.1", "9.7")
-gluc_res_v1 <- c("norm", NA, "norm")
-ast_v2 <- c("30", "48", "31")
-ast_res_v2 <- c("norm", "norm", "norm")
+ID <- c("01", "02", "03")
+AGE <- c("19", "20", "22")
+SEX <- c("f", "m", "m")
+GLUC_V1 <- c("5.5", "4.1", "9.7")
+GLUC_IND_V1 <- c("norm", NA, "norm")
+AST_V2 <- c("30", "48", "31")
+AST_IND_V2 <- c("norm", "norm", "norm")
 
 df <- data.frame(
-  id, age, sex,
-  gluc_v1, gluc_res_v1,
-  ast_v2, ast_res_v2,
+  ID, AGE, SEX,
+  GLUC_V1, GLUC_IND_V1,
+  AST_V2, AST_IND_V2,
   stringsAsFactors = F
 )
 
@@ -77,7 +80,7 @@ kable(df, caption = "dataset")
 ```{r lab}
 # "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset
 refs <- system.file("labs_refer.xlsx", package = "dmtools")
-obj_lab <- lab(refs, id, age, sex, "norm", "no")
+obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no")
 obj_lab <- obj_lab %>% check(df)
 
 # ok - analysis, which has a correct estimate of the result
@@ -99,11 +102,11 @@ For dates check, you need to create the excel table like in the example.
 
 * MINUS, PLUS, VISITDY - parameter of a timeline
 * VISITNUM - clinical encounter number, parameter for function e.g. `contains(num_visit)`
-* VISIT - protocol-defined description of a clinical encounter
-* STARTDAT - start date from a dataset, with postfix or prefix
-* STARTVISIT - friendly name of start date
-* IS_EQUAL - check date equality within a visit
-* EQUALDAT - date for check equality from a dataset, with postfix or prefix
+* VISIT - protocol-defined description of a clinical encounter (can be any convenient name) 
+* STARTDAT - column name of start date, with postfix or prefix
+* STARTVISIT - can be any convenient name of start date for you 
+* IS_EQUAL - Boolean data type(T/F) to check date equality within a visit
+* EQUALDAT - column name for check date's equality, with postfix or prefix
 
 ```{r timelines, echo = FALSE, result = 'asis', warning = F, message = FALSE}
 
@@ -166,19 +169,19 @@ kable(refers_s02, caption = "lab reference ranges s02")
 ```
 
 ```{r dataset_sites, echo = FALSE, result = 'asis'}
-site <- c("site 01", "site 02")
-id <- c("01", "02")
-age <- c("19", "20")
-sex <- c("f", "m")
-gluc_v1 <- c("5.5", "4.1")
-gluc_res_v1 <- c("norm", "no")
-ast_v2 <- c("30", "48")
-ast_res_v2 <- c(NA, "norm")
+SITE <- c("site 01", "site 02")
+ID <- c("01", "02")
+AGE <- c("19", "20")
+SEX <- c("f", "m")
+GLUC_V1 <- c("5.5", "4.1")
+GLUC_IND_V1 <- c("norm", "no")
+AST_V2 <- c("30", "48")
+AST_IND_V2 <- c(NA, "norm")
 
 df <- data.frame(
-  site, id, age, sex,
-  gluc_v1, gluc_res_v1,
-  ast_v2, ast_res_v2,
+  SITE, ID, AGE, SEX,
+  GLUC_V1, GLUC_IND_V1,
+  AST_V2, AST_IND_V2,
   stringsAsFactors = F
 )
 
@@ -189,11 +192,11 @@ kable(df, caption = "dataset")
 refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
 refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
 
-s01_lab <- lab(refs_s01, id, age, sex, "norm", "no", site = "site 01")
-s02_lab <- lab(refs_s02, id, age, sex, "norm", "no", site = "site 02")
+s01_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01")
+s02_lab <- lab(refs_s02, ID, AGE, SEX, "norm", "no", site = "site 02")
 
 labs <- list(s01_lab, s02_lab)
-labs <- labs %>% check_sites(df, site)
+labs <- labs %>% check_sites(df, SITE)
 
 # mis - analysis, which has an incorrect estimate of the result
 labs %>% test_sites(function (lab) choose_test(lab, "mis"))
@@ -208,10 +211,10 @@ labs %>% test_sites(function (lab) choose_test(lab, "skip"))
 labs %>% test_sites(function (lab) get_result(lab))
 
 # you can combine sites, use |
-comb_lab <- lab(refs_s01, id, age, sex, "norm", "no", site = "site 01|site 02")
+comb_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01|site 02")
 comb_labs <- list(comb_lab)
 
-comb_labs <- comb_labs %>% check_sites(df, site)
+comb_labs <- comb_labs %>% check_sites(df, SITE)
 comb_labs %>% test_sites(function (lab) choose_test(lab, "mis"))
 ```
 
