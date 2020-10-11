@@ -113,7 +113,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>For checking the dataset from EDC in clinical trials. Notice, your dataset should have a postfix( _v1 ) or a prefix( v1_ ) in the names of variables. Column names should be unique.</p>
+<p>For checking the dataset from EDC in clinical trials. Notice, your dataset should have a postfix( _V1 ) or a prefix( V1_ ) in the names of variables. Column names should be unique.</p>
 <ul>
 <li>laboratory - Does the investigator correctly estimate the laboratory analyzes?</li>
 <li>dates - Do all dates correspond to the protocol’s timeline?</li>
@@ -133,12 +133,13 @@
 </li>
 <li>SEX - for both sex, use <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>
 </li>
-<li>LBTEST - What was the lab test name?</li>
-<li>LBORRES - What was the result of the result lab test?</li>
-<li>LBNDIND - How [did/do] the reported values compare within the [reference/normal/expected] range?</li>
+<li>LBTEST - What was the lab test name? (can be any convenient name for you)</li>
+<li>LBORRES* - What was the result of the lab test?</li>
+<li>LBNDIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?</li>
 <li>LBORNRLO - What was the lower limit of the reference range for this lab test, &gt;=</li>
 <li>LBORNRHI - What was the high limit of the reference range for this lab test, &lt;=</li>
 </ul>
+<p>*column names without prefix or postfix</p>
 <table class="table">
 <caption>lab reference ranges</caption>
 <thead><tr class="header">
@@ -156,9 +157,9 @@
 <td align="right">18</td>
 <td align="right">45</td>
 <td align="left">f|m</td>
-<td align="left">gluc</td>
-<td align="left">gluc</td>
-<td align="left">gluc_res</td>
+<td align="left">Glucose</td>
+<td align="left">GLUC</td>
+<td align="left">GLUC_IND</td>
 <td align="left">3.9</td>
 <td align="left">5.9</td>
 </tr>
@@ -166,9 +167,9 @@
 <td align="right">18</td>
 <td align="right">45</td>
 <td align="left">m</td>
-<td align="left">ast</td>
-<td align="left">ast</td>
-<td align="left">ast_res</td>
+<td align="left">Aspartate transaminase</td>
+<td align="left">AST</td>
+<td align="left">AST_IND</td>
 <td align="left">0</td>
 <td align="left">42</td>
 </tr>
@@ -176,9 +177,9 @@
 <td align="right">18</td>
 <td align="right">45</td>
 <td align="left">f</td>
-<td align="left">ast</td>
-<td align="left">ast</td>
-<td align="left">ast_res</td>
+<td align="left">Aspartate transaminase</td>
+<td align="left">AST</td>
+<td align="left">AST_IND</td>
 <td align="left">0</td>
 <td align="left">39</td>
 </tr>
@@ -187,13 +188,13 @@
 <table class="table">
 <caption>dataset</caption>
 <thead><tr class="header">
-<th align="left">id</th>
-<th align="left">age</th>
-<th align="left">sex</th>
-<th align="left">gluc_v1</th>
-<th align="left">gluc_res_v1</th>
-<th align="left">ast_v2</th>
-<th align="left">ast_res_v2</th>
+<th align="left">ID</th>
+<th align="left">AGE</th>
+<th align="left">SEX</th>
+<th align="left">GLUC_V1</th>
+<th align="left">GLUC_IND_V1</th>
+<th align="left">AST_V2</th>
+<th align="left">AST_IND_V2</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -227,52 +228,52 @@
 </table>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset</span>
 <span class="no">refs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"labs_refer.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs</span>, <span class="no">id</span>, <span class="no">age</span>, <span class="no">sex</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>)
+<span class="no">obj_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs</span>, <span class="no">ID</span>, <span class="no">AGE</span>, <span class="no">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>)
 <span class="no">obj_lab</span> <span class="kw">&lt;-</span> <span class="no">obj_lab</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
 
 <span class="co"># ok - analysis, which has a correct estimate of the result</span>
 <span class="no">obj_lab</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"ok"</span>)
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5.5    norm</span>
-<span class="co">#&gt; 2 01  19   f    ast     ast   _v2      0.0     39.0      30    norm</span>
-<span class="co">#&gt; 3 03  22   m    ast     ast   _v2      0.0     42.0      31    norm</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span>
-<span class="co">#&gt; 1          5.5         norm</span>
-<span class="co">#&gt; 2         30.0         norm</span>
-<span class="co">#&gt; 3         31.0         norm</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 01  19   f                Glucose    GLUC   _V1      3.9      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0      30</span>
+<span class="co">#&gt; 3 03  22   m Aspartate transaminase     AST   _V2      0.0     42.0      31</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span>
+<span class="co">#&gt; 1    norm          5.5         norm</span>
+<span class="co">#&gt; 2    norm         30.0         norm</span>
+<span class="co">#&gt; 3    norm         31.0         norm</span>
 
 <span class="co"># mis - analysis, which has an incorrect estimate of the result</span>
 <span class="no">obj_lab</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"mis"</span>)
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 02  20   m    ast     ast   _v2      0.0     42.0      48    norm</span>
-<span class="co">#&gt; 2 03  22   m   gluc    gluc   _v1      3.9      5.9     9.7    norm</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span>
-<span class="co">#&gt; 1         48.0           no</span>
-<span class="co">#&gt; 2          9.7           no</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48</span>
+<span class="co">#&gt; 2 03  22   m                Glucose    GLUC   _V1      3.9      5.9     9.7</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span>
+<span class="co">#&gt; 1    norm         48.0           no</span>
+<span class="co">#&gt; 2    norm          9.7           no</span>
 
 <span class="co"># skip - analysis, which has an empty value of the estimate</span>
 <span class="no">obj_lab</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="st">"skip"</span>)
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 02  20   m   gluc    gluc   _v1      3.9      5.9     4.1    &lt;NA&gt;</span>
+<span class="co">#&gt;   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
+<span class="co">#&gt; 1 02  20   m Glucose    GLUC   _V1      3.9      5.9     4.1    &lt;NA&gt;</span>
 <span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span>
 <span class="co">#&gt; 1          4.1         &lt;NA&gt;</span>
 
 <span class="co"># all analyzes </span>
 <span class="no">obj_lab</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 01  19   f   gluc    gluc   _v1      3.9      5.9     5.5    norm</span>
-<span class="co">#&gt; 2 01  19   f    ast     ast   _v2      0.0     39.0      30    norm</span>
-<span class="co">#&gt; 3 02  20   m   gluc    gluc   _v1      3.9      5.9     4.1    &lt;NA&gt;</span>
-<span class="co">#&gt; 4 02  20   m    ast     ast   _v2      0.0     42.0      48    norm</span>
-<span class="co">#&gt; 5 03  22   m   gluc    gluc   _v1      3.9      5.9     9.7    norm</span>
-<span class="co">#&gt; 6 03  22   m    ast     ast   _v2      0.0     42.0      31    norm</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED IS_RIGHT</span>
-<span class="co">#&gt; 1          5.5         norm     TRUE</span>
-<span class="co">#&gt; 2         30.0         norm     TRUE</span>
-<span class="co">#&gt; 3          4.1         &lt;NA&gt;       NA</span>
-<span class="co">#&gt; 4         48.0           no    FALSE</span>
-<span class="co">#&gt; 5          9.7           no    FALSE</span>
-<span class="co">#&gt; 6         31.0         norm     TRUE</span></pre></body></html></div>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 01  19   f                Glucose    GLUC   _V1      3.9      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0      30</span>
+<span class="co">#&gt; 3 02  20   m                Glucose    GLUC   _V1      3.9      5.9     4.1</span>
+<span class="co">#&gt; 4 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48</span>
+<span class="co">#&gt; 5 03  22   m                Glucose    GLUC   _V1      3.9      5.9     9.7</span>
+<span class="co">#&gt; 6 03  22   m Aspartate transaminase     AST   _V2      0.0     42.0      31</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED IS_RIGHT</span>
+<span class="co">#&gt; 1    norm          5.5         norm     TRUE</span>
+<span class="co">#&gt; 2    norm         30.0         norm     TRUE</span>
+<span class="co">#&gt; 3    &lt;NA&gt;          4.1         &lt;NA&gt;       NA</span>
+<span class="co">#&gt; 4    norm         48.0           no    FALSE</span>
+<span class="co">#&gt; 5    norm          9.7           no    FALSE</span>
+<span class="co">#&gt; 6    norm         31.0         norm     TRUE</span></pre></body></html></div>
 </div>
 <div id="dates" class="section level3">
 <h3 class="hasAnchor">
@@ -282,11 +283,11 @@
 <li>MINUS, PLUS, VISITDY - parameter of a timeline</li>
 <li>VISITNUM - clinical encounter number, parameter for function e.g. <code>contains(num_visit)</code>
 </li>
-<li>VISIT - protocol-defined description of a clinical encounter</li>
-<li>STARTDAT - start date from a dataset, with postfix or prefix</li>
-<li>STARTVISIT - friendly name of start date</li>
-<li>IS_EQUAL - check date equality within a visit</li>
-<li>EQUALDAT - date for check equality from a dataset, with postfix or prefix</li>
+<li>VISIT - protocol-defined description of a clinical encounter (can be any convenient name)</li>
+<li>STARTDAT - column name of start date, with postfix or prefix</li>
+<li>STARTVISIT - can be any convenient name of start date for you</li>
+<li>IS_EQUAL - Boolean data type(T/F) to check date equality within a visit</li>
+<li>EQUALDAT - column name for check date’s equality, with postfix or prefix</li>
 </ul>
 <table class="table">
 <caption>timeline</caption>
@@ -466,9 +467,9 @@
 <td align="right">18</td>
 <td align="right">45</td>
 <td align="left">f|m</td>
-<td align="left">gluc</td>
-<td align="left">gluc</td>
-<td align="left">gluc_res</td>
+<td align="left">Glucose</td>
+<td align="left">GLUC</td>
+<td align="left">GLUC_IND</td>
 <td align="left">4.0</td>
 <td align="left">5.9</td>
 </tr>
@@ -476,9 +477,9 @@
 <td align="right">18</td>
 <td align="right">40</td>
 <td align="left">m</td>
-<td align="left">ast</td>
-<td align="left">ast</td>
-<td align="left">ast_res</td>
+<td align="left">Aspartate transaminase</td>
+<td align="left">AST</td>
+<td align="left">AST_IND</td>
 <td align="left">0</td>
 <td align="left">41</td>
 </tr>
@@ -486,9 +487,9 @@
 <td align="right">18</td>
 <td align="right">39</td>
 <td align="left">f</td>
-<td align="left">ast</td>
-<td align="left">ast</td>
-<td align="left">ast_res</td>
+<td align="left">Aspartate transaminase</td>
+<td align="left">AST</td>
+<td align="left">AST_IND</td>
 <td align="left">0</td>
 <td align="left">43</td>
 </tr>
@@ -511,9 +512,9 @@
 <td align="right">18</td>
 <td align="right">45</td>
 <td align="left">f|m</td>
-<td align="left">gluc</td>
-<td align="left">gluc</td>
-<td align="left">gluc_res</td>
+<td align="left">Glucose</td>
+<td align="left">GLUC</td>
+<td align="left">GLUC_IND</td>
 <td align="left">4.2</td>
 <td align="left">6.1</td>
 </tr>
@@ -521,9 +522,9 @@
 <td align="right">18</td>
 <td align="right">40</td>
 <td align="left">m</td>
-<td align="left">ast</td>
-<td align="left">ast</td>
-<td align="left">ast_res</td>
+<td align="left">Aspartate transaminase</td>
+<td align="left">AST</td>
+<td align="left">AST_IND</td>
 <td align="left">0</td>
 <td align="left">35</td>
 </tr>
@@ -531,9 +532,9 @@
 <td align="right">19</td>
 <td align="right">41</td>
 <td align="left">f</td>
-<td align="left">ast</td>
-<td align="left">ast</td>
-<td align="left">ast_res</td>
+<td align="left">Aspartate transaminase</td>
+<td align="left">AST</td>
+<td align="left">AST_IND</td>
 <td align="left">0</td>
 <td align="left">41</td>
 </tr>
@@ -542,14 +543,14 @@
 <table class="table">
 <caption>dataset</caption>
 <thead><tr class="header">
-<th align="left">site</th>
-<th align="left">id</th>
-<th align="left">age</th>
-<th align="left">sex</th>
-<th align="left">gluc_v1</th>
-<th align="left">gluc_res_v1</th>
-<th align="left">ast_v2</th>
-<th align="left">ast_res_v2</th>
+<th align="left">SITE</th>
+<th align="left">ID</th>
+<th align="left">AGE</th>
+<th align="left">SEX</th>
+<th align="left">GLUC_V1</th>
+<th align="left">GLUC_IND_V1</th>
+<th align="left">AST_V2</th>
+<th align="left">AST_IND_V2</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -577,60 +578,60 @@
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">refs_s01</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"labs_refer_s01.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
 <span class="no">refs_s02</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"labs_refer_s02.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
 
-<span class="no">s01_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s01</span>, <span class="no">id</span>, <span class="no">age</span>, <span class="no">sex</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 01"</span>)
-<span class="no">s02_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s02</span>, <span class="no">id</span>, <span class="no">age</span>, <span class="no">sex</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 02"</span>)
+<span class="no">s01_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s01</span>, <span class="no">ID</span>, <span class="no">AGE</span>, <span class="no">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 01"</span>)
+<span class="no">s02_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s02</span>, <span class="no">ID</span>, <span class="no">AGE</span>, <span class="no">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 02"</span>)
 
 <span class="no">labs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">s01_lab</span>, <span class="no">s02_lab</span>)
-<span class="no">labs</span> <span class="kw">&lt;-</span> <span class="no">labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check_sites.html">check_sites</a></span>(<span class="no">df</span>, <span class="no">site</span>)
+<span class="no">labs</span> <span class="kw">&lt;-</span> <span class="no">labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check_sites.html">check_sites</a></span>(<span class="no">df</span>, <span class="no">SITE</span>)
 
 <span class="co"># mis - analysis, which has an incorrect estimate of the result</span>
 <span class="no">labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/test_sites.html">test_sites</a></span>(<span class="kw">function</span> (<span class="no">lab</span>) <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="no">lab</span>, <span class="st">"mis"</span>))
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 02  20   m    ast     ast   _v2        0       35      48    norm</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED num_site</span>
-<span class="co">#&gt; 1           48           no  site 02</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 02  20   m Aspartate transaminase     AST   _V2        0       35      48</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED NUM_SITE</span>
+<span class="co">#&gt; 1    norm           48           no  site 02</span>
 
 <span class="co"># ok - analysis, which has a correct estimate of the result</span>
 <span class="no">labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/test_sites.html">test_sites</a></span>(<span class="kw">function</span> (<span class="no">lab</span>) <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="no">lab</span>, <span class="st">"ok"</span>))
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 01  19   f   gluc    gluc   _v1      4.0      5.9     5.5    norm</span>
-<span class="co">#&gt; 2 02  20   m   gluc    gluc   _v1      4.2      6.1     4.1      no</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED num_site</span>
+<span class="co">#&gt;   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
+<span class="co">#&gt; 1 01  19   f Glucose    GLUC   _V1      4.0      5.9     5.5    norm</span>
+<span class="co">#&gt; 2 02  20   m Glucose    GLUC   _V1      4.2      6.1     4.1      no</span>
+<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED NUM_SITE</span>
 <span class="co">#&gt; 1          5.5         norm  site 01</span>
 <span class="co">#&gt; 2          4.1           no  site 02</span>
 
 <span class="co"># skip - analysis, which has an empty value of the estimate</span>
 <span class="no">labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/test_sites.html">test_sites</a></span>(<span class="kw">function</span> (<span class="no">lab</span>) <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="no">lab</span>, <span class="st">"skip"</span>))
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 01  19   f    ast     ast   _v2        0       43      30    &lt;NA&gt;</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED num_site</span>
-<span class="co">#&gt; 1           30         &lt;NA&gt;  site 01</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 01  19   f Aspartate transaminase     AST   _V2        0       43      30</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED NUM_SITE</span>
+<span class="co">#&gt; 1    &lt;NA&gt;           30         &lt;NA&gt;  site 01</span>
 
 <span class="co"># all analyzes</span>
 <span class="no">labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/test_sites.html">test_sites</a></span>(<span class="kw">function</span> (<span class="no">lab</span>) <span class="fu"><a href="../reference/get_result.html">get_result</a></span>(<span class="no">lab</span>))
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 01  19   f   gluc    gluc   _v1      4.0      5.9     5.5    norm</span>
-<span class="co">#&gt; 2 01  19   f    ast     ast   _v2      0.0     43.0      30    &lt;NA&gt;</span>
-<span class="co">#&gt; 3 02  20   m   gluc    gluc   _v1      4.2      6.1     4.1      no</span>
-<span class="co">#&gt; 4 02  20   m    ast     ast   _v2      0.0     35.0      48    norm</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED IS_RIGHT num_site</span>
-<span class="co">#&gt; 1          5.5         norm     TRUE  site 01</span>
-<span class="co">#&gt; 2         30.0         &lt;NA&gt;       NA  site 01</span>
-<span class="co">#&gt; 3          4.1           no     TRUE  site 02</span>
-<span class="co">#&gt; 4         48.0           no    FALSE  site 02</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 01  19   f                Glucose    GLUC   _V1      4.0      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase     AST   _V2      0.0     43.0      30</span>
+<span class="co">#&gt; 3 02  20   m                Glucose    GLUC   _V1      4.2      6.1     4.1</span>
+<span class="co">#&gt; 4 02  20   m Aspartate transaminase     AST   _V2      0.0     35.0      48</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED IS_RIGHT NUM_SITE</span>
+<span class="co">#&gt; 1    norm          5.5         norm     TRUE  site 01</span>
+<span class="co">#&gt; 2    &lt;NA&gt;         30.0         &lt;NA&gt;       NA  site 01</span>
+<span class="co">#&gt; 3      no          4.1           no     TRUE  site 02</span>
+<span class="co">#&gt; 4    norm         48.0           no    FALSE  site 02</span>
 
 <span class="co"># you can combine sites, use |</span>
-<span class="no">comb_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s01</span>, <span class="no">id</span>, <span class="no">age</span>, <span class="no">sex</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 01|site 02"</span>)
+<span class="no">comb_lab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span>(<span class="no">refs_s01</span>, <span class="no">ID</span>, <span class="no">AGE</span>, <span class="no">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="kw">site</span> <span class="kw">=</span> <span class="st">"site 01|site 02"</span>)
 <span class="no">comb_labs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">comb_lab</span>)
 
-<span class="no">comb_labs</span> <span class="kw">&lt;-</span> <span class="no">comb_labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check_sites.html">check_sites</a></span>(<span class="no">df</span>, <span class="no">site</span>)
+<span class="no">comb_labs</span> <span class="kw">&lt;-</span> <span class="no">comb_labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check_sites.html">check_sites</a></span>(<span class="no">df</span>, <span class="no">SITE</span>)
 <span class="no">comb_labs</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/test_sites.html">test_sites</a></span>(<span class="kw">function</span> (<span class="no">lab</span>) <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span>(<span class="no">lab</span>, <span class="st">"mis"</span>))
-<span class="co">#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 02  20   m   gluc    gluc   _v1        4      5.9     4.1      no</span>
-<span class="co">#&gt; 2 02  20   m    ast     ast   _v2        0     41.0      48    norm</span>
-<span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED        num_site</span>
-<span class="co">#&gt; 1          4.1         norm site 01|site 02</span>
-<span class="co">#&gt; 2         48.0           no site 01|site 02</span></pre></body></html></div>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 02  20   m                Glucose    GLUC   _V1        4      5.9     4.1</span>
+<span class="co">#&gt; 2 02  20   m Aspartate transaminase     AST   _V2        0     41.0      48</span>
+<span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED        NUM_SITE</span>
+<span class="co">#&gt; 1      no          4.1         norm site 01|site 02</span>
+<span class="co">#&gt; 2    norm         48.0           no site 01|site 02</span></pre></body></html></div>
 </div>
 <div id="rename" class="section level3">
 <h3 class="hasAnchor">

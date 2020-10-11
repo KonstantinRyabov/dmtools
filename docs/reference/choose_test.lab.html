@@ -175,34 +175,34 @@
     <p>The filtered dataset by a value of <code>test</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"01"</span>, <span class='st'>"02"</span>, <span class='st'>"03"</span>)
-<span class='no'>site</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"site 01"</span>, <span class='st'>"site 02"</span>, <span class='st'>"site 03"</span>)
-<span class='no'>age</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"19"</span>, <span class='st'>"20"</span>, <span class='st'>"22"</span>)
-<span class='no'>sex</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"f"</span>, <span class='st'>"m"</span>, <span class='st'>"f"</span>)
-<span class='no'>gluc_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5.5</span>, <span class='fl'>4.1</span>, <span class='fl'>9.7</span>)
-<span class='no'>gluc_res_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"norm"</span>, <span class='st'>"no"</span>, <span class='st'>"cl"</span>)
-<span class='no'>ast_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"30"</span>, <span class='st'>"48"</span>, <span class='st'>"31"</span>)
-<span class='no'>ast_res_post</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"norm"</span>, <span class='st'>"norm"</span>)
+    <pre class="examples"><div class='input'><span class='no'>ID</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"01"</span>, <span class='st'>"02"</span>, <span class='st'>"03"</span>)
+<span class='no'>SITE</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"site 01"</span>, <span class='st'>"site 02"</span>, <span class='st'>"site 03"</span>)
+<span class='no'>AGE</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"19"</span>, <span class='st'>"20"</span>, <span class='st'>"22"</span>)
+<span class='no'>SEX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"f"</span>, <span class='st'>"m"</span>, <span class='st'>"f"</span>)
+<span class='no'>GLUC_V1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5.5</span>, <span class='fl'>4.1</span>, <span class='fl'>9.7</span>)
+<span class='no'>GLUC_IND_V1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"norm"</span>, <span class='st'>"no"</span>, <span class='st'>"cl"</span>)
+<span class='no'>AST_V2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"30"</span>, <span class='st'>"48"</span>, <span class='st'>"31"</span>)
+<span class='no'>AST_IND_V2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"norm"</span>, <span class='st'>"norm"</span>)
 
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='no'>id</span>, <span class='no'>site</span>, <span class='no'>age</span>, <span class='no'>sex</span>,
-  <span class='no'>gluc_post</span>, <span class='no'>gluc_res_post</span>,
-  <span class='no'>ast_post</span>, <span class='no'>ast_res_post</span>,
+  <span class='no'>ID</span>, <span class='no'>SITE</span>, <span class='no'>AGE</span>, <span class='no'>SEX</span>,
+  <span class='no'>GLUC_V1</span>, <span class='no'>GLUC_IND_V1</span>,
+  <span class='no'>AST_V2</span>, <span class='no'>AST_IND_V2</span>,
   <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 
 <span class='no'>refs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"labs_refer.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"dmtools"</span>)
-<span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lab.html'>lab</a></span>(<span class='no'>refs</span>, <span class='no'>id</span>, <span class='no'>age</span>, <span class='no'>sex</span>, <span class='st'>"norm"</span>, <span class='st'>"no"</span>)
+<span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lab.html'>lab</a></span>(<span class='no'>refs</span>, <span class='no'>ID</span>, <span class='no'>AGE</span>, <span class='no'>SEX</span>, <span class='st'>"norm"</span>, <span class='st'>"no"</span>)
 
 <span class='no'>obj_lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='check.html'>check</a></span>(<span class='no'>obj_lab</span>, <span class='no'>df</span>)
-<span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>obj_lab</span>, <span class='st'>"mis"</span>)</div><div class='output co'>#&gt;   id age sex LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-#&gt; 1 02  20   m   gluc    gluc _post      3.9      5.9     4.1      no
-#&gt; 2 02  20   m    ast     ast _post      0.0     42.0      48    norm
-#&gt; 3 03  22   f   gluc    gluc _post      3.9      5.9     9.7      cl
-#&gt;   RES_TYPE_NUM IND_EXPECTED
-#&gt; 1          4.1         norm
-#&gt; 2         48.0           no
-#&gt; 3          9.7           no</div></pre>
+<span class='fu'><a href='choose_test.html'>choose_test</a></span>(<span class='no'>obj_lab</span>, <span class='st'>"mis"</span>)</div><div class='output co'>#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES
+#&gt; 1 02  20   m                Glucose    GLUC   _V1      3.9      5.9     4.1
+#&gt; 2 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48
+#&gt; 3 03  22   f                Glucose    GLUC   _V1      3.9      5.9     9.7
+#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED
+#&gt; 1      no          4.1         norm
+#&gt; 2    norm         48.0           no
+#&gt; 3      cl          9.7           no</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

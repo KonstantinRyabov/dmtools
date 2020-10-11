@@ -15,9 +15,9 @@
 #' @export
 #'
 #' @examples
-#' obj_lab <- lab("lab_refer.xlsx", id, age, sex, 1, 2)
-#' obj_lab <- lab("lab_refer.xlsx", id, age, sex, "NORMAL", "NOCLISIG", clsig = "CLISIG")
-#' obj_lab <- lab("lab_refer.xlsx", id, age, sex, "norm", "no", FALSE)
+#' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, 1, 2)
+#' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "NORMAL", "NOCLISIG", clsig = "CLISIG")
+#' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "norm", "no", FALSE)
 lab <- function(file,
                 id,
                 age,
@@ -61,24 +61,24 @@ lab <- function(file,
 #' @export
 #'
 #' @examples
-#' id <- c("01", "02", "03")
-#' site <- c("site 01", "site 02", "site 03")
-#' age <- c("19", "20", "22")
-#' sex <- c("f", "m", "f")
-#' gluc_post <- c(5.5, 4.1, 9.7)
-#' gluc_res_post <- c("norm", "no", "cl")
-#' ast_post <- c("30", "48", "31")
-#' ast_res_post <- c(NA, "norm", "norm")
+#' ID <- c("01", "02", "03")
+#' SITE <- c("site 01", "site 02", "site 03")
+#' AGE <- c("19", "20", "22")
+#' SEX <- c("f", "m", "f")
+#' GLUC_V1 <- c(5.5, 4.1, 9.7)
+#' GLUC_IND_V1 <- c("norm", "no", "cl")
+#' AST_V2 <- c("30", "48", "31")
+#' AST_IND_V2 <- c(NA, "norm", "norm")
 #'
 #' df <- data.frame(
-#'   id, site, age, sex,
-#'   gluc_post, gluc_res_post,
-#'   ast_post, ast_res_post,
+#'   ID, SITE, AGE, SEX,
+#'   GLUC_V1, GLUC_IND_V1,
+#'   AST_V2, AST_IND_V2,
 #'   stringsAsFactors = FALSE
 #' )
 #'
 #' refs <- system.file("labs_refer.xlsx", package = "dmtools")
-#' obj_lab <- lab(refs, id, age, sex, "norm", "no")
+#' obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no")
 #'
 #' obj_lab <- check(obj_lab, df)
 #' choose_test(obj_lab, "mis")
