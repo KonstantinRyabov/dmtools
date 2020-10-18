@@ -13,7 +13,7 @@ Installation
     install.packages("dmtools")
 
     # dev-version
-    devtools::install_github("chachabooms/dmtools")
+    devtools::install_github("KonstantinRyabov/dmtools")
 
     library(dmtools)
 
