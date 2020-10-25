@@ -131,7 +131,7 @@ obj_lab <- obj_lab %>% check(strange_df)
 # dmtools can understand the value with a comma like 6,6 
 obj_lab %>% choose_test("ok")
 
-# Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
+# Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the RES_TYPE_NUM
 obj_lab %>% choose_test("mis")
 
 obj_lab %>% choose_test("skip")

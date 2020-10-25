@@ -92,7 +92,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="about_short_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>about_short</h1>
@@ -108,7 +108,8 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dmtools</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/KonstantinRyabov/dmtools">dmtools</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -174,18 +175,19 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">preg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"preg.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">preg</span>, <span class="no">id</span>, <span class="st">"LBORRES"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"site"</span>, <span class="st">"sex"</span>))
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="va">preg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"preg.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">preg</span>, <span class="va">id</span>, <span class="st">"LBORRES"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
-<span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   id    site sex LBPERF LBORRES    IDVAR VISIT</span>
 <span class="co">#&gt; 1 01 site 01   f      y     neg preg_res   _e2</span>
 <span class="co">#&gt; 2 01 site 01   f      y     neg preg_res   _e3</span>
 <span class="co">#&gt; 3 02 site 02   m      y     neg preg_res   _e2</span>
 <span class="co">#&gt; 4 02 site 02   m      y     pos preg_res   _e3</span>
 <span class="co">#&gt; 5 03 site 03   f      y     neg preg_res   _e2</span>
-<span class="co">#&gt; 6 03 site 03   f      n   unnes preg_res   _e3</span></pre></body></html></div>
+<span class="co">#&gt; 6 03 site 03   f      n   unnes preg_res   _e3</span></pre></div>
 </div>
 <div id="drug-type" class="section level3">
 <h3 class="hasAnchor">
@@ -234,18 +236,19 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">drug</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"drug.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">drug</span>, <span class="no">id</span>, <span class="st">"CMTRT"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">drug</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"drug.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">drug</span>, <span class="va">id</span>, <span class="st">"CMTRT"</span><span class="op">)</span>
 
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
-<span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   id    CMTRT CMDOSE     IDVAR VISIT</span>
 <span class="co">#&gt; 1 01 type_one      2 drug_type   _e2</span>
 <span class="co">#&gt; 2 01 type_one      2 drug_type   _e3</span>
 <span class="co">#&gt; 3 02 type_two      1 drug_type   _e2</span>
 <span class="co">#&gt; 4 02 type_two      1 drug_type   _e3</span>
 <span class="co">#&gt; 5 03 type_one      2 drug_type   _e2</span>
-<span class="co">#&gt; 6 03 type_one      1 drug_type   _e3</span></pre></body></html></div>
+<span class="co">#&gt; 6 03 type_one      1 drug_type   _e3</span></pre></div>
 </div>
 <div id="vital-functions" class="section level3">
 <h3 class="hasAnchor">
@@ -294,18 +297,19 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">vf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"vf.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">vf</span>, <span class="no">id</span>, <span class="st">"VSTEST_HR"</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="va">vf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vf.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">vf</span>, <span class="va">id</span>, <span class="st">"VSTEST_HR"</span><span class="op">)</span>
 
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
-<span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   id VSTEST_HR VSTEST_RESP IDVAR VISIT</span>
 <span class="co">#&gt; 1 01        60          12    hr   _e2</span>
 <span class="co">#&gt; 2 01        65          13    hr   _e3</span>
 <span class="co">#&gt; 3 02        70          15    hr   _e2</span>
 <span class="co">#&gt; 4 02        71          14    hr   _e3</span>
 <span class="co">#&gt; 5 03        76          16    hr   _e2</span>
-<span class="co">#&gt; 6 03        86          18    hr   _e3</span></pre></body></html></div>
+<span class="co">#&gt; 6 03        86          18    hr   _e3</span></pre></div>
 </div>
 <div id="adverse-events" class="section level3">
 <h3 class="hasAnchor">
@@ -374,11 +378,12 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ae</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"ae.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dmtools"</span>)
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span>(<span class="no">ae</span>, <span class="no">id</span>, <span class="st">"LBNRIND"</span>, <span class="kw">common_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ae_yn_e5"</span>, <span class="st">"ae_desc_e5"</span>), <span class="kw">extra</span> <span class="kw">=</span> <span class="st">"LBTEST"</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="va">ae</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"ae.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">ae</span>, <span class="va">id</span>, <span class="st">"LBNRIND"</span>, common_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ae_yn_e5"</span>, <span class="st">"ae_desc_e5"</span><span class="op">)</span>, extra <span class="op">=</span> <span class="st">"LBTEST"</span><span class="op">)</span>
 
-<span class="no">obj_short</span> <span class="kw">&lt;-</span> <span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span>(<span class="no">df</span>)
-<span class="no">obj_short</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span>()
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   id ae_yn_e5   ae_desc_e5 LBORRES LBNRIND LBCLSIG    IDVAR VISIT</span>
 <span class="co">#&gt; 1 01       no         &lt;NA&gt;      32    norm    &lt;NA&gt; ast_norm   _e2</span>
 <span class="co">#&gt; 2 01       no         &lt;NA&gt;      36    norm    &lt;NA&gt; ast_norm   _e3</span>
@@ -392,7 +397,7 @@
 <span class="co">#&gt; 3 Aspartate transaminase</span>
 <span class="co">#&gt; 4 Aspartate transaminase</span>
 <span class="co">#&gt; 5 Aspartate transaminase</span>
-<span class="co">#&gt; 6 Aspartate transaminase</span></pre></body></html></div>
+<span class="co">#&gt; 6 Aspartate transaminase</span></pre></div>
 </div>
 </div>
   </div>
@@ -412,7 +417,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

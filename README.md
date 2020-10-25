@@ -236,7 +236,7 @@ excel table like in the example.
     #> 1    norm          5.5         norm
     #> 2    norm         31.0         norm
 
-    # Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
+    # Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the RES_TYPE_NUM
     obj_lab %>% choose_test("mis")
     #>   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES
     #> 1 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0     < 5
