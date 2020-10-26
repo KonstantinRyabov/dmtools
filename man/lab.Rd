@@ -12,9 +12,7 @@ lab(
   normal,
   abnormal,
   is_post = T,
-  clsig = NULL,
-  site = NA,
-  name_to_find = "LBNDIND"
+  name_to_find = "LBNRIND"
 )
 }
 \arguments{
@@ -32,11 +30,7 @@ lab(
 
 \item{is_post}{A logical scalar, default is TRUE. True is postfix, otherwise, prefix.}
 
-\item{clsig}{A clinical significant estimate, for example, "CLISIG".}
-
-\item{site}{A site number, default: NA.}
-
-\item{name_to_find}{A character scalar. For search prefixes or postfixes, default is "LBNDIND".}
+\item{name_to_find}{A character scalar. For search prefixes or postfixes, default is "LBNRIND".}
 }
 \value{
 The object lab.
@@ -46,6 +40,6 @@ Create object lab
 }
 \examples{
 obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, 1, 2)
-obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "NORMAL", "NOCLISIG", clsig = "CLISIG")
+obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "NORMAL", "ABNORMAL")
 obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "norm", "no", FALSE)
 }

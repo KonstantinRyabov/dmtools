@@ -25,7 +25,7 @@ date <- function(file, id, get_visit, get_date = dplyr::contains, str_date = "DA
   obj
 }
 
-#' Filter final result
+#' Filter the final result of the object date
 #'
 #' @param obj An object for calculation. Class date.
 #' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
@@ -117,12 +117,12 @@ find_colnames.date <- function(obj, dataset, row_file) {
   do.call(rbind, lapply(
     dates,
     function(date) {
-      run_tests(obj, dataset, row_file, date)
+      to_long(obj, dataset, row_file, date)
     }
   ))
 }
 
-#' Run test
+#' Reshape the dataset to a long view
 #'
 #' @param dataset A data frame. Class date.
 #' @param obj An object for validation.
@@ -131,7 +131,7 @@ find_colnames.date <- function(obj, dataset, row_file) {
 #'
 #' @return A data frame. Result of the date's validation.
 #'
-run_tests.date <- function(obj, dataset, row_file, date) {
+to_long.date <- function(obj, dataset, row_file, date) {
   id <- obj[["id"]]
 
   # params of visit

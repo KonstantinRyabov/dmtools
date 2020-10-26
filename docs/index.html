@@ -19,10 +19,8 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Tools for Clinical Data Management">
 <meta property="og:description" content="For checking the dataset from EDC(Electronic Data Capture) in clinical trials.
-             dmtools can check laboratory, dates and rename the dataset.
-             Laboratory - does the investigator correctly estimate the laboratory analyzes?
-             Dates - do all dates correspond to the protocols timeline?
-             If the clinical trial has different lab reference ranges, dmtools' also can help.">
+             dmtools reshape your dataset in a tidy view and check events.
+             You can reshape the dataset and choose your target to check, for example, the laboratory reference range.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -42,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dmtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6</span>
       </span>
     </div>
 
@@ -119,22 +117,17 @@
 <p>For checking the dataset from EDC in clinical trials. Notice, your dataset should have a postfix( _V1 ) or a prefix( V1_ ) in the names of variables. Column names should be unique.</p>
 <ul>
 <li>
-<code><a href="reference/date.html">date()</a></code> - create object date, for check dates in the dataset</li>
+<code><a href="reference/date.html">date()</a></code> - create object date to check dates in the dataset</li>
 <li>
-<code><a href="reference/lab.html">lab()</a></code> - create object lab, for check lab results</li>
+<code><a href="reference/lab.html">lab()</a></code> - create object lab to check lab reference range</li>
 <li>
-<code><a href="reference/short.html">short()</a></code> - create object short to transform the dataset(different events in one column)</li>
+<code><a href="reference/short.html">short()</a></code> - create object short to reshape the dataset in a tidy view.</li>
 <li>
 <code><a href="reference/check.html">check()</a></code> - check objects</li>
 <li>
 <code><a href="reference/get_result.html">get_result()</a></code> - get the final result of object</li>
 <li>
 <code><a href="reference/choose_test.html">choose_test()</a></code> - filter the final result of <code><a href="reference/check.html">check()</a></code>
-</li>
-<li>
-<code><a href="reference/check_sites.html">check_sites()</a></code> - check objects of different sites</li>
-<li>
-<code><a href="reference/test_sites.html">test_sites()</a></code> - filter the final result of <code><a href="reference/check_sites.html">check_sites()</a></code>
 </li>
 <li>
 <code><a href="reference/rename_dataset.html">rename_dataset()</a></code> - rename the dataset</li>
@@ -152,7 +145,7 @@
 </li>
 <li>LBTEST - What was the lab test name? (can be any convenient name for you)</li>
 <li>LBORRES* - What was the result of the lab test?</li>
-<li>LBNDIND* - How <br><span class="math display"><em>d</em><em>i</em><em>d</em>/<em>d</em><em>o</em></span><br> the reported values compare within the <br><span class="math display"><em>r</em><em>e</em><em>f</em><em>e</em><em>r</em><em>e</em><em>n</em><em>c</em><em>e</em>/<em>n</em><em>o</em><em>r</em><em>m</em><em>a</em><em>l</em>/<em>e</em><em>x</em><em>p</em><em>e</em><em>c</em><em>t</em><em>e</em><em>d</em></span><br> range?</li>
+<li>LBNRIND* - How <br><span class="math display"><em>d</em><em>i</em><em>d</em>/<em>d</em><em>o</em></span><br> the reported values compare within the <br><span class="math display"><em>r</em><em>e</em><em>f</em><em>e</em><em>r</em><em>e</em><em>n</em><em>c</em><em>e</em>/<em>n</em><em>o</em><em>r</em><em>m</em><em>a</em><em>l</em>/<em>e</em><em>x</em><em>p</em><em>e</em><em>c</em><em>t</em><em>e</em><em>d</em></span><br> range?</li>
 <li>LBORNRLO - What was the lower limit of the reference range for this lab test, &gt;=</li>
 <li>LBORNRHI - What was the high limit of the reference range for this lab test, &lt;=</li>
 </ul>
@@ -178,7 +171,7 @@ LBTEST
 LBORRES
 </th>
 <th style="text-align: left;">
-LBNDIND
+LBNRIND
 </th>
 <th style="text-align: left;">
 LBORNRLO
@@ -374,10 +367,10 @@ norm
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co"># ok - analysis, which has a correct estimate of the result</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"ok"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1 01  19   f                Glucose    GLUC   _V1      3.9      5.9     5.5</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0      30</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3 03  22   m Aspartate transaminase     AST   _V2      0.0     42.0      31</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1 01  19   f                Glucose     GLUC   _V1      3.9      5.9     5.5</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   _V2      0.0     39.0      30</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3 03  22   m Aspartate transaminase      AST   _V2      0.0     42.0      31</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 1    norm          5.5         norm</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 2    norm         30.0         norm</span></span>
@@ -385,19 +378,19 @@ norm
 <span id="cb2-16"><a href="#cb2-16"></a></span>
 <span id="cb2-17"><a href="#cb2-17"></a><span class="co"># mis - analysis, which has an incorrect estimate of the result</span></span>
 <span id="cb2-18"><a href="#cb2-18"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"mis"</span>)</span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; 1 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; 2 03  22   m                Glucose    GLUC   _V1      3.9      5.9     9.7</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; 1 02  20   m Aspartate transaminase      AST   _V2      0.0     42.0      48</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; 2 03  22   m                Glucose     GLUC   _V1      3.9      5.9     9.7</span></span>
 <span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
 <span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; 1    norm         48.0           no</span></span>
 <span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; 2    norm          9.7           no</span></span>
 <span id="cb2-25"><a href="#cb2-25"></a></span>
 <span id="cb2-26"><a href="#cb2-26"></a><span class="co"># skip - analysis, which has an empty value of the estimate</span></span>
 <span id="cb2-27"><a href="#cb2-27"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"skip"</span>)</span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt;   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; 1 02  20   m Glucose    GLUC   _V1      3.9      5.9     4.1    &lt;NA&gt;</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt;   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; 1 02  20   m Glucose     GLUC   _V1      3.9      5.9     4.1    &lt;NA&gt;</span></span>
 <span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; 1          4.1         &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; 1          4.1         norm</span></span></code></pre></div>
 <table class="table">
 <caption>
 strange_dataset
@@ -502,29 +495,29 @@ norm
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co"># dmtools can understand the value with a comma like 6,6 </span></span>
 <span id="cb3-5"><a href="#cb3-5"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"ok"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1 01  19   f                Glucose    GLUC   _V1      3.9      5.9     5,5</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2 03  22   m Aspartate transaminase     AST   _V2      0.0     42.0      31</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1 01  19   f                Glucose     GLUC   _V1      3.9      5.9     5,5</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2 03  22   m Aspartate transaminase      AST   _V2      0.0     42.0      31</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 1    norm          5.5         norm</span></span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 2    norm         31.0         norm</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Notice, if dmtools can't understand the value of lab_vals e.g. &lt; 5, it puts Inf in the RES_TYPE_NUM</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"mis"</span>)</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; 1 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0     &lt; 5</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; 2 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; 3 03  22   m                Glucose    GLUC   _V1      3.9      5.9     9,7</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; 1 01  19   f Aspartate transaminase      AST   _V2      0.0     39.0     &lt; 5</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; 2 02  20   m Aspartate transaminase      AST   _V2      0.0     42.0      48</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; 3 03  22   m                Glucose     GLUC   _V1      3.9      5.9     9,7</span></span>
 <span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
 <span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; 1    norm          Inf           no</span></span>
 <span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; 2    norm         48.0           no</span></span>
 <span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; 3    norm          9.7           no</span></span>
 <span id="cb3-23"><a href="#cb3-23"></a></span>
 <span id="cb3-24"><a href="#cb3-24"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"skip"</span>)</span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt;   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; 1 02  20   m Glucose    GLUC   _V1      3.9      5.9     4,1    &lt;NA&gt;</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt;   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; 1 02  20   m Glucose     GLUC   _V1      3.9      5.9     4,1    &lt;NA&gt;</span></span>
 <span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; 1          4.1         &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; 1          4.1         norm</span></span></code></pre></div>
 </div>
 </div>
   </div>

@@ -7,16 +7,14 @@
 #' @param sex A column name of the subject sex in the dataset, without quotes.
 #' @param normal A normal estimate, for example, "NORMAL".
 #' @param abnormal An abnormal estimate, for example, "ABNORMAL".
-#' @param clsig A clinical significant estimate, for example, "CLISIG".
-#' @param site A site number, default: NA.
-#' @param name_to_find A character scalar. For search prefixes or postfixes, default is "LBNDIND".
+#' @param name_to_find A character scalar. For search prefixes or postfixes, default is "LBNRIND".
 #'
 #' @return The object lab.
 #' @export
 #'
 #' @examples
 #' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, 1, 2)
-#' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "NORMAL", "NOCLISIG", clsig = "CLISIG")
+#' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "NORMAL", "ABNORMAL")
 #' obj_lab <- lab("lab_refer.xlsx", ID, AGE, SEX, "norm", "no", FALSE)
 lab <- function(file,
                 id,
@@ -25,9 +23,7 @@ lab <- function(file,
                 normal,
                 abnormal,
                 is_post = T,
-                clsig = NULL,
-                site = NA,
-                name_to_find = "LBNDIND") {
+                name_to_find = "LBNRIND") {
   obj <- list(
     file = file,
     id = dplyr::enquo(id),
@@ -36,8 +32,6 @@ lab <- function(file,
     normal = normal,
     abnormal = abnormal,
     is_post = is_post,
-    clsig = clsig,
-    site = site,
     name_to_find = name_to_find,
     bond = "_"
   )
@@ -46,7 +40,7 @@ lab <- function(file,
   obj
 }
 
-#' Filter final result
+#' Filter the final result of the object lab
 #'
 #' @param obj An object. Class lab.
 #' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
@@ -115,7 +109,7 @@ choose_test.lab <- function(obj, test = "mis", group_id = T) {
   result
 }
 
-#' Run tests
+#' Reshape the dataset to a long view
 #'
 #' @param dataset A data frame.
 #' @param obj An object. Class lab.
@@ -124,7 +118,7 @@ choose_test.lab <- function(obj, test = "mis", group_id = T) {
 #'
 #' @return A data frame. The part of the final result.
 #'
-run_tests.lab <- function(obj, dataset, row_file, part) {
+to_long.lab <- function(obj, dataset, row_file, part) {
   # object's parameters
   id <- obj[["id"]]
   age <- obj[["age"]]
@@ -133,25 +127,16 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
   abnormal <- obj[["abnormal"]]
   is_post <- obj[["is_post"]]
   obj_cl <- obj[["clsig"]]
-  lbclsig <- ifelse(is.null(obj_cl), abnormal, obj_cl)
 
   # laboratory's parameters
   lbtest <- row_file$LBTEST
   lbtestcd <- row_file$LBORRES
-  lbnrind <- row_file$LBNDIND
+  lbnrind <- row_file$LBNRIND
   lbornrlo <- as.double(row_file$LBORNRLO)
   lbornrhi <- as.double(row_file$LBORNRHI)
   age_low <- as.double(row_file$AGELOW)
   age_high <- as.double(row_file$AGEHIGH)
   pattern_sex <- paste0("^", row_file$SEX, "$")
-
-  if (age_low > age_high) {
-    warning("AGELOW > AGEHIGH in ", lbtest)
-  }
-
-  if (lbornrlo > lbornrhi) {
-    warning("LBORNRLO > LBORNRHI in ", lbtest)
-  }
 
   # laboratory's parameter with prefix or postfix
   lborres <- ifelse(is_post, paste0(lbtestcd, part), paste0(part, lbtestcd))
@@ -166,30 +151,14 @@ run_tests.lab <- function(obj, dataset, row_file, part) {
 
   # validate by reference values
   result <- by_age_sex %>%
-    dplyr::mutate(LBTESCD = lbtestcd, LBTEST = lbtest, VISIT = part, LBORNRLO = lbornrlo, LBORNRHI = lbornrhi) %>%
-    dplyr::select(!!id, !!age, !!sex, .data$LBTEST, .data$LBTESCD, .data$VISIT, .data$LBORNRLO, .data$LBORNRHI, !!lborres, !!lbnrind) %>%
+    dplyr::mutate(LBTESTCD = lbtestcd, LBTEST = lbtest, VISIT = part, LBORNRLO = lbornrlo, LBORNRHI = lbornrhi) %>%
+    dplyr::select(!!id, !!age, !!sex, .data$LBTEST, .data$LBTESTCD, .data$VISIT, .data$LBORNRLO, .data$LBORNRHI, !!lborres, !!lbnrind) %>%
     dplyr::mutate(RES_TYPE_NUM = to_dbl(.data[[lborres]])) %>%
-    dplyr::mutate(IND_EXPECTED = create_norm(.data$RES_TYPE_NUM, lbornrlo, lbornrhi, .data[[lbnrind]], normal, abnormal, lbclsig)) %>%
+    dplyr::mutate(IND_EXPECTED = ifelse(dplyr::between(.data$RES_TYPE_NUM, lbornrlo, lbornrhi), normal, abnormal)) %>%
     dplyr::mutate(IS_RIGHT = .data$IND_EXPECTED == .data[[lbnrind]]) %>%
     dplyr::rename(!!vars_rename)
 
   result
 }
 
-#' Estimating laboratory values
-#'
-#' @param vals A double vector. The laboratory values.
-#' @param low A double scalar. The minimum.
-#' @param high double scalar. The maximum.
-#' @param ds_norm An estimate of the laboratory values from the dataset.
-#' @param normal An option for the normal estimate, for example, "NORMAL".
-#' @param abnormal An option for the abnormal estimate, for example, "ABNORMAL".
-#' @param clsig An option for the clinical significant estimate, for example, "CLISIG".
-#'
-#' @return A vector with the auto estimate.
-#'
-create_norm <- function(vals, low, high, ds_norm, normal, abnormal, clsig) {
-  temp_norm <- ifelse(dplyr::between(vals, low, high), normal, abnormal)
-  temp_cl <- ifelse(dplyr::between(vals, low, high), normal, clsig)
-  ifelse(temp_cl == ds_norm, temp_cl, temp_norm)
-}
+

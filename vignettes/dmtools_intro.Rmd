@@ -25,7 +25,7 @@ Notice, your dataset should have a postfix( \_V1 ) or a prefix( V1\_ ) in the na
 
 * laboratory - Does the investigator correctly estimate the laboratory analyzes?
 * dates - Do all dates correspond to the protocol's timeline?
-* sites - If the clinical trial has different lab reference ranges.
+* rename the dataset
 
 ## Usage
 
@@ -38,7 +38,7 @@ For laboratory check, you need to create the excel table like in the example.
 * SEX - for both sex, use `|`
 * LBTEST - What was the lab test name? (can be any convenient name for you)
 * LBORRES* - What was the result of the lab test?
-* LBNDIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBNRIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
 * LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
 * LBORNRHI - What was the high limit of the reference range for this lab test, <=
 
@@ -153,70 +153,6 @@ obj_date %>% get_result()
 `dplyr::contains` - A function, which select necessary visit or event e.g. dplyr::start_with, dplyr::contains. It works like `df %>% select(contains("E1"))`. You also can use `dplyr::start_with`, works like `df %>% select(start_with("V1"))`
 
 `dplyr::matches` - A function, which select dates from necessary visit e.g. dplyr::matches, dplyr::contains. It works like `visit_one %>% select(contains("DAT"))`, default: `dplyr::contains()`
-
-### sites
-
-If the clinical trial has different sites and lab reference ranges.
-
-```{r refer_sites, echo = FALSE, result = 'asis'}
-refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
-refers_s01 <- readxl::read_xlsx(refs_s01)
-kable(refers_s01, caption = "lab reference ranges s01")
-
-refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
-refers_s02 <- readxl::read_xlsx(refs_s02)
-kable(refers_s02, caption = "lab reference ranges s02")
-```
-
-```{r dataset_sites, echo = FALSE, result = 'asis'}
-SITE <- c("site 01", "site 02")
-ID <- c("01", "02")
-AGE <- c("19", "20")
-SEX <- c("f", "m")
-GLUC_V1 <- c("5.5", "4.1")
-GLUC_IND_V1 <- c("norm", "no")
-AST_V2 <- c("30", "48")
-AST_IND_V2 <- c(NA, "norm")
-
-df <- data.frame(
-  SITE, ID, AGE, SEX,
-  GLUC_V1, GLUC_IND_V1,
-  AST_V2, AST_IND_V2,
-  stringsAsFactors = F
-)
-
-kable(df, caption = "dataset")
-```
-
-``` {r sites}
-refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
-refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
-
-s01_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01")
-s02_lab <- lab(refs_s02, ID, AGE, SEX, "norm", "no", site = "site 02")
-
-labs <- list(s01_lab, s02_lab)
-labs <- labs %>% check_sites(df, SITE)
-
-# mis - analysis, which has an incorrect estimate of the result
-labs %>% test_sites(function (lab) choose_test(lab, "mis"))
-
-# ok - analysis, which has a correct estimate of the result
-labs %>% test_sites(function (lab) choose_test(lab, "ok")) 
-
-# skip - analysis, which has an empty value of the estimate
-labs %>% test_sites(function (lab) choose_test(lab, "skip"))
-
-# all analyzes
-labs %>% test_sites(function (lab) get_result(lab))
-
-# you can combine sites, use |
-comb_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01|site 02")
-comb_labs <- list(comb_lab)
-
-comb_labs <- comb_labs %>% check_sites(df, SITE)
-comb_labs %>% test_sites(function (lab) choose_test(lab, "mis"))
-```
 
 ### rename
 

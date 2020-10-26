@@ -31,14 +31,12 @@ library(dmtools)
 For checking the dataset from EDC in clinical trials. 
 Notice, your dataset should have a postfix( \_V1 ) or a prefix( V1\_ ) in the names of variables. Column names should be unique.
 
-* `date()` - create object date, for check dates in the dataset
-* `lab()` - create object lab, for check lab results
-* `short()` - create object short to transform the dataset(different events in one column)
+* `date()` - create object date to check dates in the dataset
+* `lab()` - create object lab to check lab reference range
+* `short()` - create object short to reshape the dataset in a tidy view.
 * `check()` - check objects
 * `get_result()` - get the final result of object
 * `choose_test()` - filter the final result of `check()`
-* `check_sites()` - check objects of different sites
-* `test_sites()` - filter the final result of `check_sites()`
 * `rename_dataset()` - rename the dataset
 
 ## Usage
@@ -50,7 +48,7 @@ For example, you want to check laboratory values, you need to create the excel t
 * SEX - for both sex, use `|`
 * LBTEST - What was the lab test name? (can be any convenient name for you)
 * LBORRES* - What was the result of the lab test?
-* LBNDIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBNRIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
 * LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
 * LBORNRHI - What was the high limit of the reference range for this lab test, <=
 

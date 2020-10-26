@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • dmtools</title>
+<title>Reshape the dataset to a long view — to_long.lab • dmtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Reshape the dataset to a long view — to_long.lab" />
+<meta property="og:description" content="Reshape the dataset to a long view" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -136,130 +137,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/KonstantinRyabov/dmtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Reshape the dataset to a long view</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KonstantinRyabov/dmtools/blob/master/R/lab.R'><code>R/lab.R</code></a></small>
+    <div class="hidden name"><code>to_long.lab.Rd</code></div>
     </div>
 
-    <div id="dmtools-025" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.5">
-<a href="#dmtools-025" class="anchor"></a>dmtools 0.2.5<small> 2020-09-01 </small>
-</h1>
-<ul>
-<li>add functions for MedDRA API</li>
-<li>
-<code><a href="../reference/short.html">short()</a></code> don’t stop if an error happens</li>
-<li>CDASH</li>
-<li>delete <code>wbc()</code>
-</li>
-</ul>
-</div>
-    <div id="dmtools-024" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.4">
-<a href="#dmtools-024" class="anchor"></a>dmtools 0.2.4<small> 2020-05-12 </small>
-</h1>
-<ul>
-<li>add <code><a href="../reference/short.html">short()</a></code>
-</li>
-<li>add <code><a href="../reference/get_result.html">get_result()</a></code>
-</li>
-<li>add parameter <code>name_to_find</code> for <code><a href="../reference/lab.html">lab()</a></code>, <code>wbc()</code>
-</li>
-<li>delete parameter <code>test</code> and add paramater <code>func</code> for <code>test_sites()</code>
-</li>
-<li>add example for <code><a href="../reference/rename_dataset.html">rename_dataset()</a></code>
-</li>
-</ul>
-</div>
-    <div id="dmtools-023" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.3">
-<a href="#dmtools-023" class="anchor"></a>dmtools 0.2.3<small> Unreleased </small>
-</h1>
-<ul>
-<li>add <code>test_sites</code> for choose test in the different sites</li>
-<li>add <code>get_date</code> for the date object</li>
-</ul>
-<div id="bug-fixes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>wbc checks non-numeric arguments</li>
-</ul>
-</div>
-</div>
-    <div id="dmtools-022" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.2">
-<a href="#dmtools-022" class="anchor"></a>dmtools 0.2.2<small> Unreleased </small>
-</h1>
-<ul>
-<li>add opportunity for check sites</li>
-<li>delete depended and filtered columns</li>
-</ul>
-<div id="bug-fixes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>parameter for clinical significant estimate</li>
-</ul>
-</div>
-</div>
-    <div id="dmtools-021" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.1">
-<a href="#dmtools-021" class="anchor"></a>dmtools 0.2.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>add &lt;- -&gt; for dates, which is out</li>
-<li>add function for calculation WBCs count</li>
-<li>OOP structure</li>
-</ul>
-</div>
-    <div id="dmtools-014" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.4">
-<a href="#dmtools-014" class="anchor"></a>dmtools 0.1.4<small> Unreleased </small>
-</h1>
-<ul>
-<li>throw error if the final result result is empty</li>
-<li>throw warning if don`t find item in file</li>
-</ul>
-<div id="bug-fixes-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>parameter for sex: substring in regex e.g. “male” in “female”</li>
-</ul>
-</div>
-</div>
-    <div id="dmtools-013" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.3">
-<a href="#dmtools-013" class="anchor"></a>dmtools 0.1.3<small> Unreleased </small>
-</h1>
-<ul>
-<li>add a parameter for the clinical significant estimate</li>
-</ul>
-</div>
-    <div id="dmtools-012" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.2">
-<a href="#dmtools-012" class="anchor"></a>dmtools 0.1.2<small> Unreleased </small>
-</h1>
-<ul>
-<li>add a function for dates validation</li>
-</ul>
-</div>
-    <div id="dmtools-011" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.1">
-<a href="#dmtools-011" class="anchor"></a>dmtools 0.1.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>first public release of the package</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Reshape the dataset to a long view</p>
+    </div>
 
+    <pre class="usage"><span class='co'># S3 method for lab</span>
+<span class='fu'><a href='to_long.html'>to_long</a></span><span class='op'>(</span><span class='va'>obj</span>, <span class='va'>dataset</span>, <span class='va'>row_file</span>, <span class='va'>part</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>obj</th>
+      <td><p>An object. Class lab.</p></td>
+    </tr>
+    <tr>
+      <th>dataset</th>
+      <td><p>A data frame.</p></td>
+    </tr>
+    <tr>
+      <th>row_file</th>
+      <td><p>A data frame. A data frame with parameters.</p></td>
+    </tr>
+    <tr>
+      <th>part</th>
+      <td><p>A character scalar. Prefixes or postfixes.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame. The part of the final result.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
