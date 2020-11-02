@@ -61,15 +61,15 @@ kable(refers, caption = "lab reference ranges")
 ID <- c("01", "02", "03")
 AGE <- c("19", "20", "22")
 SEX <- c("f", "m", "m")
-GLUC_V1 <- c("5.5", "4.1", "9.7")
-GLUC_IND_V1 <- c("norm", NA, "norm")
-AST_V2 <- c("30", "48", "31")
-AST_IND_V2 <- c("norm", "norm", "norm")
+V1_GLUC <- c("5.5", "4.1", "9.7")
+V1_GLUC_IND <- c("norm", NA, "norm")
+V2_AST <- c("30", "48", "31")
+V2_AST_IND <- c("norm", "norm", "norm")
 
 df <- data.frame(
   ID, AGE, SEX,
-  GLUC_V1, GLUC_IND_V1,
-  AST_V2, AST_IND_V2,
+  V1_GLUC, V1_GLUC_IND,
+  V2_AST, V2_AST_IND,
   stringsAsFactors = F
 )
 
@@ -79,8 +79,9 @@ kable(df, caption = "dataset")
 
 ```{r lab}
 # "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset
+# parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables
 refs <- system.file("labs_refer.xlsx", package = "dmtools")
-obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no")
+obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no", is_post = FALSE)
 obj_lab <- obj_lab %>% check(df)
 
 # ok - analysis, which has a correct estimate of the result

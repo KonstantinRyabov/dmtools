@@ -1,3 +1,9 @@
+# dmtools 0.2.6
+* fixed LBNDIND -> LBNRIND
+* check if age or sex is null in `lab()`
+* delete `check_sites()` and `test_sites()`
+* delete parameter `clsig` in `lab()` 
+
 # dmtools 0.2.5
 
 * add functions for MedDRA API

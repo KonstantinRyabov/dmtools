@@ -192,10 +192,10 @@
 <th align="left">ID</th>
 <th align="left">AGE</th>
 <th align="left">SEX</th>
-<th align="left">GLUC_V1</th>
-<th align="left">GLUC_IND_V1</th>
-<th align="left">AST_V2</th>
-<th align="left">AST_IND_V2</th>
+<th align="left">V1_GLUC</th>
+<th align="left">V1_GLUC_IND</th>
+<th align="left">V2_AST</th>
+<th align="left">V2_AST_IND</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -229,16 +229,17 @@
 </table>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset</span>
+<span class="co"># parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables</span>
 <span class="va">refs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"labs_refer.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
-<span class="va">obj_lab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span><span class="op">(</span><span class="va">refs</span>, <span class="va">ID</span>, <span class="va">AGE</span>, <span class="va">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span><span class="op">)</span>
+<span class="va">obj_lab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span><span class="op">(</span><span class="va">refs</span>, <span class="va">ID</span>, <span class="va">AGE</span>, <span class="va">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, is_post <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">obj_lab</span> <span class="op">&lt;-</span> <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 
 <span class="co"># ok - analysis, which has a correct estimate of the result</span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span><span class="op">(</span><span class="st">"ok"</span><span class="op">)</span>
 <span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span>
-<span class="co">#&gt; 1 01  19   f                Glucose     GLUC   _V1      3.9      5.9     5.5</span>
-<span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   _V2      0.0     39.0      30</span>
-<span class="co">#&gt; 3 03  22   m Aspartate transaminase      AST   _V2      0.0     42.0      31</span>
+<span class="co">#&gt; 1 01  19   f                Glucose     GLUC   V1_      3.9      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   V2_      0.0     39.0      30</span>
+<span class="co">#&gt; 3 03  22   m Aspartate transaminase      AST   V2_      0.0     42.0      31</span>
 <span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span>
 <span class="co">#&gt; 1    norm          5.5         norm</span>
 <span class="co">#&gt; 2    norm         30.0         norm</span>
@@ -247,8 +248,8 @@
 <span class="co"># mis - analysis, which has an incorrect estimate of the result</span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span><span class="op">(</span><span class="st">"mis"</span><span class="op">)</span>
 <span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span>
-<span class="co">#&gt; 1 02  20   m Aspartate transaminase      AST   _V2      0.0     42.0      48</span>
-<span class="co">#&gt; 2 03  22   m                Glucose     GLUC   _V1      3.9      5.9     9.7</span>
+<span class="co">#&gt; 1 02  20   m Aspartate transaminase      AST   V2_      0.0     42.0      48</span>
+<span class="co">#&gt; 2 03  22   m                Glucose     GLUC   V1_      3.9      5.9     9.7</span>
 <span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span>
 <span class="co">#&gt; 1    norm         48.0           no</span>
 <span class="co">#&gt; 2    norm          9.7           no</span>
@@ -256,19 +257,19 @@
 <span class="co"># skip - analysis, which has an empty value of the estimate</span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span><span class="op">(</span><span class="st">"skip"</span><span class="op">)</span>
 <span class="co">#&gt;   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 02  20   m Glucose     GLUC   _V1      3.9      5.9     4.1    &lt;NA&gt;</span>
+<span class="co">#&gt; 1 02  20   m Glucose     GLUC   V1_      3.9      5.9     4.1    &lt;NA&gt;</span>
 <span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span>
 <span class="co">#&gt; 1          4.1         norm</span>
 
 <span class="co"># all analyzes </span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span>
-<span class="co">#&gt; 1 01  19   f                Glucose     GLUC   _V1      3.9      5.9     5.5</span>
-<span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   _V2      0.0     39.0      30</span>
-<span class="co">#&gt; 3 02  20   m                Glucose     GLUC   _V1      3.9      5.9     4.1</span>
-<span class="co">#&gt; 4 02  20   m Aspartate transaminase      AST   _V2      0.0     42.0      48</span>
-<span class="co">#&gt; 5 03  22   m                Glucose     GLUC   _V1      3.9      5.9     9.7</span>
-<span class="co">#&gt; 6 03  22   m Aspartate transaminase      AST   _V2      0.0     42.0      31</span>
+<span class="co">#&gt; 1 01  19   f                Glucose     GLUC   V1_      3.9      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   V2_      0.0     39.0      30</span>
+<span class="co">#&gt; 3 02  20   m                Glucose     GLUC   V1_      3.9      5.9     4.1</span>
+<span class="co">#&gt; 4 02  20   m Aspartate transaminase      AST   V2_      0.0     42.0      48</span>
+<span class="co">#&gt; 5 03  22   m                Glucose     GLUC   V1_      3.9      5.9     9.7</span>
+<span class="co">#&gt; 6 03  22   m Aspartate transaminase      AST   V2_      0.0     42.0      31</span>
 <span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED IS_RIGHT</span>
 <span class="co">#&gt; 1    norm          5.5         norm     TRUE</span>
 <span class="co">#&gt; 2    norm         30.0         norm     TRUE</span>

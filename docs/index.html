@@ -406,16 +406,16 @@ AGE
 SEX
 </th>
 <th style="text-align: left;">
-GLUC_V1
+V1_GLUC
 </th>
 <th style="text-align: left;">
-GLUC_IND_V1
+V1_GLUC_IND
 </th>
 <th style="text-align: left;">
-AST_V2
+V2_AST
 </th>
 <th style="text-align: left;">
-AST_IND_V2
+V2_AST_IND
 </th>
 </tr></thead>
 <tbody>
@@ -491,33 +491,35 @@ norm
 </tbody>
 </table>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># dmtools can work with the dataset as strange_df</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>obj_lab &lt;-<span class="st"> </span>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check</span>(strange_df)</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># dmtools can understand the value with a comma like 6,6 </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"ok"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1 01  19   f                Glucose     GLUC   _V1      3.9      5.9     5,5</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2 03  22   m Aspartate transaminase      AST   _V2      0.0     42.0      31</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 1    norm          5.5         norm</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 2    norm         31.0         norm</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Notice, if dmtools can't understand the value of lab_vals e.g. &lt; 5, it puts Inf in the RES_TYPE_NUM</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"mis"</span>)</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; 1 01  19   f Aspartate transaminase      AST   _V2      0.0     39.0     &lt; 5</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; 2 02  20   m Aspartate transaminase      AST   _V2      0.0     42.0      48</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; 3 03  22   m                Glucose     GLUC   _V1      3.9      5.9     9,7</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; 1    norm          Inf           no</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; 2    norm         48.0           no</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; 3    norm          9.7           no</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a></span>
-<span id="cb3-24"><a href="#cb3-24"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"skip"</span>)</span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt;   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; 1 02  20   m Glucose     GLUC   _V1      3.9      5.9     4,1    &lt;NA&gt;</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; 1          4.1         norm</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>obj_lab &lt;-<span class="st"> </span><span class="kw">lab</span>(refs, ID, AGE, SEX, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="dt">is_post =</span> F)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>obj_lab &lt;-<span class="st"> </span>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check</span>(strange_df)</span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co"># dmtools can understand the value with a comma like 6,6 </span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"ok"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 1 01  19   f                Glucose     GLUC   V1_      3.9      5.9     5,5</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 2 03  22   m Aspartate transaminase      AST   V2_      0.0     42.0      31</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; 1    norm          5.5         norm</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 2    norm         31.0         norm</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co"># Notice, if dmtools can't understand the value of lab_vals e.g. &lt; 5, it puts Inf in the RES_TYPE_NUM</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"mis"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; 1 01  19   f Aspartate transaminase      AST   V2_      0.0     39.0     &lt; 5</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; 2 02  20   m Aspartate transaminase      AST   V2_      0.0     42.0      48</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; 3 03  22   m                Glucose     GLUC   V1_      3.9      5.9     9,7</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; 1    norm          Inf           no</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; 2    norm         48.0           no</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; 3    norm          9.7           no</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26"></a>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">choose_test</span>(<span class="st">"skip"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt;   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; 1 02  20   m Glucose     GLUC   V1_      3.9      5.9     4,1    &lt;NA&gt;</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; 1          4.1         norm</span></span></code></pre></div>
 </div>
 </div>
   </div>

@@ -114,7 +114,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>The <code><a href="../reference/short.html">short()</a></code> can be useful for validation, if you need to transform the dataset and create one column for a variable with different events. You also need to create the excel document, where the name and number of columns can be any. If you have common columns, pass them to a parameter <code>common_cols</code> of <code><a href="../reference/short.html">short()</a></code>. Notice, don’t write common columns in the excel document. If you have the extra information e.g. the understandable name of an analysis, pass it to a parameter <code>extra</code>.</p>
+<p>The <code><a href="../reference/short.html">short()</a></code> can be useful for validation, if you need to reshape the dataset. You also need to create the excel document, where the name and number of columns can be any. If you have common columns, pass them to a parameter <code>common_cols</code> of <code><a href="../reference/short.html">short()</a></code>. Notice, don’t write common columns in the excel document. If you have the extra information e.g. the understandable name of an analysis, pass it to a parameter <code>extra</code>.</p>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -207,10 +207,10 @@
 <caption>dataset</caption>
 <thead><tr class="header">
 <th align="left">id</th>
-<th align="left">drug_type_e2</th>
-<th align="right">drug_amount_e2</th>
-<th align="left">drug_type_e3</th>
-<th align="right">drug_amount_e3</th>
+<th align="left">e2_drug_type</th>
+<th align="right">e2_drug_amount</th>
+<th align="left">e3_drug_type</th>
+<th align="right">e3_drug_amount</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -238,17 +238,18 @@
 </table>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">drug</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"drug.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
-<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">drug</span>, <span class="va">id</span>, <span class="st">"CMTRT"</span><span class="op">)</span>
+<span class="co"># parameter is_post has value FALSE because a dataset has a prefix in the names of variables</span>
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">drug</span>, <span class="va">id</span>, <span class="st">"CMTRT"</span>, is_post <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
 <span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   id    CMTRT CMDOSE     IDVAR VISIT</span>
-<span class="co">#&gt; 1 01 type_one      2 drug_type   _e2</span>
-<span class="co">#&gt; 2 01 type_one      2 drug_type   _e3</span>
-<span class="co">#&gt; 3 02 type_two      1 drug_type   _e2</span>
-<span class="co">#&gt; 4 02 type_two      1 drug_type   _e3</span>
-<span class="co">#&gt; 5 03 type_one      2 drug_type   _e2</span>
-<span class="co">#&gt; 6 03 type_one      1 drug_type   _e3</span></pre></div>
+<span class="co">#&gt; 1 01 type_one      2 drug_type   e2_</span>
+<span class="co">#&gt; 2 01 type_one      2 drug_type   e3_</span>
+<span class="co">#&gt; 3 02 type_two      1 drug_type   e2_</span>
+<span class="co">#&gt; 4 02 type_two      1 drug_type   e3_</span>
+<span class="co">#&gt; 5 03 type_one      2 drug_type   e2_</span>
+<span class="co">#&gt; 6 03 type_one      1 drug_type   e3_</span></pre></div>
 </div>
 <div id="vital-functions" class="section level3">
 <h3 class="hasAnchor">
@@ -268,10 +269,10 @@
 <caption>dataset</caption>
 <thead><tr class="header">
 <th align="left">id</th>
-<th align="right">hr_e2</th>
-<th align="right">respr_e2</th>
-<th align="right">hr_e3</th>
-<th align="right">respr_e3</th>
+<th align="right">e2_hr</th>
+<th align="right">e2_respr</th>
+<th align="right">e3_hr</th>
+<th align="right">e3_respr</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -299,17 +300,17 @@
 </table>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">vf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vf.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
-<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">vf</span>, <span class="va">id</span>, <span class="st">"VSTEST_HR"</span><span class="op">)</span>
+<span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/short.html">short</a></span><span class="op">(</span><span class="va">vf</span>, <span class="va">id</span>, <span class="st">"VSTEST_HR"</span>, is_post <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
 <span class="va">obj_short</span> <span class="op">&lt;-</span> <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 <span class="va">obj_short</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   id VSTEST_HR VSTEST_RESP IDVAR VISIT</span>
-<span class="co">#&gt; 1 01        60          12    hr   _e2</span>
-<span class="co">#&gt; 2 01        65          13    hr   _e3</span>
-<span class="co">#&gt; 3 02        70          15    hr   _e2</span>
-<span class="co">#&gt; 4 02        71          14    hr   _e3</span>
-<span class="co">#&gt; 5 03        76          16    hr   _e2</span>
-<span class="co">#&gt; 6 03        86          18    hr   _e3</span></pre></div>
+<span class="co">#&gt; 1 01        60          12    hr   e2_</span>
+<span class="co">#&gt; 2 01        65          13    hr   e3_</span>
+<span class="co">#&gt; 3 02        70          15    hr   e2_</span>
+<span class="co">#&gt; 4 02        71          14    hr   e3_</span>
+<span class="co">#&gt; 5 03        76          16    hr   e2_</span>
+<span class="co">#&gt; 6 03        86          18    hr   e3_</span></pre></div>
 </div>
 <div id="adverse-events" class="section level3">
 <h3 class="hasAnchor">
