@@ -11,7 +11,7 @@ navbar:
     href: https://github.com/chachabooms/dmtools
 
 reference:
- - title: One site
+ - title: Check or Reshape
    desc: >
       Validate different parameters: laboratory, dates in the one site.
    contents:
@@ -22,14 +22,6 @@ reference:
    - get_result
    - choose_test.lab
    - choose_test.date
-   - choose_test.short
-
- - title: Different sites
-   desc: >
-      Validate different parameters: laboratory in the different sites.
-   contents:
-    - check_sites
-    - test_sites
 
  - title: Rename
    desc: >

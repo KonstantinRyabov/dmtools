@@ -2,7 +2,7 @@
 % Please edit documentation in R/date.R
 \name{choose_test.date}
 \alias{choose_test.date}
-\title{Filter final result}
+\title{Filter the final result of the object date}
 \usage{
 \method{choose_test}{date}(obj, test = "out", group_id = T)
 }
@@ -21,7 +21,7 @@
 The dataset by a value of \code{test}.
 }
 \description{
-Filter final result
+Filter the final result of the object date
 }
 \examples{
 id <- c("01", "02", "03")

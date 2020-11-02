@@ -2,7 +2,7 @@
 % Please edit documentation in R/abstract.R
 \name{choose_test}
 \alias{choose_test}
-\title{Filter final result}
+\title{Filter the final result}
 \usage{
 choose_test(obj, test, group_id)
 }
@@ -17,7 +17,7 @@ choose_test(obj, test, group_id)
 The filtered dataset.
 }
 \description{
-Filter final result
+Filter the final result
 }
 \examples{
 id <- c("01", "02", "03")

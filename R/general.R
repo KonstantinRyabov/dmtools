@@ -1,4 +1,4 @@
-#' Check
+#' Check the dataset
 #'
 #' @param obj An object for check.
 #' @param dataset A dataset, a type is a data frame.
@@ -101,7 +101,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
   do.call(
     rbind,
     lapply(parts, function(part) {
-      tryCatch(run_tests(obj, dataset, row_file, part),
+      tryCatch(to_long(obj, dataset, row_file, part),
         error = function(e) {
           warning(part, " can't bind, because ", e)
           data.frame()
@@ -111,7 +111,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
   )
 }
 
-#' Get final result
+#' Get the final result of the check
 #'
 #' @param obj An object. Can be all classes: short, lab, date.
 #' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
@@ -140,7 +140,7 @@ find_colnames.default <- function(obj, dataset, row_file) {
 #'
 #' obj_short <- check(obj_short, df)
 #' get_result(obj_short)
-get_result.default <- function(obj, group_id = T) {
+get_result <- function(obj, group_id = T) {
   result <- obj[["result"]]
 
   if (group_id) {
@@ -152,107 +152,6 @@ get_result.default <- function(obj, group_id = T) {
   result
 }
 
-#' Check sites
-#'
-#' @param objs A list of objects.
-#' @param dataset A dataset, a type is a data frame.
-#' @param col_site A column name of a site in the dataset, without quotes.
-#'
-#' @return A list of objects with a check result.
-#' @export
-#'
-#' @examples
-#' SITE <- c("site 01", "site 02")
-#' ID <- c("01", "02")
-#' AGE <- c("19", "20")
-#' SEX <- c("f", "m")
-#' GLUC_V1 <- c("5.5", "4.1")
-#' GLUC_IND_V1 <- c("norm", "no")
-#' AST_V2 <- c("30", "48")
-#' AST_IND_V2 <- c(NA, "norm")
-#'
-#' df <- data.frame(
-#'   SITE, ID, AGE, SEX,
-#'   GLUC_V1, GLUC_IND_V1,
-#'   AST_V2, AST_IND_V2,
-#'   stringsAsFactors = FALSE
-#' )
-#'
-#' refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
-#' refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
-#'
-#' s01_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01")
-#' s02_lab <- lab(refs_s02, ID, AGE, SEX, "norm", "no", site = "site 02")
-#'
-#' labs <- list(s01_lab, s02_lab)
-#' labs <- check_sites(labs, df, SITE)
-check_sites <- function(objs, dataset, col_site) {
-  col_site <- dplyr::enquo(col_site)
-
-  objs %>% purrr::modify(function(obj) {
-    obj_site <- obj[["site"]]
-    pattern_site <- paste0("^", obj_site, "$")
-
-    # filter by site
-    data_site <- dataset %>%
-      dplyr::mutate(!!col_site := as.character(!!col_site)) %>%
-      dplyr::filter(grepl(pattern_site, !!col_site))
-
-    obj <- obj %>%
-      check(data_site)
-
-    obj[["result"]] <- obj[["result"]] %>% dplyr::mutate(NUM_SITE = obj_site)
-
-    obj
-  })
-}
-
-
-#' Test sites
-#'
-#' @param objs A list of objects.
-#' @param func A function e.g. \code{choose_test}, \code{get_result}.
-#'
-#' @return A data frame. The dataset.
-#' @export
-#'
-#' @examples
-#' SITE <- c("site 01", "site 02")
-#' ID <- c("01", "02")
-#' AGE <- c("19", "20")
-#' SEX <- c("f", "m")
-#' GLUC_V1 <- c("5.5", "4.1")
-#' GLUC_IND_V1 <- c("norm", "no")
-#' AST_V2 <- c("30", "48")
-#' AST_IND_V2 <- c(NA, "norm")
-#'
-#' df <- data.frame(
-#'   SITE, ID, AGE, SEX,
-#'   GLUC_V1, GLUC_IND_V1,
-#'   AST_V2, AST_IND_V2,
-#'   stringsAsFactors = FALSE
-#' )
-#'
-#' refs_s01 <- system.file("labs_refer_s01.xlsx", package = "dmtools")
-#' refs_s02 <- system.file("labs_refer_s02.xlsx", package = "dmtools")
-#'
-#' s01_lab <- lab(refs_s01, ID, AGE, SEX, "norm", "no", site = "site 01")
-#' s02_lab <- lab(refs_s02, ID, AGE, SEX, "norm", "no", site = "site 02")
-#'
-#' labs <- list(s01_lab, s02_lab)
-#' labs <- check_sites(labs, df, SITE)
-#'
-#' test_sites(labs, func = function(lab) choose_test(lab, "mis"))
-test_sites <- function(objs, func) {
-  result <- do.call(rbind, lapply(
-    objs,
-    function(obj) {
-      func(obj)
-    }
-  ))
-
-  result
-}
 
 #' Cast to double type
 #'

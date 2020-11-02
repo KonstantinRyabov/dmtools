@@ -2,7 +2,7 @@
 % Please edit documentation in R/lab.R
 \name{choose_test.lab}
 \alias{choose_test.lab}
-\title{Filter final result}
+\title{Filter the final result of the object lab}
 \usage{
 \method{choose_test}{lab}(obj, test = "mis", group_id = T)
 }
@@ -21,7 +21,7 @@
 The filtered dataset by a value of \code{test}.
 }
 \description{
-Filter final result
+Filter the final result of the object lab
 }
 \examples{
 ID <- c("01", "02", "03")

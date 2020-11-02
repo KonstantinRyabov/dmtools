@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find column names with dates — find_colnames.date • dmtools</title>
+<title>Reshape the dataset to a long view — to_long • dmtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Find column names with dates — find_colnames.date" />
-<meta property="og:description" content="Find column names with dates" />
+<meta property="og:title" content="Reshape the dataset to a long view — to_long" />
+<meta property="og:description" content="Reshape the dataset to a long view" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -137,38 +137,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find column names with dates</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KonstantinRyabov/dmtools/blob/master/R/date.R'><code>R/date.R</code></a></small>
-    <div class="hidden name"><code>find_colnames.date.Rd</code></div>
+    <h1>Reshape the dataset to a long view</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KonstantinRyabov/dmtools/blob/master/R/abstract.R'><code>R/abstract.R</code></a></small>
+    <div class="hidden name"><code>to_long.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Find column names with dates</p>
+    <p>Reshape the dataset to a long view</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for date</span>
-<span class='fu'><a href='find_colnames.html'>find_colnames</a></span><span class='op'>(</span><span class='va'>obj</span>, <span class='va'>dataset</span>, <span class='va'>row_file</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>to_long</span><span class='op'>(</span><span class='va'>obj</span>, <span class='va'>dataset</span>, <span class='va'>row_file</span>, <span class='va'>part</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obj</th>
-      <td><p>An object for validation.</p></td>
+      <td><p>An object for check.</p></td>
     </tr>
     <tr>
       <th>dataset</th>
-      <td><p>A data frame. Class date.</p></td>
+      <td><p>A data frame.</p></td>
     </tr>
     <tr>
       <th>row_file</th>
-      <td><p>A data frame. A data frame with analysis parameters.</p></td>
+      <td><p>A data frame. A data frame with parameters.</p></td>
+    </tr>
+    <tr>
+      <th>part</th>
+      <td><p>A character scalar. Prefixes or postfixes.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame. Visit's dates.</p>
+    <p>A data frame. The part of final result.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

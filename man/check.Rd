@@ -2,7 +2,7 @@
 % Please edit documentation in R/abstract.R
 \name{check}
 \alias{check}
-\title{Check}
+\title{Check the dataset}
 \usage{
 check(obj, dataset)
 }
@@ -15,7 +15,7 @@ check(obj, dataset)
 An object with a check result.
 }
 \description{
-Check
+Check the dataset
 }
 \examples{
 id <- c("01", "02", "03")

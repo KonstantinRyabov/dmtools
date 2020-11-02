@@ -1,4 +1,4 @@
-#' Check
+#' Check the dataset
 #'
 #' @param obj An object for check.
 #' @param dataset A dataset, a type is a data frame.
@@ -25,40 +25,7 @@ check <- function(obj, dataset) {
   UseMethod("check")
 }
 
-#' Get the final result
-#'
-#' @param obj An object. Can be all classes: short, lab, date.
-#' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
-#'
-#' @return A data frame. The final result.
-#' @export
-#'
-#' @examples
-#' id <- c("01", "02", "03")
-#' site <- c("site 01", "site 02", "site 03")
-#' sex <- c("f", "m", "f")
-#' preg_yn_e2 <- c("y", "y", "y")
-#' preg_res_e2 <- c("neg", "neg", "neg")
-#' preg_yn_e3 <- c("y", "y", "n")
-#' preg_res_e3 <- c("neg", "pos", "unnes")
-#'
-#' df <- data.frame(
-#'   id, site, sex,
-#'   preg_yn_e2, preg_res_e2,
-#'   preg_yn_e3, preg_res_e3,
-#'   stringsAsFactors = FALSE
-#' )
-#'
-#' preg <- system.file("preg.xlsx", package = "dmtools")
-#' obj_short <- short(preg, id, "LBORRES", c("site", "sex"))
-#'
-#' obj_short <- check(obj_short, df)
-#' get_result(obj_short)
-get_result <- function(obj, group_id) {
-  UseMethod("get_result")
-}
-
-#' Filter final result
+#' Filter the final result
 #'
 #' @param obj An object for check.
 #' @param group_id A logical scalar, default is TRUE.True is grouped by id, otherwise, it isn't grouped.
@@ -99,7 +66,7 @@ find_colnames <- function(obj, dataset, row_file) {
   UseMethod("find_colnames")
 }
 
-#' Run tests
+#' Reshape the dataset to a long view
 #'
 #' @param obj An object for check.
 #' @param dataset A data frame.
@@ -108,6 +75,6 @@ find_colnames <- function(obj, dataset, row_file) {
 #'
 #' @return A data frame. The part of final result.
 #'
-run_tests <- function(obj, dataset, row_file, part) {
-  UseMethod("run_tests")
+to_long <- function(obj, dataset, row_file, part) {
+  UseMethod("to_long")
 }

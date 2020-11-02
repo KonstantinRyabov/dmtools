@@ -36,7 +36,7 @@ short <- function(file,
   obj
 }
 
-#' Run tests
+#' Reshape the dataset to a long view
 #'
 #' @param dataset A data frame.
 #' @param obj An object. Class short.
@@ -45,7 +45,7 @@ short <- function(file,
 #'
 #' @return A data frame. The part of the final result.
 #'
-run_tests.short <- function(obj, dataset, row_file, part) {
+to_long.short <- function(obj, dataset, row_file, part) {
   id <- obj[["id"]]
   is_pst <- obj[["is_post"]]
   name_to_find <- obj[["name_to_find"]]

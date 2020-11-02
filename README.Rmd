@@ -31,14 +31,12 @@ library(dmtools)
 For checking the dataset from EDC in clinical trials. 
 Notice, your dataset should have a postfix( \_V1 ) or a prefix( V1\_ ) in the names of variables. Column names should be unique.
 
-* `date()` - create object date, for check dates in the dataset
-* `lab()` - create object lab, for check lab results
-* `short()` - create object short to transform the dataset(different events in one column)
+* `date()` - create object date to check dates in the dataset
+* `lab()` - create object lab to check lab reference range
+* `short()` - create object short to reshape the dataset in a tidy view.
 * `check()` - check objects
 * `get_result()` - get the final result of object
 * `choose_test()` - filter the final result of `check()`
-* `check_sites()` - check objects of different sites
-* `test_sites()` - filter the final result of `check_sites()`
 * `rename_dataset()` - rename the dataset
 
 ## Usage
@@ -50,7 +48,7 @@ For example, you want to check laboratory values, you need to create the excel t
 * SEX - for both sex, use `|`
 * LBTEST - What was the lab test name? (can be any convenient name for you)
 * LBORRES* - What was the result of the lab test?
-* LBNDIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
+* LBNRIND* - How [did/do] the reported values compare within the [reference/normal/expected] range?
 * LBORNRLO - What was the lower limit of the reference range for this lab test, >= 
 * LBORNRHI - What was the high limit of the reference range for this lab test, <=
 
@@ -109,15 +107,15 @@ obj_lab %>% choose_test("skip")
 ID <- c("01", "02", "03")
 AGE <- c("19", "20", "22")
 SEX <- c("f", "m", "m")
-GLUC_V1 <- c("5,5", "4,1", "9,7")
-GLUC_IND_V1 <- c("norm", NA, "norm")
-AST_V2 <- c(" < 5", "48", "31")
-AST_IND_V2 <- c("norm", "norm", "norm")
+V1_GLUC <- c("5,5", "4,1", "9,7")
+V1_GLUC_IND <- c("norm", NA, "norm")
+V2_AST <- c(" < 5", "48", "31")
+V2_AST_IND <- c("norm", "norm", "norm")
 
 strange_df <- data.frame(
   ID, AGE, SEX,
-  GLUC_V1, GLUC_IND_V1,
-  AST_V2, AST_IND_V2,
+  V1_GLUC, V1_GLUC_IND,
+  V2_AST, V2_AST_IND,
   stringsAsFactors = F
 )
 
@@ -126,12 +124,14 @@ kable(strange_df, caption = "strange_dataset")
 
 ```{r stange_lab}
 # dmtools can work with the dataset as strange_df
+# parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables
+obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no", is_post = F)
 obj_lab <- obj_lab %>% check(strange_df)
 
 # dmtools can understand the value with a comma like 6,6 
 obj_lab %>% choose_test("ok")
 
-# Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
+# Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the RES_TYPE_NUM
 obj_lab %>% choose_test("mis")
 
 obj_lab %>% choose_test("skip")

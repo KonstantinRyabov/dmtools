@@ -24,15 +24,13 @@ For checking the dataset from EDC in clinical trials. Notice, your
 dataset should have a postfix( \_V1 ) or a prefix( V1\_ ) in the names
 of variables. Column names should be unique.
 
--   `date()` - create object date, for check dates in the dataset
--   `lab()` - create object lab, for check lab results
--   `short()` - create object short to transform the dataset(different
-    events in one column)
+-   `date()` - create object date to check dates in the dataset
+-   `lab()` - create object lab to check lab reference range
+-   `short()` - create object short to reshape the dataset in a tidy
+    view.
 -   `check()` - check objects
 -   `get_result()` - get the final result of object
 -   `choose_test()` - filter the final result of `check()`
--   `check_sites()` - check objects of different sites
--   `test_sites()` - filter the final result of `check_sites()`
 -   `rename_dataset()` - rename the dataset
 
 Usage
@@ -47,7 +45,7 @@ excel table like in the example.
 -   LBTEST - What was the lab test name? (can be any convenient name for
     you)
 -   LBORRES\* - What was the result of the lab test?
--   LBNDIND\* - How \[did/do\] the reported values compare within the
+-   LBNRIND\* - How \[did/do\] the reported values compare within the
     \[reference/normal/expected\] range?
 -   LBORNRLO - What was the lower limit of the reference range for this
     lab test, &gt;=
@@ -65,7 +63,7 @@ excel table like in the example.
 <th style="text-align: left;">SEX</th>
 <th style="text-align: left;">LBTEST</th>
 <th style="text-align: left;">LBORRES</th>
-<th style="text-align: left;">LBNDIND</th>
+<th style="text-align: left;">LBNRIND</th>
 <th style="text-align: left;">LBORNRLO</th>
 <th style="text-align: left;">LBORNRHI</th>
 </tr>
@@ -155,10 +153,10 @@ excel table like in the example.
 
     # ok - analysis, which has a correct estimate of the result
     obj_lab %>% choose_test("ok")
-    #>   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES
-    #> 1 01  19   f                Glucose    GLUC   _V1      3.9      5.9     5.5
-    #> 2 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0      30
-    #> 3 03  22   m Aspartate transaminase     AST   _V2      0.0     42.0      31
+    #>   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES
+    #> 1 01  19   f                Glucose     GLUC   _V1      3.9      5.9     5.5
+    #> 2 01  19   f Aspartate transaminase      AST   _V2      0.0     39.0      30
+    #> 3 03  22   m Aspartate transaminase      AST   _V2      0.0     42.0      31
     #>   LBNRIND RES_TYPE_NUM IND_EXPECTED
     #> 1    norm          5.5         norm
     #> 2    norm         30.0         norm
@@ -166,19 +164,19 @@ excel table like in the example.
 
     # mis - analysis, which has an incorrect estimate of the result
     obj_lab %>% choose_test("mis")
-    #>   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES
-    #> 1 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48
-    #> 2 03  22   m                Glucose    GLUC   _V1      3.9      5.9     9.7
+    #>   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES
+    #> 1 02  20   m Aspartate transaminase      AST   _V2      0.0     42.0      48
+    #> 2 03  22   m                Glucose     GLUC   _V1      3.9      5.9     9.7
     #>   LBNRIND RES_TYPE_NUM IND_EXPECTED
     #> 1    norm         48.0           no
     #> 2    norm          9.7           no
 
     # skip - analysis, which has an empty value of the estimate
     obj_lab %>% choose_test("skip")
-    #>   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 02  20   m Glucose    GLUC   _V1      3.9      5.9     4.1    <NA>
+    #>   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 02  20   m Glucose     GLUC   _V1      3.9      5.9     4.1    <NA>
     #>   RES_TYPE_NUM IND_EXPECTED
-    #> 1          4.1         <NA>
+    #> 1          4.1         norm
 
 <table>
 <caption>strange_dataset</caption>
@@ -187,10 +185,10 @@ excel table like in the example.
 <th style="text-align: left;">ID</th>
 <th style="text-align: left;">AGE</th>
 <th style="text-align: left;">SEX</th>
-<th style="text-align: left;">GLUC_V1</th>
-<th style="text-align: left;">GLUC_IND_V1</th>
-<th style="text-align: left;">AST_V2</th>
-<th style="text-align: left;">AST_IND_V2</th>
+<th style="text-align: left;">V1_GLUC</th>
+<th style="text-align: left;">V1_GLUC_IND</th>
+<th style="text-align: left;">V2_AST</th>
+<th style="text-align: left;">V2_AST_IND</th>
 </tr>
 </thead>
 <tbody>
@@ -225,30 +223,32 @@ excel table like in the example.
 </table>
 
     # dmtools can work with the dataset as strange_df
+    # parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables
+    obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no", is_post = F)
     obj_lab <- obj_lab %>% check(strange_df)
 
     # dmtools can understand the value with a comma like 6,6 
     obj_lab %>% choose_test("ok")
-    #>   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES
-    #> 1 01  19   f                Glucose    GLUC   _V1      3.9      5.9     5,5
-    #> 2 03  22   m Aspartate transaminase     AST   _V2      0.0     42.0      31
+    #>   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES
+    #> 1 01  19   f                Glucose     GLUC   V1_      3.9      5.9     5,5
+    #> 2 03  22   m Aspartate transaminase      AST   V2_      0.0     42.0      31
     #>   LBNRIND RES_TYPE_NUM IND_EXPECTED
     #> 1    norm          5.5         norm
     #> 2    norm         31.0         norm
 
-    # Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the vals_to_dbl
+    # Notice, if dmtools can't understand the value of lab_vals e.g. < 5, it puts Inf in the RES_TYPE_NUM
     obj_lab %>% choose_test("mis")
-    #>   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES
-    #> 1 01  19   f Aspartate transaminase     AST   _V2      0.0     39.0     < 5
-    #> 2 02  20   m Aspartate transaminase     AST   _V2      0.0     42.0      48
-    #> 3 03  22   m                Glucose    GLUC   _V1      3.9      5.9     9,7
+    #>   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES
+    #> 1 01  19   f Aspartate transaminase      AST   V2_      0.0     39.0     < 5
+    #> 2 02  20   m Aspartate transaminase      AST   V2_      0.0     42.0      48
+    #> 3 03  22   m                Glucose     GLUC   V1_      3.9      5.9     9,7
     #>   LBNRIND RES_TYPE_NUM IND_EXPECTED
     #> 1    norm          Inf           no
     #> 2    norm         48.0           no
     #> 3    norm          9.7           no
 
     obj_lab %>% choose_test("skip")
-    #>   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
-    #> 1 02  20   m Glucose    GLUC   _V1      3.9      5.9     4,1    <NA>
+    #>   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND
+    #> 1 02  20   m Glucose     GLUC   V1_      3.9      5.9     4,1    <NA>
     #>   RES_TYPE_NUM IND_EXPECTED
-    #> 1          4.1         <NA>
+    #> 1          4.1         norm

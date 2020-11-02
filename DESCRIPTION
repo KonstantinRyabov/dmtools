@@ -1,16 +1,14 @@
 Package: dmtools
 Title: Tools for Clinical Data Management
-Version: 0.2.5.9000
+Version: 0.2.6
 Authors@R: 
     person(given = "Konstantin",
            family = "Ryabov",
            role = c("aut", "cre"),
            email = "chachabooms@gmail.com")
 Description: For checking the dataset from EDC(Electronic Data Capture) in clinical trials.
-             'dmtools' can check laboratory, dates and rename the dataset.
-             Laboratory - does the investigator correctly estimate the laboratory analyzes?
-             Dates - do all dates correspond to the protocol's timeline?
-             If the clinical trial has different lab reference ranges, 'dmtools' also can help.
+             'dmtools' reshape your dataset in a tidy view and check events.
+             You can reshape the dataset and choose your target to check, for example, the laboratory reference range.
 Depends: R (>= 3.6)
 Imports:
   magrittr (>= 1.5),
@@ -26,7 +24,7 @@ URL: https://github.com/KonstantinRyabov/dmtools
 BugReports: https://github.com/KonstantinRyabov/dmtools/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     testthat,
     knitr,
