@@ -491,7 +491,7 @@ norm
 </tbody>
 </table>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># dmtools can work with the dataset as strange_df</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># parameter is_post has value FALSE because a dataset has a prefix( V1_ ) in the names of variables</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>obj_lab &lt;-<span class="st"> </span><span class="kw">lab</span>(refs, ID, AGE, SEX, <span class="st">"norm"</span>, <span class="st">"no"</span>, <span class="dt">is_post =</span> F)</span>
 <span id="cb3-4"><a href="#cb3-4"></a>obj_lab &lt;-<span class="st"> </span>obj_lab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check</span>(strange_df)</span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>

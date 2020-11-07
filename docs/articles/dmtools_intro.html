@@ -229,7 +229,7 @@
 </table>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># "norm" and "no" it is an example, necessary variable for the estimate, get from the dataset</span>
-<span class="co"># parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables</span>
+<span class="co"># parameter is_post has value FALSE because a dataset has a prefix( V1_ ) in the names of variables</span>
 <span class="va">refs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"labs_refer.xlsx"</span>, package <span class="op">=</span> <span class="st">"dmtools"</span><span class="op">)</span>
 <span class="va">obj_lab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lab.html">lab</a></span><span class="op">(</span><span class="va">refs</span>, <span class="va">ID</span>, <span class="va">AGE</span>, <span class="va">SEX</span>, <span class="st">"norm"</span>, <span class="st">"no"</span>, is_post <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">obj_lab</span> <span class="op">&lt;-</span> <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/check.html">check</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
