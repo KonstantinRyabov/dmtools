@@ -109,7 +109,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/KonstantinRyabov/dmtools">dmtools</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chachabooms/dmtools">dmtools</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -149,7 +149,7 @@
 <th align="left">SEX</th>
 <th align="left">LBTEST</th>
 <th align="left">LBORRES</th>
-<th align="left">LBNRIND</th>
+<th align="left">LBNDIND</th>
 <th align="left">LBORNRLO</th>
 <th align="left">LBORNRHI</th>
 </tr></thead>
@@ -236,10 +236,10 @@
 
 <span class="co"># ok - analysis, which has a correct estimate of the result</span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span><span class="op">(</span><span class="st">"ok"</span><span class="op">)</span>
-<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span>
-<span class="co">#&gt; 1 01  19   f                Glucose     GLUC   V1_      3.9      5.9     5.5</span>
-<span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   V2_      0.0     39.0      30</span>
-<span class="co">#&gt; 3 03  22   m Aspartate transaminase      AST   V2_      0.0     42.0      31</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 01  19   f                Glucose    GLUC   V1_      3.9      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase     AST   V2_      0.0     39.0      30</span>
+<span class="co">#&gt; 3 03  22   m Aspartate transaminase     AST   V2_      0.0     42.0      31</span>
 <span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span>
 <span class="co">#&gt; 1    norm          5.5         norm</span>
 <span class="co">#&gt; 2    norm         30.0         norm</span>
@@ -247,33 +247,33 @@
 
 <span class="co"># mis - analysis, which has an incorrect estimate of the result</span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span><span class="op">(</span><span class="st">"mis"</span><span class="op">)</span>
-<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span>
-<span class="co">#&gt; 1 02  20   m Aspartate transaminase      AST   V2_      0.0     42.0      48</span>
-<span class="co">#&gt; 2 03  22   m                Glucose     GLUC   V1_      3.9      5.9     9.7</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 02  20   m Aspartate transaminase     AST   V2_      0.0     42.0      48</span>
+<span class="co">#&gt; 2 03  22   m                Glucose    GLUC   V1_      3.9      5.9     9.7</span>
 <span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED</span>
 <span class="co">#&gt; 1    norm         48.0           no</span>
 <span class="co">#&gt; 2    norm          9.7           no</span>
 
 <span class="co"># skip - analysis, which has an empty value of the estimate</span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/choose_test.html">choose_test</a></span><span class="op">(</span><span class="st">"skip"</span><span class="op">)</span>
-<span class="co">#&gt;   ID AGE SEX  LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
-<span class="co">#&gt; 1 02  20   m Glucose     GLUC   V1_      3.9      5.9     4.1    &lt;NA&gt;</span>
+<span class="co">#&gt;   ID AGE SEX  LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES LBNRIND</span>
+<span class="co">#&gt; 1 02  20   m Glucose    GLUC   V1_      3.9      5.9     4.1    &lt;NA&gt;</span>
 <span class="co">#&gt;   RES_TYPE_NUM IND_EXPECTED</span>
-<span class="co">#&gt; 1          4.1         norm</span>
+<span class="co">#&gt; 1          4.1         &lt;NA&gt;</span>
 
 <span class="co"># all analyzes </span>
 <span class="va">obj_lab</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_result.html">get_result</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESTCD VISIT LBORNRLO LBORNRHI LBORRES</span>
-<span class="co">#&gt; 1 01  19   f                Glucose     GLUC   V1_      3.9      5.9     5.5</span>
-<span class="co">#&gt; 2 01  19   f Aspartate transaminase      AST   V2_      0.0     39.0      30</span>
-<span class="co">#&gt; 3 02  20   m                Glucose     GLUC   V1_      3.9      5.9     4.1</span>
-<span class="co">#&gt; 4 02  20   m Aspartate transaminase      AST   V2_      0.0     42.0      48</span>
-<span class="co">#&gt; 5 03  22   m                Glucose     GLUC   V1_      3.9      5.9     9.7</span>
-<span class="co">#&gt; 6 03  22   m Aspartate transaminase      AST   V2_      0.0     42.0      31</span>
+<span class="co">#&gt;   ID AGE SEX                 LBTEST LBTESCD VISIT LBORNRLO LBORNRHI LBORRES</span>
+<span class="co">#&gt; 1 01  19   f                Glucose    GLUC   V1_      3.9      5.9     5.5</span>
+<span class="co">#&gt; 2 01  19   f Aspartate transaminase     AST   V2_      0.0     39.0      30</span>
+<span class="co">#&gt; 3 02  20   m                Glucose    GLUC   V1_      3.9      5.9     4.1</span>
+<span class="co">#&gt; 4 02  20   m Aspartate transaminase     AST   V2_      0.0     42.0      48</span>
+<span class="co">#&gt; 5 03  22   m                Glucose    GLUC   V1_      3.9      5.9     9.7</span>
+<span class="co">#&gt; 6 03  22   m Aspartate transaminase     AST   V2_      0.0     42.0      31</span>
 <span class="co">#&gt;   LBNRIND RES_TYPE_NUM IND_EXPECTED IS_RIGHT</span>
 <span class="co">#&gt; 1    norm          5.5         norm     TRUE</span>
 <span class="co">#&gt; 2    norm         30.0         norm     TRUE</span>
-<span class="co">#&gt; 3    &lt;NA&gt;          4.1         norm       NA</span>
+<span class="co">#&gt; 3    &lt;NA&gt;          4.1         &lt;NA&gt;       NA</span>
 <span class="co">#&gt; 4    norm         48.0           no    FALSE</span>
 <span class="co">#&gt; 5    norm          9.7           no    FALSE</span>
 <span class="co">#&gt; 6    norm         31.0         norm     TRUE</span></pre></div>
