@@ -223,7 +223,7 @@ excel table like in the example.
 </table>
 
     # dmtools can work with the dataset as strange_df
-    # parameter is_post has value FALSE because a dataset has a prefix( V1\_ ) in the names of variables
+    # parameter is_post has value FALSE because a dataset has a prefix( V1_ ) in the names of variables
     obj_lab <- lab(refs, ID, AGE, SEX, "norm", "no", is_post = F)
     obj_lab <- obj_lab %>% check(strange_df)
 
