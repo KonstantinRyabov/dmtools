@@ -43,7 +43,7 @@ check.default <- function(obj, dataset) {
   file_rows <- readxl::read_xlsx(file)
   file_size <- nrow(file_rows)
   pb <- progress::progress_bar$new(total = file_size)
-  pb$tick(0)
+
   # create final dataset
   rs <- do.call(rbind, lapply(
     seq_len(file_size),
