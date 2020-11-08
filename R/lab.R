@@ -160,5 +160,3 @@ to_long.lab <- function(obj, dataset, row_file, part) {
 
   result
 }
-
-

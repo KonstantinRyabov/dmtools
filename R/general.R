@@ -40,13 +40,16 @@ check.default <- function(obj, dataset) {
 
   # load file
   file <- obj[["file"]]
-  labs <- readxl::read_xlsx(file)
+  file_rows <- readxl::read_xlsx(file)
+  file_size <- nrow(file_rows)
+  pb <- progress::progress_bar$new(total = file_size)
 
   # create final dataset
   rs <- do.call(rbind, lapply(
-    seq_len(nrow(labs)),
+    seq_len(file_size),
     function(n) {
-      find_colnames(obj, dataset, labs[n, ])
+      pb$tick()
+      find_colnames(obj, dataset, file_rows[n, ])
     }
   ))
 
