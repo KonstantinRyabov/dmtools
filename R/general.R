@@ -48,7 +48,7 @@ check.default <- function(obj, dataset) {
   rs <- do.call(rbind, lapply(
     seq_len(file_size),
     function(n) {
-      pb$tick()
+      pb$tick(0)
       find_colnames(obj, dataset, file_rows[n, ])
     }
   ))

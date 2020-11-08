@@ -2,7 +2,8 @@
 * fixed LBNDIND -> LBNRIND
 * check if age or sex is null in `lab()`
 * delete `check_sites()` and `test_sites()`
-* delete parameter `clsig` in `lab()` 
+* delete parameter `clsig` in `lab()`
+* add progress bar
 
 # dmtools 0.2.5
 
