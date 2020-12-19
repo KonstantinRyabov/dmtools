@@ -1,6 +1,6 @@
 Package: dmtools
 Title: Tools for Clinical Data Management
-Version: 0.2.6
+Version: 0.2.6.9000
 Authors@R: 
     person(given = "Konstantin",
            family = "Ryabov",
