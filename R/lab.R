@@ -126,7 +126,6 @@ to_long.lab <- function(obj, dataset, row_file, part) {
   normal <- obj[["normal"]]
   abnormal <- obj[["abnormal"]]
   is_post <- obj[["is_post"]]
-  obj_cl <- obj[["clsig"]]
 
   # laboratory's parameters
   lbtest <- row_file$LBTEST

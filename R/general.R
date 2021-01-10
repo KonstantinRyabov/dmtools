@@ -54,7 +54,7 @@ check.default <- function(obj, dataset) {
   ))
 
   # if dataset is empty
-  if (nrow(rs) == 0) {
+  if (is.null(rs) || nrow(rs) == 0) {
     stop("the final result of validation is empty")
   } else {
     obj[["result"]] <- rs
